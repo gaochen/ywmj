@@ -46,12 +46,13 @@ $color-C6: #f56d9d;
 }
 
 /**
- * 首页
+ * 首页-现场实景
  */
 .index-nav {
     width: 100%;
     @include px2rem(height, 90px);
     overflow: hidden;
+    background-color: #ffffff;
     font-size: 0; // 解决inline-block空格间隙
     -webkit-text-size-adjust:none; // 兼容chrome浏览器最小字体限制
 }
@@ -84,6 +85,9 @@ $color-C6: #f56d9d;
 }
 .index-nav a.active span {
     display: block;
+}
+.index-tab {
+    display: none;
 }
 .index-720 {
     @include px2rem(width, 750px);
@@ -235,6 +239,144 @@ $color-C6: #f56d9d;
     @include px2rem(font-size, $font-F5);
     color: $color-C4;
     text-align: center;
+}
+
+/**
+ * 首页-详细资料
+ */
+.data-active {
+    background-image: url(../img/work_detail_data_bg.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+.data-line {
+    width: 100%;
+    @include px2rem(height, 20px);
+    opacity: 0;
+}
+.data-main {
+    width: 100%;
+    height: auto;
+    @include px2rem(margin-top, 20px);
+    background-color: #ffffff;
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+}
+.data-title {
+    @include px2rem(font-size, $font-F4);
+    color: $color-C1;
+    text-align: center;
+    @include px2rem(height, 30px);
+    @include px2rem(line-height, 30px);
+    padding: 0.4rem 0;
+    box-shadow: 0 2px 5px -3px rgba(53,53,53,0.6);  
+}
+.data-cost {
+    width: auto;
+    margin: 0 0.52rem;
+    overflow: hidden;
+}
+.data-cost li {
+    width: 50%;
+    height: auto;
+    position: relative;
+    border-bottom: 1px solid $color-C3;
+    float: left;
+    padding: 0.4rem 0;
+}
+.data-cost-line {
+    width: 1px;
+    @include px2rem(height, 60px);
+    background-color: $color-C3;
+    position: absolute;
+    @include px2rem(top, 60px);
+    right: 0;
+}
+.data-cost-icon {
+    @include px2rem(width, 66px);
+    @include px2rem(height, 66px);
+    margin: 0 auto;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+.data-cost p {
+    @include px2rem(font-size, $font-F4);
+    color: $color-C1;
+    text-align: center;
+    @include px2rem(height, 30px);
+    @include px2rem(line-height, 30px);
+    padding-top: 0.28rem;
+}
+.data-cost p :nth-child(2) {
+    margin-left: 0.24rem;
+}
+.data-fwsj {
+    background-image: url(../img/work_data_price_fwsj@3x.png);
+}
+.data-jczx {
+    background-image: url(../img/work_data_price_jczx@3x.png);
+}
+.data-sbss {
+    background-image: url(../img/work_data_price_sssb@3x.png);
+}
+.data-jjjd {
+    background-image: url(../img/work_data_price_jjjd@3x.png);
+}
+.data-djsp {
+    background-image: url(../img/work_data_price_djsp@3x.png);
+}
+.data-zycl {
+    background-image: url(../img/work_data_price_zycl@3x.png);
+}
+.data-fxgz {
+    background-image: url(../img/work_data_price_fwgz@3x.png);
+}
+.data-qtzj {
+    background-image: url(../img/work_data_price_qtzj@3x.png);
+}
+.data-totalCost {
+    width: auto;
+    margin: 0.4rem 0.52rem;
+    @include px2rem(font-size, $font-F4);
+    color: $color-C1;
+    text-align: center;
+    background-color: #f5f5f5;
+    @include px2rem(height, 30px);
+    @include px2rem(line-height, 30px);
+    padding: 0.4rem 0;
+}
+.data-totalCost span {
+    margin-left: 0.24rem;
+}
+.data-module {
+    width: auto;
+    margin: 0.4rem 0.52rem 0 0.52rem;
+    overflow: hidden;
+}
+.data-module ul {
+    margin-right: -0.28rem;
+}
+.data-module li {
+    @include css3(box-sizing, border-box);
+    float: left;
+    border: 1px solid $color-C3;
+    @include px2rem(width, 210px);
+    @include px2rem(height, 66px);
+    @include px2rem(line-height, 66px);
+    margin: 0 0.28rem 0.4rem 0;
+    border-radius: 3px;
+    text-align: center;
+}
+.data-module a {
+    color: $color-C4;
+}
+.data-module a:hover {
+    text-decoration: none;
 }
 
 /**
@@ -407,4 +549,75 @@ $color-C6: #f56d9d;
     @include px2rem(font-size, $font-F2);
     margin: 0.4rem 0 0.28rem 0;
     text-align: center;
+}
+
+/**
+ * 材料品牌
+ */
+.material-module {
+    width: auto;
+    margin: 0 0.52rem;
+    overflow: hidden;
+}
+.material-title {
+    width: 100%;
+    border-bottom: 1px solid $color-C3;
+    @include px2rem(font-size, $font-F4);
+    color: $color-C1;
+    @include px2rem(height, 30px);
+    @include px2rem(line-height, 30px);
+    padding: 0.4rem 0;
+}
+.material-list {
+    width: 100%;
+    height: auto;
+    margin-top: 0.4rem;
+    overflow: hidden;
+}
+.material-list ul {
+    margin-right: -0.48rem;
+}
+.material-list li {
+    float: left;
+    @include px2rem(width, 200px);
+    height: auto;
+    margin: 0 0.48rem 0.4rem 0;
+}
+.material-list div {
+    @include css3(box-sizing, border-box);
+    border: 1px solid $color-C3;
+    @include px2rem(width, 200px);
+    @include px2rem(height, 84px);
+    @include px2rem(line-height, 84px);
+}
+.material-list p {
+    padding-top: 0.28rem;
+    @include px2rem(font-size, $font-F5);
+    color: $color-C4;
+    @include px2rem(height, 30px);
+    @include px2rem(line-height, 30px);
+    text-align: center;
+}
+
+/**
+ * 视频页面
+ */
+.video {
+    width: 100%;
+    height: 100%;
+    display: table;
+}
+.video div {
+    width: 100%;
+    height: 100%;
+    display: table-cell;
+    vertical-align: middle;
+}
+.video video {
+    width: 100%;
+    background-image: url(../img/1.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    vertical-align: middle;
 }

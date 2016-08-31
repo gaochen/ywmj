@@ -31,12 +31,13 @@
   overflow-scrolling: touch; }
 
 /**
- * 首页
+ * 首页-现场实景
  */
 .index-nav {
   width: 100%;
   height: 1.2rem;
   overflow: hidden;
+  background-color: #ffffff;
   font-size: 0;
   -webkit-text-size-adjust: none; }
 
@@ -70,6 +71,9 @@
 
 .index-nav a.active span {
   display: block; }
+
+.index-tab {
+  display: none; }
 
 .index-720 {
   width: 10rem;
@@ -222,6 +226,144 @@
   font-size: 0.34667rem;
   color: #737373;
   text-align: center; }
+
+/**
+ * 首页-详细资料
+ */
+.data-active {
+  background-image: url(../img/work_detail_data_bg.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  background-attachment: fixed; }
+
+.data-line {
+  width: 100%;
+  height: 0.26667rem;
+  opacity: 0; }
+
+.data-main {
+  width: 100%;
+  height: auto;
+  margin-top: 0.26667rem;
+  background-color: #ffffff;
+  position: relative;
+  z-index: 2;
+  overflow: hidden; }
+
+.data-title {
+  font-size: 0.37333rem;
+  color: #282828;
+  text-align: center;
+  height: 0.4rem;
+  line-height: 0.4rem;
+  padding: 0.4rem 0;
+  box-shadow: 0 2px 5px -3px rgba(53, 53, 53, 0.6); }
+
+.data-cost {
+  width: auto;
+  margin: 0 0.52rem;
+  overflow: hidden; }
+
+.data-cost li {
+  width: 50%;
+  height: auto;
+  position: relative;
+  border-bottom: 1px solid #e6e6e6;
+  float: left;
+  padding: 0.4rem 0; }
+
+.data-cost-line {
+  width: 1px;
+  height: 0.8rem;
+  background-color: #e6e6e6;
+  position: absolute;
+  top: 0.8rem;
+  right: 0; }
+
+.data-cost-icon {
+  width: 0.88rem;
+  height: 0.88rem;
+  margin: 0 auto;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover; }
+
+.data-cost p {
+  font-size: 0.37333rem;
+  color: #282828;
+  text-align: center;
+  height: 0.4rem;
+  line-height: 0.4rem;
+  padding-top: 0.28rem; }
+
+.data-cost p :nth-child(2) {
+  margin-left: 0.24rem; }
+
+.data-fwsj {
+  background-image: url(../img/work_data_price_fwsj@3x.png); }
+
+.data-jczx {
+  background-image: url(../img/work_data_price_jczx@3x.png); }
+
+.data-sbss {
+  background-image: url(../img/work_data_price_sssb@3x.png); }
+
+.data-jjjd {
+  background-image: url(../img/work_data_price_jjjd@3x.png); }
+
+.data-djsp {
+  background-image: url(../img/work_data_price_djsp@3x.png); }
+
+.data-zycl {
+  background-image: url(../img/work_data_price_zycl@3x.png); }
+
+.data-fxgz {
+  background-image: url(../img/work_data_price_fwgz@3x.png); }
+
+.data-qtzj {
+  background-image: url(../img/work_data_price_qtzj@3x.png); }
+
+.data-totalCost {
+  width: auto;
+  margin: 0.4rem 0.52rem;
+  font-size: 0.37333rem;
+  color: #282828;
+  text-align: center;
+  background-color: #f5f5f5;
+  height: 0.4rem;
+  line-height: 0.4rem;
+  padding: 0.4rem 0; }
+
+.data-totalCost span {
+  margin-left: 0.24rem; }
+
+.data-module {
+  width: auto;
+  margin: 0.4rem 0.52rem 0 0.52rem;
+  overflow: hidden; }
+
+.data-module ul {
+  margin-right: -0.28rem; }
+
+.data-module li {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  float: left;
+  border: 1px solid #e6e6e6;
+  width: 2.8rem;
+  height: 0.88rem;
+  line-height: 0.88rem;
+  margin: 0 0.28rem 0.4rem 0;
+  border-radius: 3px;
+  text-align: center; }
+
+.data-module a {
+  color: #737373; }
+
+.data-module a:hover {
+  text-decoration: none; }
 
 /**
  * 平面布置页面
@@ -392,3 +534,73 @@
   font-size: 0.45333rem;
   margin: 0.4rem 0 0.28rem 0;
   text-align: center; }
+
+/**
+ * 材料品牌
+ */
+.material-module {
+  width: auto;
+  margin: 0 0.52rem;
+  overflow: hidden; }
+
+.material-title {
+  width: 100%;
+  border-bottom: 1px solid #e6e6e6;
+  font-size: 0.37333rem;
+  color: #282828;
+  height: 0.4rem;
+  line-height: 0.4rem;
+  padding: 0.4rem 0; }
+
+.material-list {
+  width: 100%;
+  height: auto;
+  margin-top: 0.4rem;
+  overflow: hidden; }
+
+.material-list ul {
+  margin-right: -0.48rem; }
+
+.material-list li {
+  float: left;
+  width: 2.66667rem;
+  height: auto;
+  margin: 0 0.48rem 0.4rem 0; }
+
+.material-list div {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 1px solid #e6e6e6;
+  width: 2.66667rem;
+  height: 1.12rem;
+  line-height: 1.12rem; }
+
+.material-list p {
+  padding-top: 0.28rem;
+  font-size: 0.34667rem;
+  color: #737373;
+  height: 0.4rem;
+  line-height: 0.4rem;
+  text-align: center; }
+
+/**
+ * 视频页面
+ */
+.video {
+  width: 100%;
+  height: 100%;
+  display: table; }
+
+.video div {
+  width: 100%;
+  height: 100%;
+  display: table-cell;
+  vertical-align: middle; }
+
+.video video {
+  width: 100%;
+  background-image: url(../img/1.jpg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  vertical-align: middle; }
