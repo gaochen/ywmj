@@ -38,6 +38,28 @@ $(function() {
         oPic.css("margin-top",h2+"px");
     });
 
+    // 视频播放
+    (function() {
+
+        $(".personal-video").on("tap", function() {
+
+            $(".personal-mask").addClass("show");
+
+            var video = document.querySelector("#personal-video");
+            video.play();
+
+        });
+
+        $(".personal-mask").on("tap", function() {
+            $(this).removeClass("show");
+        });
+
+        $("#personal-video").on("tap", function(ev) {
+            ev.stopPropagation();
+        });
+        
+    })();
+
     //滚动到底部
     var oDiv = document.querySelector(".content");
     var iStartTouchX = 0;

@@ -14,29 +14,27 @@
     <div class="wrap">
         <div class="content">
             <div class="index-nav">
-                <a href="#" class="active">
+                <a href="#index=0" class="active">
                     现场实景
                     <span></span>
                 </a>
-                <a href="#">
+                <a href="#index=1">
                     原创团队
                     <span></span>
                 </a>
-                <a href="#">
+                <a href="#index=2">
                     详细资料
                     <span></span>
                 </a>
             </div>
             <div class="index-tab show">
-                <div class="index-720">
-                    <a href="#" class="index-720-url"></a>
-                    <div class="index-720-bg"></div>
-                    <div class="index-720-name"></div>
-                    <div class="index-720-btn show">
-                        <span></span>
-                        720°观赏
+                <a href="#" id="index-720">
+                    <div class="index-720">
+                        <div class="index-720-bg"></div>
+                        <div class="index-720-name"></div>
+                        <div class="index-720-btn show"></div>
                     </div>
-                </div>
+                </a>
                 <div class="index-basicInfo">
                     <div class="index-basicInfo-title">
                         基础信息
@@ -44,7 +42,7 @@
                     <div class="index-basicInfo-info"></div>
                 </div>
                 <div class="line-index"></div>
-                <a class="index-module index-plainLayout">
+                <a id="index-plainLayout">
                     <div class="index-module-title">
                         平面布置
                         <span></span>
@@ -52,7 +50,7 @@
                     <div class="index-module-pic"></div>
                 </a>
                 <div class="line-index"></div>
-                <a class="index-module index-scene">
+                <a id="index-scene">
                     <div class="index-module-title">
                         实景照片
                         <span></span>
@@ -81,6 +79,44 @@
                 </div>
                 <div class="line-index"></div>
             </div>
+            
+            <!-- 原创团队 -->
+            <div class="index-tab js-team">
+                <div class="line-index"></div>
+                <!-- <div class="team-group">
+                    <div class="team-title">
+                        设计
+                    </div>
+                    <ul class="team-list clearfix">
+                        <li>
+                            <a href="#">
+                                <div class="team-portrait fl">
+                                    <img src="/static/img/1.jpg">
+                                </div>
+                                <div class="team-member fl">
+                                    <h4>田妮妮</h4>
+                                    <p>家具顾问</p>
+                                </div>
+                                <span></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="team-portrait fl">
+                                    <img src="/static/img/1.jpg">
+                                </div>
+                                <div class="team-member fl">
+                                    <h4>成都业之峰装修有限公司</h4>
+                                    <p>所属公司</p>
+                                </div>
+                                <span></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="line-index"></div> -->
+            </div>
+
             <!-- 详细资料 -->
             <div class="index-tab">
                 <div class="data-main">
@@ -88,69 +124,17 @@
                         项目造价
                     </div>
                     <ul class="data-cost clearfix">
-                        <li>
-                            <div class="data-cost-icon data-fwsj"></div>
+                        <!-- <li>
+                            <div class="data-cost-icon data-icon-1"></div>
                             <p>
                                 <span>房屋设计</span>
                                 <span>8.0万元</span>
                             </p>
                             <div class="data-cost-line"></div>
-                        </li>
-                        <li>
-                            <div class="data-cost-icon data-jczx"></div>
-                            <p>
-                                <span>基础装修</span>
-                                <span>8.0万元</span>
-                            </p>
-                        </li>
-                        <li>
-                            <div class="data-cost-icon data-sbss"></div>
-                            <p>
-                                <span>设备设施</span>
-                                <span>8.0万元</span>
-                            </p>
-                            <div class="data-cost-line"></div>
-                        </li>
-                        <li>
-                            <div class="data-cost-icon data-jjjd"></div>
-                            <p>
-                                <span>家具家电</span>
-                                <span>8.0万元</span>
-                            </p>
-                        </li>
-                        <li>
-                            <div class="data-cost-icon data-djsp"></div>
-                            <p>
-                                <span>灯具饰品</span>
-                                <span>8.0万元</span>
-                            </p>
-                            <div class="data-cost-line"></div>
-                        </li>
-                        <li>
-                            <div class="data-cost-icon data-zycl"></div>
-                            <p>
-                                <span>主要材料</span>
-                                <span>8.0万元</span>
-                            </p>
-                        </li>
-                        <li>
-                            <div class="data-cost-icon data-fxgz"></div>
-                            <p>
-                                <span>房型改造</span>
-                                <span>8.0万元</span>
-                            </p>
-                            <div class="data-cost-line"></div>
-                        </li>
-                        <li>
-                            <div class="data-cost-icon data-qtzj"></div>
-                            <p>
-                                <span>其他造价</span>
-                                <span>8.0万元</span>
-                            </p>
-                        </li>
+                        </li> -->
                     </ul>
                     <div class="data-totalCost">
-                        总造价 <span>40万元</span>
+                        总造价 <span></span>
                     </div>
                 </div>
                 <div class="data-main">
@@ -159,24 +143,9 @@
                     </div>
                     <div class="data-module data-material">
                         <ul class="clearfix">
-                            <li>
+                            <!-- <li>
                                 <a href="#">辅材品牌</a>
-                            </li>
-                            <li>
-                                <a href="#">主材品牌</a>
-                            </li>
-                            <li>
-                                <a href="#">设备品牌</a>
-                            </li>
-                            <li>
-                                <a href="#">家具品牌</a>
-                            </li>
-                            <li>
-                                <a href="#">饰品品牌</a>
-                            </li>
-                            <li>
-                                <a href="#">灯具品牌</a>
-                            </li>
+                            </li> -->
                         </ul>
                     </div>  
                 </div>
@@ -253,43 +222,16 @@
                     </div>  
                 </div>
             </div>
-            <!-- 原创团队 -->
-            <div class="index-tab">
-                <div class="line-index"></div>
-                <div class="team-group">
-                    <div class="team-title">
-                        设计
-                    </div>
-                    <ul class="team-list clearfix">
-                        <li>
-                            <a href="#">
-                                <div class="team-portrait fl">
-                                    <img src="/static/img/1.jpg">
-                                </div>
-                                <div class="team-member fl">
-                                    <h4>田妮妮</h4>
-                                    <p>家具顾问</p>
-                                </div>
-                                <span></span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="team-portrait fl">
-                                    <img src="/static/img/1.jpg">
-                                </div>
-                                <div class="team-member fl">
-                                    <h4>成都业之峰装修有限公司</h4>
-                                    <p>所属公司</p>
-                                </div>
-                                <span></span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="line-index"></div>
-            </div>
         </div>
+
+        <!-- 下载 -->
+        <div class="bottom">
+            <div class="bottom-logo"></div>
+            <div class="bottom-slogen"></div>
+            <a class="bottom-btn" href="http://a.app.qq.com/o/simple.jsp?pkgname=com.yingwumeijia.android.ywmj.client">立即下载</a>
+            <div class="bottom-close"></div>
+        </div>
+        <!-- 下载 End-->
     </div>
 
     <script src="/static/js/libs/zepto.min.js"></script>

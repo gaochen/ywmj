@@ -84,21 +84,13 @@
   background-size: cover;
   position: relative; }
 
-.index-720-url {
-  display: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%; }
-
 .index-720-bg {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 2.66667rem;
-  background: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.7), transparent); }
+  height: 3rem;
+  background: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.8), transparent); }
 
 .index-720-name {
   position: absolute;
@@ -109,19 +101,15 @@
 
 .index-720-btn {
   display: none;
-  width: 2.46667rem;
-  height: 0.4rem;
-  line-height: 0.4rem;
-  padding: 0.18rem 0;
-  border: 1px solid #ffffff;
-  color: #fffefe;
-  -webkit-border-radius: 60px;
-  border-radius: 60px;
-  text-indent: 0.73333rem;
-  font-size: 0.34667rem;
+  width: 2.48rem;
+  height: 0.77333rem;
+  background-image: url(../img/work_details_720_play_ico@3x.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
   position: absolute;
-  bottom: 0.46667rem;
-  right: 0.53333rem; }
+  bottom: 0.42rem;
+  right: 0.52rem; }
 
 .index-720-btn span {
   position: absolute;
@@ -138,9 +126,6 @@
   border-style: dashed dashed dashed solid;
   border-color: transparent transparent transparent #ffffff;
   border-right: none; }
-
-.show {
-  display: block; }
 
 .index-basicInfo {
   width: auto;
@@ -162,9 +147,6 @@
   height: auto;
   font-size: 0.34667rem;
   color: #737373; }
-
-.index-module {
-  display: block; }
 
 .index-module-title {
   width: auto;
@@ -192,7 +174,6 @@
   width: 10rem;
   height: 6.66667rem;
   overflow: hidden;
-  background-image: url(../img/1.jpg);
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover; }
@@ -223,7 +204,6 @@
 .index-similar-cover {
   width: 4.4rem;
   height: 4.4rem;
-  background-image: url(../img/1.jpg);
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover; }
@@ -311,28 +291,28 @@
 .data-cost p :nth-child(2) {
   margin-left: 0.24rem; }
 
-.data-fwsj {
+.data-icon-1 {
   background-image: url(../img/work_data_price_fwsj@3x.png); }
 
-.data-jczx {
+.data-icon-2 {
   background-image: url(../img/work_data_price_jczx@3x.png); }
 
-.data-sbss {
+.data-icon-3 {
   background-image: url(../img/work_data_price_sssb@3x.png); }
 
-.data-jjjd {
+.data-icon-4 {
   background-image: url(../img/work_data_price_jjjd@3x.png); }
 
-.data-djsp {
+.data-icon-5 {
   background-image: url(../img/work_data_price_djsp@3x.png); }
 
-.data-zycl {
+.data-icon-6 {
   background-image: url(../img/work_data_price_zycl@3x.png); }
 
-.data-fxgz {
+.data-icon-7 {
   background-image: url(../img/work_data_price_fwgz@3x.png); }
 
-.data-qtzj {
+.data-icon-8 {
   background-image: url(../img/work_data_price_qtzj@3x.png); }
 
 .data-totalCost {
@@ -370,6 +350,9 @@
   text-align: center; }
 
 .data-module a {
+  display: block;
+  width: 100%;
+  height: 100%;
   color: #737373; }
 
 .data-module a:hover {
@@ -724,19 +707,17 @@
 
 .personal-btn {
   display: none;
-  width: 0.2rem;
-  height: 0.4rem;
+  width: 100%;
+  height: 0.26667rem;
   margin: 0 auto 0.4rem auto;
-  -webkit-transform: rotate(90deg);
-  transform: rotate(90deg);
-  background-image: url(../img/work_details_more_ico@3x.png);
+  background-image: url(../img/work_yctd_info_more_ico@3x.png);
   background-repeat: no-repeat;
   background-position: center center;
-  background-size: cover; }
+  background-size: contain; }
 
 .personal-btn-active {
-  -webkit-transform: rotate(270deg);
-  transform: rotate(270deg); }
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg); }
 
 .personal-title {
   width: auto;
@@ -838,16 +819,34 @@
 
 .personal-video {
   width: 100%;
-  height: 2rem;
+  height: 6.66667rem;
   background-image: url(../img/1.jpg);
   background-repeat: no-repeat;
   background-position: center center;
-  background-size: cover; }
+  background-size: cover;
+  position: relative; }
 
-.personal-video video {
+.personal-video div {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: auto;
-  display: block; }
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); }
+
+.personal-video span {
+  display: block;
+  width: 2.66667rem;
+  height: 2.66667rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -1.33333rem;
+  margin-top: -1.33333rem;
+  background-image: url(../img/work_details_sp_play_ico@3x.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover; }
 
 .personal-title .personal-other {
   position: static;
@@ -889,6 +888,7 @@
   padding: 0.52rem 0; }
 
 .personal-mask {
+  display: none;
   position: absolute;
   top: 0;
   left: 0;
@@ -916,6 +916,253 @@
   vertical-align: middle; }
 
 /**
+ * 公司简介
+ */
+.company-portrait {
+  margin: 0.4rem auto;
+  width: 2.56rem;
+  height: 2.56rem;
+  border-radius: 50%;
+  overflow: hidden; }
+
+.company-portrait img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%; }
+
+.company-name {
+  margin-bottom: 0.4rem;
+  text-align: center;
+  height: auto;
+  width: 100%;
+  font-size: 0.45333rem;
+  color: #282828; }
+
+.company-summary {
+  width: auto;
+  height: 2.16rem;
+  font-size: 0.34667rem;
+  color: #737373;
+  line-height: 0.72rem;
+  margin: 0 0.52rem 0.3rem 0.52rem;
+  overflow: hidden;
+  text-align: center;
+  word-break: break-all;
+  word-wrap: break-word; }
+
+.company-summary-active {
+  height: auto; }
+
+.company-btn {
+  display: none;
+  width: 100%;
+  height: 0.26667rem;
+  margin: 0 auto 0.4rem auto;
+  background-image: url(../img/work_yctd_info_more_ico@3x.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain; }
+
+.company-btn-active {
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg); }
+
+.company-title {
+  width: auto;
+  margin: 0 0.53333rem;
+  height: 0.4rem;
+  line-height: 0.4rem;
+  padding: 0.4rem 0;
+  font-size: 0.37333rem;
+  color: #282828;
+  position: relative; }
+
+.company-title span {
+  width: 0.2rem;
+  height: 0.4rem;
+  position: absolute;
+  top: 0.4rem;
+  right: 0;
+  background-image: url(../img/work_details_more_ico@3x.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover; }
+
+.company-showPic {
+  width: 100%;
+  height: 6.66667rem;
+  overflow: hidden;
+  background-image: url(../img/1.jpg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover; }
+
+.company-title .company-other {
+  position: static;
+  background: none;
+  width: auto;
+  height: auto; }
+
+.company-otherCase {
+  width: auto;
+  margin: 0 0.4rem;
+  height: auto;
+  overflow: hidden; }
+
+.company-otherCase ul {
+  margin-right: -0.4rem; }
+
+.company-otherCase li {
+  width: 4.4rem;
+  height: auto;
+  margin-right: 0.4rem;
+  overflow: hidden;
+  float: left; }
+
+.company-otherCase div {
+  width: 4.4rem;
+  height: 4.4rem; }
+
+.company-otherCase div img {
+  width: 100%;
+  height: 100%; }
+
+.company-otherCase p {
+  width: 100%;
+  text-align: center;
+  font-size: 0.34667rem;
+  color: #737373;
+  height: 0.4rem;
+  line-height: 0.4rem;
+  padding: 0.52rem 0; }
+
+/**
+ * 公司展示
+ */
+.company-720 {
+  width: 100%;
+  height: 6.66667rem;
+  overflow: hidden;
+  background-image: url(../img/1.jpg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  position: relative; }
+
+.company-720-bg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3rem;
+  background: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.8), transparent); }
+
+.company-720 span {
+  width: 2.48rem;
+  height: 0.77333rem;
+  background-image: url(../img/work_details_720_play_ico@3x.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+  position: absolute;
+  bottom: 0.28rem;
+  right: 0.52rem; }
+
+.company-video {
+  width: 100%;
+  height: 6.66667rem;
+  background-image: url(../img/1.jpg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  position: relative; }
+
+.company-video div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); }
+
+.company-video span {
+  display: block;
+  width: 2.66667rem;
+  height: 2.66667rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -1.33333rem;
+  margin-top: -1.33333rem;
+  background-image: url(../img/work_details_sp_play_ico@3x.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover; }
+
+.company-mask {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7); }
+
+.company-mask > div {
+  width: 100%;
+  height: 100%;
+  display: table; }
+
+.company-mask > div > div {
+  width: 100%;
+  height: 100%;
+  display: table-cell;
+  vertical-align: middle; }
+
+.company-mask video {
+  width: 100%;
+  background-image: url(../img/1.jpg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  vertical-align: middle; }
+
+.company-border-bottom {
+  border-bottom: 1px solid #e6e6e6; }
+
+.company-list {
+  width: 100%;
+  height: auto;
+  overflow: hidden; }
+
+.company-item {
+  width: 100%;
+  height: auto;
+  overflow: hidden; }
+
+.company-item-title {
+  font-size: 0.74667rem;
+  color: #282828;
+  font-weight: bold;
+  width: auto;
+  height: auto;
+  padding: 0.6rem 0 0.16rem 0;
+  margin: 0 0.52rem; }
+
+.company-item-describe {
+  width: auto;
+  height: auto;
+  margin: 0 0.52rem;
+  line-height: 0.72rem;
+  font-size: 0.34667rem;
+  color: #737373; }
+
+.company-item-pic {
+  width: 100%;
+  height: auto;
+  margin-top: 0.4rem; }
+
+/**
  * 视频页面
  */
 .video {
@@ -936,3 +1183,73 @@
   background-repeat: no-repeat;
   background-size: cover;
   vertical-align: middle; }
+
+/**
+ * 底部链接
+ */
+.bottom {
+  width: 100%;
+  height: 0.98667rem;
+  padding: 0.64rem 0;
+  background-color: rgba(255, 255, 255, 0.9);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-top: 1px solid #e53573;
+  z-index: 10001; }
+
+.bottom-logo {
+  width: 2.48rem;
+  height: 0.53333rem;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+  background-image: url(../img/download_ywmj_logo@3x.png);
+  position: absolute;
+  top: 0.64rem;
+  left: 0.45333rem;
+  overflow: hidden; }
+
+.bottom-slogen {
+  width: 4.89333rem;
+  height: 0.33333rem;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+  background-image: url(../img/download_slogn_txt@3x.png);
+  position: absolute;
+  top: 1.33333rem;
+  left: 0.45333rem;
+  overflow: hidden; }
+
+.bottom-btn {
+  width: 2.45333rem;
+  height: 0.98667rem;
+  background-color: #e53573;
+  color: #fff;
+  border-radius: 5px;
+  position: absolute;
+  top: 0.66667rem;
+  right: 1.6rem;
+  display: block;
+  text-align: center;
+  font-size: 0.37333rem;
+  line-height: 0.98667rem; }
+
+.bottom-btn:hover {
+  text-decoration: none; }
+
+.bottom-close {
+  width: 0.4rem;
+  height: 0.4rem;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  background-image: url(../img/download_close_ico@3x.png);
+  position: absolute;
+  top: 0.18667rem;
+  right: 0.53333rem; }
+
+.show {
+  display: block; }
