@@ -1,12 +1,143 @@
 $(function() {
-    var obj = $(".scan-frame");
-    var num = obj.find("li").length;
-    var oUl = $(".scan-list").eq(0);
-    var obj_w = obj.width();
-    var oUl_w = num*obj_w;
-    oUl.width(oUl_w);
-    new Slider().init(obj);
+    var id = GetQueryString("caseId");
+    var index = GetQueryString("index");
+    var type = GetQueryString("type");
+
+    switch (type) {
+        case "plainLayout":
+            var api = window.Host.customer+"/case/app/detail/scene/plan/"+id;
+            loadPMBZ(api, id, index);
+            break;
+        case "realScene":
+            var api = window.Host.customer+"/case/app/detail/scene/pics/"+id;
+            loadSJZP(api, id, index);
+            break; 
+    }
+
+    $(".scan-picBox").on("tap", function() {
+        alert(1);
+    });
 });
+
+/**
+ * [loadXCSJ 请求平面布置数据]
+ * @param  {[type]} url [请求接口地址]
+ * @param  {[type]} id  [案例编号]
+ * @param  {[type]} index  [当前点击的图片顺序]
+ * @return {[type]}     [description]
+ */
+function loadPMBZ(url, id, index) {
+    var url = url,
+        id = id,
+        index = index;
+
+    $.ajax({
+        type: "GET",
+        url: url,
+        dataType: "json",
+        success: function(data) {
+            var data = data.data;
+
+            $.each(data, function(i, item) {
+                var _this = item;
+
+                $.each(item.pics, function(i, item) {
+                    var oLi = $('<li class="scan-item"></li>');
+                    var str = '<div class="scan-picBox">';
+                    str += '<img src="'+item+'" alt="">';
+                    str += '</div>';
+                    str += '<div class="scan-content">';
+                    str += '<div class="scan-describe">';
+                    str += '<h3>'+_this.title+'</h3>';
+                    str += '<p>'+_this.explain+'</p>';
+                    str += '</div>';
+                    str += '</div>';
+
+                    oLi.html(str);
+                    oLi.appendTo($(".scan-list"));
+                })
+            });
+
+            var len = $(".scan-list").find("li").length;
+            $(".scan-page").find("span").eq(0).text(index);
+            $(".scan-page").find("span").eq(1).text(len);
+
+            var obj = $(".scan-frame");
+            var oUl = $(".scan-list").eq(0);
+            var obj_w = obj.width();
+            var oUl_w = len*obj_w;
+            oUl.width(oUl_w);
+
+            var startX = -1*(index-1)*obj_w;
+            oUl.css({"WebkitTransform":"translateX("+startX+"px)", "transform":"translateX("+startX+"px)"});
+            
+            new Slider().init(obj, index);
+        }
+    });
+}
+
+/**
+ * [loadXCSJ 请求实景照片数据]
+ * @param  {[type]} url [请求接口地址]
+ * @param  {[type]} id  [案例编号]
+ * @param  {[type]} index  [当前点击的图片顺序]
+ * @return {[type]}     [description]
+ */
+function loadSJZP(url, id, index) {
+    var url = url,
+        id = id,
+        index = index;
+
+    $.ajax({
+        type: "GET",
+        url: url,
+        dataType: "json",
+        success: function(data) {
+            var data = data.data;
+
+            $.each(data.pics, function(i, item) {
+                var oLi = $('<li class="scan-item"></li>');
+                var str = '<div class="scan-picBox">';
+                str += '<img src="'+item.pics[0]+'" alt="">';
+                str += '</div>';
+                str += '<div class="scan-content">';
+                str += '<div class="scan-describe">';
+                str += '<h3>'+item.title+'</h3>';
+                str += '<p>'+item.explain+'</p>';
+                str += '</div>';
+                str += '</div>';
+
+                oLi.html(str);
+                oLi.appendTo($(".scan-list"));
+            });
+
+            var len = $(".scan-list").find("li").length;
+            $(".scan-page").find("span").eq(0).text(index);
+            $(".scan-page").find("span").eq(1).text(len);
+
+            var obj = $(".scan-frame");
+            var oUl = $(".scan-list").eq(0);
+            var obj_w = obj.width();
+            var oUl_w = len*obj_w;
+            oUl.width(oUl_w);
+
+            var startX = -1*(index-1)*obj_w;
+            oUl.css({"WebkitTransform":"translateX("+startX+"px)", "transform":"translateX("+startX+"px)"});
+            
+            new Slider().init(obj, index);
+        }
+    })
+}
+
+/**
+ * [GetQueryString 通过名字查询url参数]
+ * @param {[type]} name [description]
+ */
+function GetQueryString(name) {
+     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+     var r = window.location.search.substr(1).match(reg);
+     if(r!=null)return  unescape(r[2]); return null;
+}
 
 /**
  * [Slider 幻灯片]
@@ -29,13 +160,20 @@ function Slider() {
 }
 
 Slider.prototype = {
-    init: function(obj) {
+    init: function(obj, index) {
         var options = this.options;
         options.oTab = $(obj);
         options.oList = options.oTab.find("ul").eq(0);
         options.aLi = options.oList.find("li");
         options.iW = options.aLi.eq(0).width();
         var that = this;
+
+        // 初始化定位，默认定位为0
+        var index = index;
+        if (typeof index === "string") {
+            options.iNow = index-1;
+            options.iX = -options.iNow*options.iW;
+        }
 
         options.oTab.on("touchstart", function(ev) { 
             that.fnStart(ev); 

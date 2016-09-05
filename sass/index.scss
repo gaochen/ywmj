@@ -576,10 +576,10 @@ $color-C6: #f56d9d;
 }
 .scan-content {
     position: absolute;
-    bottom: 0;
+    bottom: 1.16rem;
     left: 0;
     width: 100%;
-    @include px2rem(height, 410px);
+    @include px2rem(height, 320px);
     overflow: hidden;
     padding-top: 1.2rem;
     background:-webkit-linear-gradient(bottom, rgba(0,0,0,1), rgba(53,53,53,0)); 
@@ -593,7 +593,7 @@ $color-C6: #f56d9d;
 }
 /*滚动条大小*/
 .scan-describe::-webkit-scrollbar {
-    width: 4px;
+    width: 2px;
 }
 /*滚动条默认显示样式*/
 .scan-describe::-webkit-scrollbar-thumb {
@@ -614,8 +614,12 @@ $color-C6: #f56d9d;
     @include px2rem(line-height, 54px);
 }
 .scan-page {
+    position: absolute;
+    bottom: 0;
+    left: 0;
     width: 100%;
-    height: auto;
+    @include px2rem(height, 36px);
+    @include px2rem(height, 36px);
     color: #ffffff;
     @include px2rem(font-size, $font-F2);
     margin: 0.4rem 0 0.28rem 0;

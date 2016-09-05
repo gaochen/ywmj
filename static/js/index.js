@@ -162,7 +162,7 @@ function loadYCTD(url, id) {
                 });
 
                 var company = $('<li></li>');
-                var url = "http://"+window.location.host+"/template/personal.html?caseId="+index.company.companyId;
+                var url = "http://"+window.location.host+"/template/company.html?caseId="+index.company.companyId;
                 var str = '<a href="'+url+'">';
                 str += '<div class="team-portrait fl">';
                 str += '<img src="'+index.company.companyHeadImage+'">';

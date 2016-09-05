@@ -93,12 +93,11 @@ $(function() {
         var X = Math.abs(iDisX);
         var Y = Math.abs(iDisY);
 
-        if (Y > X && iDisY < 0) {
-
-        }
-        else {
+        var bool = (Y > X && iDisY < 0);
+        if (!bool) {
             return false;
         }
+
 
     }, false);
 
@@ -106,7 +105,13 @@ $(function() {
         var endTop = oDiv.scrollTop;
         console.log("endTop:"+endTop);
 
-        var oLi = $('<li></li>')
+        // $.ajax({
+        //     type: "GET",
+        //     url: window.Host.customer+"/case/app/detail/scene/pics/1044",
+        //     dataType: "json",
+        //     success: function(data) {
+        //     }
+        // });
 
     }, false);
 
