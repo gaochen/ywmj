@@ -16,8 +16,7 @@
   top: 0;
   left: 0;
   right: 0;
-  bottom: 0;
-  overflow-y: hidden; }
+  bottom: 0; }
 
 .content {
   position: absolute;
@@ -646,7 +645,12 @@
   border: 1px solid #e6e6e6;
   width: 2.66667rem;
   height: 1.12rem;
-  line-height: 1.12rem; }
+  line-height: 1.12rem;
+  overflow: hidden; }
+
+.material-list img {
+  width: 100%;
+  height: 100%; }
 
 .material-list p {
   padding-top: 0.28rem;
@@ -747,11 +751,6 @@
 .personal-showPic {
   display: block;
   width: 10rem;
-  height: auto;
-  overflow: hidden; }
-
-.personal-showPic img {
-  width: 100%;
   height: auto; }
 
 .personal-article {
@@ -784,7 +783,12 @@
   width: 1.68rem;
   height: 1.68rem;
   background-color: #e6e6e6;
-  margin-right: 0.52rem; }
+  margin-right: 0.52rem;
+  overflow: hidden; }
+
+.personal-article-thumb img {
+  width: 100%;
+  height: 100%; }
 
 .personal-service-standard {
   width: auto;
@@ -1165,6 +1169,18 @@
   width: 100%;
   height: auto;
   margin-top: 0.4rem; }
+
+.personal-slideDown {
+  display: none;
+  width: 100%;
+  height: 0.4rem;
+  line-height: 0.4rem;
+  padding: 0.4rem 0;
+  text-align: center;
+  font-size: 0.37333rem;
+  color: #282828;
+  border-bottom: 1px solid #e6e6e6;
+  background-color: #ffffff; }
 
 /**
  * 视频页面

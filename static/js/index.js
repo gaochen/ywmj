@@ -130,8 +130,6 @@ function loadYCTD(url, id) {
     var url = url,
         id = id;
 
-   // return false;
-
     $.ajax({
         type: "GET",
         url: url,
@@ -143,10 +141,11 @@ function loadYCTD(url, id) {
                 var oDiv = $('<div class="team-group"><div class="team-title">'+index.phase+'</div></div>');
                 var oLine = $('<div class="line-index"></div>');
                 var oUl = $('<ul class="team-list clearfix"></ul>'); 
+                var phaseId = index.phaseId;
 
                 $.each(index.employees, function(i, index) {
                     var oLi = $('<li></li>');
-                    var url = "http://"+window.location.host+"/template/personal.html?caseId="+index.userId;
+                    var url = "http://"+window.location.host+"/template/personal.html?userId="+index.userId+"&phaseId="+phaseId+"&caseId="+id;
                     var str = '<a href="'+url+'">';
                     str += '<div class="team-portrait fl">';
                     str += '<img src="'+index.headImage+'">';
@@ -162,7 +161,7 @@ function loadYCTD(url, id) {
                 });
 
                 var company = $('<li></li>');
-                var url = "http://"+window.location.host+"/template/company.html?caseId="+index.company.companyId;
+                var url = "http://"+window.location.host+"/template/company.html?companyId="+index.company.companyId+"&caseId="+id;
                 var str = '<a href="'+url+'">';
                 str += '<div class="team-portrait fl">';
                 str += '<img src="'+index.company.companyHeadImage+'">';
@@ -221,28 +220,8 @@ function loadXXZL(url, id) {
 
             // 材料品牌
             $.each(data.brands, function(i, index) {
-                var url;
-                switch (index.brandId) {
-                    case 1:
-                    // 主材品牌
-                    url = "http://"+window.location.host+"/template/material.html?brandType=1&caseId="+id;
-                    case 2:
-                    // 辅材品牌
-                    url = "http://"+window.location.host+"/template/material.html?brandType=2&caseId="+id;
-                    case 3:
-                    // 设备品牌
-                    url = "http://"+window.location.host+"/template/material.html?brandType=3&caseId="+id;
-                    case 4:
-                    // 家居品牌
-                    url = "http://"+window.location.host+"/template/material.html?brandType=4&caseId="+id;
-                    case 5:
-                    // 灯具品牌
-                    url = "http://"+window.location.host+"/template/material.html?brandType=5&caseId="+id;
-                    case 6:
-                    // 饰品品牌
-                    url = "http://"+window.location.host+"/template/material.html?brandType=6&caseId="+id;
-                }
-                var oLi = $('<li><a href="'+url+'">主材品牌</a></li>');
+                var url="http://"+window.location.host+"/template/material.html?brandId="+index.brandId+"&caseId="+id;
+                var oLi = $('<li><a href="'+url+'">'+index.brandName+'品牌</a></li>');
                 oLi.appendTo($(".data-material ul"));
 
             });

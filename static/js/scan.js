@@ -2,6 +2,8 @@ $(function() {
     var id = GetQueryString("caseId");
     var index = GetQueryString("index");
     var type = GetQueryString("type");
+    var userId = GetQueryString("userId");
+    var phaseId = GetQueryString("phaseId");
 
     switch (type) {
         case "plainLayout":
@@ -12,15 +14,14 @@ $(function() {
             var api = window.Host.customer+"/case/app/detail/scene/pics/"+id;
             loadSJZP(api, id, index);
             break; 
+        case "personal":
+            var api = window.Host.customer+"/case/app/resume/employee/"+userId+"/"+id+"/"+phaseId;
+            loadGRJJ(api, id, null);
     }
-
-    $(".scan-picBox").on("tap", function() {
-        alert(1);
-    });
 });
 
 /**
- * [loadXCSJ 请求平面布置数据]
+ * [loadPMBZ 请求平面布置数据]
  * @param  {[type]} url [请求接口地址]
  * @param  {[type]} id  [案例编号]
  * @param  {[type]} index  [当前点击的图片顺序]
@@ -36,6 +37,13 @@ function loadPMBZ(url, id, index) {
         url: url,
         dataType: "json",
         success: function(data) {
+
+            // 判断返回数据是否错误
+            if (data.succ === false) {
+                $("body").html(data.message+"，稍后请重试!");
+                return false;
+            }
+
             var data = data.data;
 
             $.each(data, function(i, item) {
@@ -58,10 +66,12 @@ function loadPMBZ(url, id, index) {
                 })
             });
 
+            // 底部图片页码
             var len = $(".scan-list").find("li").length;
             $(".scan-page").find("span").eq(0).text(index);
             $(".scan-page").find("span").eq(1).text(len);
 
+            // 侧滑
             var obj = $(".scan-frame");
             var oUl = $(".scan-list").eq(0);
             var obj_w = obj.width();
@@ -72,12 +82,18 @@ function loadPMBZ(url, id, index) {
             oUl.css({"WebkitTransform":"translateX("+startX+"px)", "transform":"translateX("+startX+"px)"});
             
             new Slider().init(obj, index);
+
+            // 点击图片隐藏文字
+            $(".scan-picBox").on("click", function(ev) {
+                ev.stopPropagation();
+                $(this).siblings(".scan-content").hide();
+            });
         }
     });
 }
 
 /**
- * [loadXCSJ 请求实景照片数据]
+ * [loadSJZP 请求实景照片数据]
  * @param  {[type]} url [请求接口地址]
  * @param  {[type]} id  [案例编号]
  * @param  {[type]} index  [当前点击的图片顺序]
@@ -93,6 +109,13 @@ function loadSJZP(url, id, index) {
         url: url,
         dataType: "json",
         success: function(data) {
+
+            // 判断返回数据是否错误
+            if (data.succ === false) {
+                $("body").html(data.message+"，稍后请重试!");
+                return false;
+            }
+
             var data = data.data;
 
             $.each(data.pics, function(i, item) {
@@ -111,10 +134,12 @@ function loadSJZP(url, id, index) {
                 oLi.appendTo($(".scan-list"));
             });
 
+            // 底部图片页码
             var len = $(".scan-list").find("li").length;
             $(".scan-page").find("span").eq(0).text(index);
             $(".scan-page").find("span").eq(1).text(len);
 
+            // 侧滑
             var obj = $(".scan-frame");
             var oUl = $(".scan-list").eq(0);
             var obj_w = obj.width();
@@ -125,8 +150,67 @@ function loadSJZP(url, id, index) {
             oUl.css({"WebkitTransform":"translateX("+startX+"px)", "transform":"translateX("+startX+"px)"});
             
             new Slider().init(obj, index);
+
+            // 点击图片隐藏文字
+            $(".scan-picBox").on("click", function(ev) {
+                ev.stopPropagation();
+                $(this).next(".scan-content").hide();
+            });
         }
     })
+}
+
+/**
+ * [loadGRJJ 请求个人简介数据]
+ * @param  {[type]} url [请求接口地址]
+ * @param  {[type]} id  [案例编号]
+ * @param  {[type]} index  [当前点击的图片顺序]
+ * @return {[type]}     [description]
+ */
+function loadGRJJ(url, id, index) {
+    var url = url,
+        id = id,
+        index = index;
+
+    $.ajax({
+        type: "GET",
+        url: url,
+        dataType: "json",
+        success: function(data) {
+
+            // 判断返回数据是否错误
+            if (data.succ === false) {
+                $("body").html(data.message+"，稍后请重试!");
+                return false;
+            }
+
+            var data = data.data;
+
+            $.each(data.presentPics, function(i, item) {
+                var oLi = $('<li class="scan-item"></li>');
+                var str = '<div class="scan-picBox">';
+                str += '<img src="'+item+'" alt="">';
+                str += '</div>';
+
+                oLi.html(str);
+                oLi.appendTo($(".scan-list"));
+            });
+
+            // 底部图片页码
+            var len = $(".scan-list").find("li").length;
+            $(".scan-page").find("span").eq(0).text(1);
+            $(".scan-page").find("span").eq(1).text(len);
+
+            // 侧滑
+            var obj = $(".scan-frame");
+            var oUl = $(".scan-list").eq(0);
+            var obj_w = obj.width();
+            var oUl_w = len*obj_w;
+            oUl.width(oUl_w);
+            
+            new Slider().init(obj, null);
+        }
+    });
 }
 
 /**
@@ -183,7 +267,7 @@ Slider.prototype = {
             that.fnMove(ev);
         });    
 
-        options.oTab.on("touchend", function(ev) {
+        options.oTab.on("touchend", function() {
             that.fnEnd();
         });
     },

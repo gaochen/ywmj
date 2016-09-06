@@ -32,7 +32,6 @@ $color-C6: #f56d9d;
     left: 0;
     right: 0;
     bottom: 0;
-    overflow-y: hidden;
 }
 .content {
     position: absolute;
@@ -664,6 +663,11 @@ $color-C6: #f56d9d;
     @include px2rem(width, 200px);
     @include px2rem(height, 84px);
     @include px2rem(line-height, 84px);
+    overflow: hidden;
+}
+.material-list img {
+    width: 100%;
+    height: 100%;
 }
 .material-list p {
     padding-top: 0.28rem;
@@ -765,11 +769,6 @@ $color-C6: #f56d9d;
    display: block;
    @include px2rem(width, 750px);
    height: auto;
-   overflow: hidden;
-}
-.personal-showPic img {
-    width: 100%;
-    height: auto;
 }
 .personal-article {
     width: 100%;
@@ -802,6 +801,11 @@ $color-C6: #f56d9d;
     @include px2rem(height, 126px);
     background-color: #e6e6e6;
     margin-right: 0.52rem;
+    overflow: hidden;
+}
+.personal-article-thumb img {
+    width: 100%;
+    height: 100%;
 }
 .personal-service-standard {
     width: auto;
@@ -1183,6 +1187,18 @@ $color-C6: #f56d9d;
     width: 100%;
     height: auto;
     margin-top: 0.4rem;
+}
+.personal-slideDown {
+    display: none;
+    width: 100%;
+    @include px2rem(height, 30px);
+    @include px2rem(line-height, 30px);
+    padding:0.4rem 0;
+    text-align: center;
+    @include px2rem(font-size, $font-F4);
+    color: $color-C1;
+    border-bottom: 1px solid $color-C3;
+    background-color: #ffffff;
 }
 
 /**

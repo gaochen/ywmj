@@ -7,6 +7,12 @@ $(function () {
         url: api,
         dataType: "json",
         success: function(data) {
+            // 请求失败
+            if (data.succ === false) {
+                $("body").html(data.message+"，稍后请重试!");
+                return false;
+            }
+
             var data = data.data;
 
             $.each(data.pics, function(i, item) {
