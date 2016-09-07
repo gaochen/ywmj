@@ -4,6 +4,7 @@ $(function() {
     var type = GetQueryString("type");
     var userId = GetQueryString("userId");
     var phaseId = GetQueryString("phaseId");
+    var companyId = GetQueryString("companyId");
 
     switch (type) {
         case "plainLayout":
@@ -17,6 +18,11 @@ $(function() {
         case "personal":
             var api = window.Host.customer+"/case/app/resume/employee/"+userId+"/"+id+"/"+phaseId;
             loadGRJJ(api, id, null);
+            break;
+        case "company":
+            var api = window.Host.customer+"/case/app/present/company/"+companyId;
+            loadGSZS(api, id, index);
+            break;
     }
 });
 
@@ -214,6 +220,74 @@ function loadGRJJ(url, id, index) {
 }
 
 /**
+ * [loadGSZS 请求公司展示数据]
+ * @param  {[type]} url [请求接口地址]
+ * @param  {[type]} id  [案例编号]
+ * @param  {[type]} index  [当前点击的图片顺序]
+ * @return {[type]}     [description]
+ */
+function loadGSZS(url, id, index) {
+    var url = url,
+        id = id,
+        index = index;
+
+    $.ajax({
+        type: "GET",
+        url: url,
+        dataType: "json",
+        success: function(data) {
+
+            // 判断返回数据是否错误
+            if (data.succ === false) {
+                $("body").html(data.message+"，稍后请重试!");
+                return false;
+            }
+
+            var data = data.data;
+
+            $.each(data.pics, function(i, item) {
+                var oLi = $('<li class="scan-item"></li>');
+                var str = '<div class="scan-picBox">';
+                str += '<img src="'+item.pics[0]+'" alt="">';
+                str += '</div>';
+                str += '<div class="scan-content">';
+                str += '<div class="scan-describe">';
+                str += '<h3>'+item.title+'</h3>';
+                str += '<p>'+item.explain+'</p>';
+                str += '</div>';
+                str += '</div>';
+
+                oLi.html(str);
+                oLi.appendTo($(".scan-list"));
+            });
+
+            // 底部图片页码
+            var len = $(".scan-list").find("li").length;
+            $(".scan-page").find("span").eq(0).text(index);
+            $(".scan-page").find("span").eq(1).text(len);
+
+            // 侧滑
+            var obj = $(".scan-frame");
+            var oUl = $(".scan-list").eq(0);
+            var obj_w = obj.width();
+            var oUl_w = len*obj_w;
+            oUl.width(oUl_w);
+
+            var startX = -1*(index-1)*obj_w;
+            oUl.css({"WebkitTransform":"translateX("+startX+"px)", "transform":"translateX("+startX+"px)"});
+            
+            new Slider().init(obj, index);
+
+            // 点击图片隐藏文字
+            $(".scan-picBox").on("click", function(ev) {
+                ev.stopPropagation();
+                $(this).next(".scan-content").hide();
+            });
+        }
+    })
+}
+
+/**
  * [GetQueryString 通过名字查询url参数]
  * @param {[type]} name [description]
  */
@@ -302,9 +376,11 @@ Slider.prototype = {
     fnEnd: function() {
         var options = this.options;
         var val = Math.abs(options.iDis) * 4;
+
         if (val > options.iW) {
             options.iDis < 0 ? options.iNow++ : options.iNow--;   
         }
+
         if (options.iNow < 0) {
             options.iNow = 0;
         }
@@ -315,6 +391,7 @@ Slider.prototype = {
     },
     tab: function() {
         var options = this.options;
+        options.iDis = 0;
         options.oTab.find("span").eq(0).text(options.iNow+1);
         options.iX = -options.iNow*options.iW;
      

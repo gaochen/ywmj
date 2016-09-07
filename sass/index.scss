@@ -845,7 +845,6 @@ $color-C6: #f56d9d;
 .personal-video {
     width: 100%;
     @include px2rem(height, 500px);
-    background-image: url(../img/1.jpg);
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
@@ -1017,7 +1016,6 @@ $color-C6: #f56d9d;
    width: 100%;
    @include px2rem(height, 500px);
    overflow: hidden;
-   background-image: url(../img/1.jpg);
    background-repeat: no-repeat;
    background-position: center center;
    background-size: cover;
@@ -1069,7 +1067,6 @@ $color-C6: #f56d9d;
     width: 100%;
     @include px2rem(height, 500px);
     overflow: hidden;
-    background-image: url(../img/1.jpg);
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
@@ -1083,7 +1080,7 @@ $color-C6: #f56d9d;
     @include px2rem(height, 225px);
     background:-webkit-linear-gradient(bottom, rgba(0,0,0,0.8), rgba(0,0,0,0)); 
 }
-.company-720 span {
+.company-720-btn {
     @include px2rem(width, 186px);
     @include px2rem(height, 58px);
     background-image: url(../img/work_details_720_play_ico@3x.png);
@@ -1093,6 +1090,7 @@ $color-C6: #f56d9d;
     position: absolute;
     bottom: 0.28rem;
     right: 0.52rem;
+    display: none;
 }
 .company-video {
     width: 100%;

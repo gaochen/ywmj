@@ -26,7 +26,9 @@ $(function() {
             var oSummary = $(".company-summary");
             var oBtn = $(".company-btn");
 
-            oSummary.find("p").text(data.resume);
+            data.resume = data.resume.replace(/\n/g,'<br />');
+
+            oSummary.find("p").html(data.resume);
 
             // 是否显示按钮
             if (oSummary.find("p").height() > oSummary.height()) {
@@ -34,17 +36,20 @@ $(function() {
             } 
             
             // 显示全部内容
-            $(".personal-btn").on("click", function() {
+            oBtn.on("click", function() {
                 var _this = $(this);
-                if (oSummary.hasClass("personal-summary-active")) {
-                    oSummary.removeClass("personal-summary-active");
-                    _this.removeClass("personal-btn-active");
+                if (oSummary.hasClass("company-summary-active")) {
+                    oSummary.removeClass("company-summary-active");
+                    _this.removeClass("company-btn-active");
                 }
                 else {
-                    oSummary.addClass("personal-summary-active");
-                    _this.addClass("personal-btn-active");
+                    oSummary.addClass("company-summary-active");
+                    _this.addClass("company-btn-active");
                 }
             });
+
+            // 公司展示封面图
+            $(".company-showPic").css("background-image", "url("+data.cover+")");
 
             // 其他作品总数
             if (data.otherCasesCount !== 0) {
@@ -55,40 +60,82 @@ $(function() {
                 $(".company-other").hide();
             }
 
+            //滚动到底部
+            (function() {
+                var oDiv = document.querySelector(".content");
+                var iStartTouchX = 0;
+                var iStartTouchY = 0;
+                var iEndTouchY = 0;
+                var iDisX = 0;
+                var iDisY = 0;
+                var startTop = 0;
+                var endTop = 0;
+                var bool = false;
+                var pageNum = 1;
+                var pageSize = 10;
+
+                var api = window.Host.customer+"/case/app/detail/company/works/"+companyId+"/"+caseId+"/"+pageNum+"/"+pageSize;
+                slideDown(api, pageNum);
+                pageNum++;
+
+                oDiv.addEventListener("touchstart", function(ev) {
+
+                    var ev = ev || window.event;
+                    var _ev = ev.changedTouches[0];
+                    iStartTouchX = _ev.pageX;
+                    iStartTouchY = _ev.pageY;
+
+                    startTop = oDiv.scrollTop;
+
+                }, false);
+
+                oDiv.addEventListener("touchmove", function(ev) {
+
+                    var ev = ev || window.event;
+                    var _ev = ev.changedTouches[0];
+
+                    iDisX = _ev.pageX - iStartTouchX;
+                    iDisY = _ev.pageY - iStartTouchY;
+
+                    var X = Math.abs(iDisX);
+                    var Y = Math.abs(iDisY);
+
+                    if (Y > X && iDisY < 0) {
+                        bool = true;
+                    }
+                    else {
+                        bool = false;
+                    }
+
+                }, false);
+
+                oDiv.addEventListener("touchend", function(ev) {
+                    var ev = ev || window.event;
+                    var _ev = ev.changedTouches[0];
+                    iEndTouchY = _ev.pageY;
+
+                    if (iStartTouchY === iEndTouchY) {
+                        return false;
+                    }
+
+                    endTop = oDiv.scrollTop;
+
+                    if (endTop === startTop && bool) {
+                        var api = window.Host.customer+"/case/app/detail/company/works/"+companyId+"/"+caseId+"/"+pageNum+"/"+pageSize;
+                        slideDown(api, pageNum);
+                        pageNum++;
+                    }
+
+                }, false);
+            })();
         },
         error: function(error) {
             $("body").html("请求失败，稍后请重试！");
         }
     });
 
-    /**
-     * 公司描述
-     */
-    (function() {
-        var oSummary = $(".company-summary");
-        var oBtn = $(".company-btn");
-
-        // 是否显示按钮
-        if (oSummary.find("p").height() > oSummary.height()) {
-            oBtn.show();
-        } 
-        
-        // 显示全部内容
-        $(".company-btn").on("tap", function() {
-            var _this = $(this);
-            if (oSummary.hasClass("company-summary-active")) {
-                oSummary.removeClass("company-summary-active");
-                _this.removeClass("company-btn-active");
-            }
-            else {
-                oSummary.addClass("company-summary-active");
-                _this.addClass("company-btn-active");
-            }
-        });
-    })();
-
     // 跳转公司展示链接
-    var url_companyShow = "http://" + window.location.host + "/template/companyShow.html";
+    var url_companyShow = "http://" + window.location.host + "/template/companyShow.html?companyId="+companyId;
     $("#company-show").attr("href", url_companyShow);
 
     // 视频播放
@@ -112,6 +159,13 @@ $(function() {
         });
         
     })();
+
+    // 关闭底部下载提示层
+    $(".bottom-close").on("click", function(ev) {
+        ev.stopPropagation();
+        $(".wrap").find(".bottom").remove();
+    });
+
 });
 
 /**
@@ -134,10 +188,18 @@ function slideDown(api, pageNum) {
                 $.each(data, function(i, index) {
                     var oLi = $('<li><div><img src="'+index.caseCover+'"></div><p>'+index.caseName+'</p></li>');
                     oLi.appendTo($(".company-otherCase ul"));
-               })
+               });
+
+                // 判断是否加载完
+                var length = $(".company-otherCase").find("li").length;
+                var num = $(".company-other").text();
+
+                if (length == num) {
+                    $(".personal-slideDown").hide();
+                }
             }
             else {
-                $(".personal-slideDown").text("已无更多其他作品");
+                $(".personal-slideDown").hide();
             }
         }
     });

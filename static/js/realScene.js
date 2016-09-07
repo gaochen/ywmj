@@ -31,6 +31,7 @@ $(function () {
                     oDiv.appendTo($(".realScene-list"));
             });
 
+            data.designConcept = data.designConcept.replace(/\n/g,'<br />');
             $(".realScene-describe").text(data.designConcept);
         }
     });

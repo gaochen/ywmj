@@ -3,6 +3,22 @@ $(function() {
     var id = GetQueryString("caseId");
     var indexId = window.location.hash;
 
+    // 获取分享链接和title
+    var share_url = window.Host.customer+"/case/app/share/"+id;
+    $.ajax({
+        type: "GET",
+        url: share_url,
+        dataType: "json",
+        success: function(data) {
+            // 判断返回数据是否错误
+            if (data.succ === true) {
+                var data = data.data;
+                $("title").text(data.caseName);
+            }
+
+        }
+    });
+
     // 显示对应的tab
     if (indexId === "#index=1") {
         $(".index-nav").find("a").eq(1).addClass("active").siblings("a").removeClass("active");

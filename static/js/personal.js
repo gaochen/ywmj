@@ -30,7 +30,9 @@ $(function() {
             var oSummary = $(".personal-summary");
             var oBtn = $(".personal-btn");
 
-            oSummary.find("p").text(data.resume);
+            data.resume = data.resume.replace(/\n/g,'<br />');
+
+            oSummary.find("p").html(data.resume);
 
             // 是否显示按钮
             if (oSummary.find("p").height() > oSummary.height()) {
@@ -56,7 +58,7 @@ $(function() {
             $(".personal-showPic").attr("src", data.presentPics[0]);
 
             // 微信链接
-            if (data.articles instanceof Array) {
+            if (!!data.articles) {
                 $.each(data.articles, function(i, index) {
                     var oLi = $('<li><a href="'+index.url+'"><p class="fl personal-article-title">'+index.title+'</p><div class="fr personal-article-thumb"><img src="'+index.thumb+'"></div></a></li>');
 
@@ -78,15 +80,23 @@ $(function() {
                     oPic.css("margin-top",h2+"px");
                 });
             }
+            else {
+                $(".js-personal-article").hide();
+            }
 
             // 服务信息
             $(".personal-service-price").text("¥ "+data.chargeRangeStart+"-"+data.chargeRangeEnd);
             $(".personal-service-Target").text(data.serviceTarget);
 
-            // 视频讲解
-            $.each(data.videos, function(i, index) {
-                $("#personal-video").attr("src", index.videoInfo.url);
-            });
+            // 视频(1个)
+            if (!!data.videos) {
+                var video_cover = data.videos[0].videoInfo.url+"?vframe/jpg/offset/"+data.videos[0].videoInfo.second+"/w/240/h/160";
+                $(".personal-video").css("background-image", "url("+video_cover+")");
+                $("#personal-video").attr("src", data.videos[0].videoInfo.url);
+            }
+            else {
+                $(".js-personal-video").hide();
+            }
 
             // 其他作品总数
             if (data.otherCasesCount !== 0) {
@@ -96,6 +106,76 @@ $(function() {
             else {
                 $(".personal-other").hide();
             }
+
+            //滚动到底部
+            (function() {
+                var oDiv = document.querySelector(".content");
+                var iStartTouchX = 0;
+                var iStartTouchY = 0;
+                var iEndTouchY = 0;
+                var iDisX = 0;
+                var iDisY = 0;
+                var startTop = 0;
+                var endTop = 0;
+                var bool = false;
+                var pageNum = 1;
+                var pageSize = 10;
+
+                var api = window.Host.customer+"/case/app/detail/employee/works/"+userId+"/"+caseId+"/"+pageNum+"/"+pageSize;
+                slideDown(api, pageNum);
+                pageNum++;
+
+                oDiv.addEventListener("touchstart", function(ev) {
+
+                    var ev = ev || window.event;
+                    var _ev = ev.changedTouches[0];
+                    iStartTouchX = _ev.pageX;
+                    iStartTouchY = _ev.pageY;
+
+                    startTop = oDiv.scrollTop;
+
+                }, false);
+
+                oDiv.addEventListener("touchmove", function(ev) {
+
+                    var ev = ev || window.event;
+                    var _ev = ev.changedTouches[0];
+
+                    iDisX = _ev.pageX - iStartTouchX;
+                    iDisY = _ev.pageY - iStartTouchY;
+
+                    var X = Math.abs(iDisX);
+                    var Y = Math.abs(iDisY);
+
+                    if (Y > X && iDisY < 0) {
+                        bool = true;
+                    }
+                    else {
+                        bool = false;
+                    }
+
+                }, false);
+
+                oDiv.addEventListener("touchend", function(ev) {
+                    var ev = ev || window.event;
+                    var _ev = ev.changedTouches[0];
+                    iEndTouchY = _ev.pageY;
+
+                    if (iStartTouchY === iEndTouchY) {
+                        return false;
+                    }
+
+                    endTop = oDiv.scrollTop;
+
+                    if (endTop === startTop && bool) {
+                        var api = window.Host.customer+"/case/app/detail/employee/works/"+userId+"/"+caseId+"/"+pageNum+"/"+pageSize;
+                        slideDown(api, pageNum);
+                        pageNum++;
+                    }
+
+                }, false);
+            })();
+
 
         },
         error: function(error) {
@@ -125,78 +205,11 @@ $(function() {
         
     })();
 
-    //滚动到底部
-    (function() {
-        var oDiv = document.querySelector(".content");
-        var iStartTouchX = 0;
-        var iStartTouchY = 0;
-        var iEndTouchY = 0;
-        var iDisX = 0;
-        var iDisY = 0;
-        var startTop = 0;
-        var endTop = 0;
-        var bool = false;
-        var pageNum = 1;
-        var pageSize = 10;
-
-
-        oDiv.addEventListener("touchstart", function(ev) {
-
-            var ev = ev || window.event;
-            var _ev = ev.changedTouches[0];
-            iStartTouchX = _ev.pageX;
-            iStartTouchY = _ev.pageY;
-
-            startTop = oDiv.scrollTop;
-
-        }, false);
-
-        oDiv.addEventListener("touchmove", function(ev) {
-
-            var ev = ev || window.event;
-            var _ev = ev.changedTouches[0];
-
-            iDisX = _ev.pageX - iStartTouchX;
-            iDisY = _ev.pageY - iStartTouchY;
-
-            var X = Math.abs(iDisX);
-            var Y = Math.abs(iDisY);
-
-            if (Y > X && iDisY < 0) {
-                bool = true;
-            }
-            else {
-                bool = false;
-            }
-
-        }, false);
-
-        oDiv.addEventListener("touchend", function(ev) {
-            var ev = ev || window.event;
-            var _ev = ev.changedTouches[0];
-            iEndTouchY = _ev.pageY;
-
-            if (iStartTouchY === iEndTouchY) {
-                return false;
-            }
-
-            console.log(iStartTouchY);
-            console.log(iEndTouchY);
-            console.log(startTop);
-            console.log(endTop);
-            console.log(bool);
-
-            endTop = oDiv.scrollTop;
-
-            if (endTop === startTop && bool) {
-                var api = window.Host.customer+"/case/app/detail/employee/works/"+userId+"/"+caseId+"/"+pageNum+"/"+pageSize;
-                slideDown(api, pageNum);
-                pageNum++;
-            }
-
-        }, false);
-    })();
-
+    // 关闭底部下载提示层
+    $(".bottom-close").on("click", function(ev) {
+        ev.stopPropagation();
+        $(".wrap").find(".bottom").remove();
+    });
 });
 
 /**
@@ -211,7 +224,6 @@ function slideDown(api, pageNum) {
         url: api,
         dataType: "json",
         success: function(data) {
-            console.log(data);
 
             var data = data.data;
 
@@ -219,10 +231,17 @@ function slideDown(api, pageNum) {
                 $.each(data, function(i, index) {
                     var oLi = $('<li><div><img src="'+index.caseCover+'"></div><p>'+index.caseName+'</p></li>');
                     oLi.appendTo($(".personal-otherCase ul"));
-               })
+               });
+
+                // 判断是否加载完
+                var length = $(".personal-otherCase").find("li").length;
+                var num = $(".personal-other").text();
+                if (length == num) {
+                    $(".personal-slideDown").hide();
+                }
             }
             else {
-                $(".personal-slideDown").text("已无更多其他作品");
+                $(".personal-slideDown").hide();
             }
         }
     });
