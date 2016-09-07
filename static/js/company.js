@@ -135,7 +135,7 @@ $(function() {
     });
 
     // 跳转公司展示链接
-    var url_companyShow = "http://" + window.location.host + "/template/companyShow.html?companyId="+companyId;
+    var url_companyShow = window.Host.local + "companyShow.html?companyId="+companyId;
     $("#company-show").attr("href", url_companyShow);
 
     // 视频播放

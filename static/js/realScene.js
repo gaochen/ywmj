@@ -17,7 +17,7 @@ $(function () {
 
             $.each(data.pics, function(i, item) {
                 var index = i+1;
-                var api = "http://"+window.location.host+"/template/scan.html?caseId="+id+"&type=realScene&index="+index;
+                var api = window.Host.local+"scan.html?caseId="+id+"&type=realScene&index="+index;
                 var oDiv = $('<div class="realScene-item"></div>');
                 var str = '<div class="realScene-title">'+item.title+'</div>';
                     str += '<div class="realScene-describe">'+item.explain+'</div>';

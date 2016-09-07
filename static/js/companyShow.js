@@ -45,7 +45,7 @@ $(function() {
 
             $.each(data.pics, function(i, index) {
                 var num = i+1;
-                var api = "http://"+window.location.host+"/template/scan.html?companyId="+companyId+"&type=company&index="+num;
+                var api = window.Host.local+"scan.html?companyId="+companyId+"&type=company&index="+num;
                 var oLi = $('<li class="company-item"><div class="company-item-title">'+index.title+'</div><div class="company-item-describe">'+index.explain+'</div><a href="'+api+'"><img class="company-item-pic" src="'+index.pics[0]+'" /></a></li>');
                 oLi.appendTo($(".company-list"));
             });

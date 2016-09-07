@@ -114,11 +114,11 @@ function loadXCSJ(url, id) {
             $(".index-basicInfo-info").text(data.cityName + " / " + data.decorateStyle + " / " + data.houseType + " / " + data.houseArea + "㎡" + " / " + data.cost + "万" + " / " + data.buildingName);
         
             // 平面布置
-            var url_plainLayput = "http://" + window.location.host + "/template/plainLayout.html?caseId="+id;
+            var url_plainLayput = window.Host.local + "plainLayout.html?caseId="+id;
             $("#index-plainLayout").attr("href", url_plainLayput).find(".index-module-pic").css("background-image","url("+data.planCover+")");
         
             // 实景照片
-            var url_realScene = "http://" + window.location.host + "/template/realScene.html?caseId="+id;
+            var url_realScene = window.Host.local + "realScene.html?caseId="+id;
             $("#index-scene").attr("href", url_realScene).find(".index-module-pic").css("background-image","url("+data.sceneCover+")");
 
             // 相似作品
@@ -161,7 +161,7 @@ function loadYCTD(url, id) {
 
                 $.each(index.employees, function(i, index) {
                     var oLi = $('<li></li>');
-                    var url = "http://"+window.location.host+"/template/personal.html?userId="+index.userId+"&phaseId="+phaseId+"&caseId="+id;
+                    var url = window.Host.local+"personal.html?userId="+index.userId+"&phaseId="+phaseId+"&caseId="+id;
                     var str = '<a href="'+url+'">';
                     str += '<div class="team-portrait fl">';
                     str += '<img src="'+index.headImage+'">';
@@ -177,7 +177,7 @@ function loadYCTD(url, id) {
                 });
 
                 var company = $('<li></li>');
-                var url = "http://"+window.location.host+"/template/company.html?companyId="+index.company.companyId+"&caseId="+id;
+                var url = window.Host.local+"company.html?companyId="+index.company.companyId+"&caseId="+id;
                 var str = '<a href="'+url+'">';
                 str += '<div class="team-portrait fl">';
                 str += '<img src="'+index.company.companyHeadImage+'">';
@@ -236,7 +236,7 @@ function loadXXZL(url, id) {
 
             // 材料品牌
             $.each(data.brands, function(i, index) {
-                var url="http://"+window.location.host+"/template/material.html?brandId="+index.brandId+"&caseId="+id;
+                var url=window.Host.local+"material.html?brandId="+index.brandId+"&caseId="+id;
                 var oLi = $('<li><a href="'+url+'">'+index.brandName+'品牌</a></li>');
                 oLi.appendTo($(".data-material ul"));
 

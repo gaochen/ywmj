@@ -37,7 +37,7 @@ $(function() {
             var arr_a = $(".plainLayout-link");
             $.each(arr_a, function(i, item) {
                 var index = i+1;
-                var api = "http://"+window.location.host+"/template/scan.html?caseId="+id+"&type=plainLayout&index="+index;
+                var api = window.Host.local+"scan.html?caseId="+id+"&type=plainLayout&index="+index;
                 $(this).attr("href", api);
             });
 

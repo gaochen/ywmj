@@ -53,7 +53,7 @@ $(function() {
             });
 
             // 点击图片跳转
-            var url = "http://"+window.location.host+"/template/scan.html?caseId="+caseId+"&type=personal"+"&userId="+userId+"&phaseId="+phaseId;
+            var url = window.Host.local+"scan.html?caseId="+caseId+"&type=personal"+"&userId="+userId+"&phaseId="+phaseId;
             $(".personal-showPic-url").attr("href", url);
             $(".personal-showPic").attr("src", data.presentPics[0]);
 
