@@ -224,7 +224,7 @@ function loadXXZL(url, id) {
                 else {
                     var oLi = $('<li><div class="data-cost-icon data-icon-'+index.id+'"></div><p><span>'+index.costType+'</span><span>'+index.cost+'万元</span></p></li>');
                     
-                    if ((index.id%2) ===1) {
+                    if ((i%2) ===0) {
                         var border = $('<div class="data-cost-line"></div>');
                         border.appendTo(oLi);
                     }
