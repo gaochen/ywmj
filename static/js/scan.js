@@ -60,7 +60,7 @@ function loadPMBZ(url, id, index) {
                     var str = '<div class="scan-picBox">';
                     str += '<img src="'+item+'" alt="">';
                     str += '</div>';
-                    str += '<div class="scan-content">';
+                    str += '<div class="scan-content show">';
                     str += '<div class="scan-describe">';
                     str += '<h3>'+_this.title+'</h3>';
                     str += '<p>'+_this.explain+'</p>';
@@ -92,7 +92,13 @@ function loadPMBZ(url, id, index) {
             // 点击图片隐藏文字
             $(".scan-picBox").on("click", function(ev) {
                 ev.stopPropagation();
-                $(this).siblings(".scan-content").hide();
+                var oContent = $(this).siblings(".scan-content");
+                if (oContent.hasClass("show")) {
+                    oContent.removeClass("show");
+                }
+                else {
+                    oContent.addClass("show");
+                }
             });
         }
     });
@@ -129,7 +135,7 @@ function loadSJZP(url, id, index) {
                 var str = '<div class="scan-picBox">';
                 str += '<img src="'+item.pics[0]+'" alt="">';
                 str += '</div>';
-                str += '<div class="scan-content">';
+                str += '<div class="scan-content show">';
                 str += '<div class="scan-describe">';
                 str += '<h3>'+item.title+'</h3>';
                 str += '<p>'+item.explain+'</p>';
@@ -160,7 +166,13 @@ function loadSJZP(url, id, index) {
             // 点击图片隐藏文字
             $(".scan-picBox").on("click", function(ev) {
                 ev.stopPropagation();
-                $(this).next(".scan-content").hide();
+                var oContent = $(this).siblings(".scan-content");
+                if (oContent.hasClass("show")) {
+                    oContent.removeClass("show");
+                }
+                else {
+                    oContent.addClass("show");
+                }
             });
         }
     })
@@ -250,7 +262,7 @@ function loadGSZS(url, id, index) {
                 var str = '<div class="scan-picBox">';
                 str += '<img src="'+item.pics[0]+'" alt="">';
                 str += '</div>';
-                str += '<div class="scan-content">';
+                str += '<div class="scan-content show">';
                 str += '<div class="scan-describe">';
                 str += '<h3>'+item.title+'</h3>';
                 str += '<p>'+item.explain+'</p>';
@@ -281,7 +293,13 @@ function loadGSZS(url, id, index) {
             // 点击图片隐藏文字
             $(".scan-picBox").on("click", function(ev) {
                 ev.stopPropagation();
-                $(this).next(".scan-content").hide();
+                var oContent = $(this).siblings(".scan-content");
+                if (oContent.hasClass("show")) {
+                    oContent.removeClass("show");
+                }
+                else {
+                    oContent.addClass("show");
+                }
             });
         }
     })

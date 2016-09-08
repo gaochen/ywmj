@@ -564,6 +564,7 @@
   vertical-align: middle; }
 
 .scan-content {
+  display: none;
   position: absolute;
   bottom: 1.16rem;
   left: 0;

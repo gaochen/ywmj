@@ -29,17 +29,17 @@ $(function() {
             }
 
             // 视频(1个)
-            if (!!data.videos) {
-                var video_cover = data.videos[0].videoInfo.url+"?vframe/jpg/offset/"+data.videos[0].videoInfo.second+"/w/240/h/160";
+            if (!!data.video) {
+                var video_cover = data.video.videoInfo.url+"?vframe/jpg/offset/"+data.video.videoInfo.second+"/w/240/h/160";
                 $(".company-video").css("background-image", "url("+video_cover+")");
-                $("#company-video").attr("src", data.videos[0].videoInfo.url);
+                $("#company-video").attr("src", data.video.videoInfo.url);
             }
             else {
                 $(".js-company-video").hide();
             }
 
             // 如果720和视频都没有，去掉顶部分割线
-            if (!!data.pathOf720 && !!data.videos) {
+            if (!!data.pathOf720 && !!data.video) {
                 $(".line-index").eq(0).hide();
             }
 

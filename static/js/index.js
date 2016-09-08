@@ -122,16 +122,21 @@ function loadXCSJ(url, id) {
             $("#index-scene").attr("href", url_realScene).find(".index-module-pic").css("background-image","url("+data.sceneCover+")");
 
             // 相似作品
-            $.each(data.relativeCases, function(i, index) {
-                var oDiv = $('<div class="index-similar-item fl" data-case-id='+ index.caseId +'><div class="index-similar-cover" style="background-image:url('+ data.caseCover +')"></div><div class="index-similar-name">'+index.caseName+'</div></div>');
-                if (i === 0) {
-                    oDiv.addClass("fl");
-                }
-                else {
-                    oDiv.addClass("fr");
-                }
-                oDiv.appendTo($(".index-similar-frame"));
-            }); 
+            if (typeof data.relativeCases === "object") {
+                $.each(data.relativeCases, function(i, index) {
+                    var oDiv = $('<div class="index-similar-item fl" data-case-id='+ index.caseId +'><div class="index-similar-cover" style="background-image:url('+ data.caseCover +')"></div><div class="index-similar-name">'+index.caseName+'</div></div>');
+                    if (i === 0) {
+                        oDiv.addClass("fl");
+                    }
+                    else {
+                        oDiv.addClass("fr");
+                    }
+                    oDiv.appendTo($(".index-similar-frame"));
+                }); 
+            }
+            else {
+                $(".index-similar-title").text("限量版，只有这一个哟");
+            }   
         }
     });
 }
@@ -216,8 +221,14 @@ function loadXXZL(url, id) {
         success: function(data) {
             var data = data.data;
 
+
+
             // 项目造价
-            $.each(data.costs, function(i, index) {                
+            $.each(data.costs, function(i, index) { 
+                if (index.id === 9 && index.cost === "0") {
+                    $(".js-cost").hide();
+                }
+
                 if (index.id === 9) {
                     $(".data-totalCost").find("span").text(index.cost+"万元");
                 }

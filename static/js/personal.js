@@ -85,7 +85,12 @@ $(function() {
             }
 
             // 服务信息
-            $(".personal-service-price").text("¥ "+data.chargeRangeStart+"-"+data.chargeRangeEnd);
+            if (typeof data.chargeRangeEnd === "number") {
+                $(".personal-service-price").text("¥ "+data.chargeRangeStart+"-"+data.chargeRangeEnd);
+            }
+            else {
+                $(".personal-service-standard").hide();
+            }
             $(".personal-service-Target").text(data.serviceTarget);
 
             // 视频(1个)
