@@ -56,6 +56,28 @@ $(function() {
         } 
     });
 
+    // 视频播放
+    (function() {
+
+        $(".company-video").on("tap", function() {
+
+            $(".company-mask").addClass("show");
+
+            var video = document.querySelector("#company-video");
+            video.play();
+
+        });
+
+        $(".company-mask").on("tap", function() {
+            $(this).removeClass("show");
+        });
+
+        $("#company-video").on("tap", function(ev) {
+            ev.stopPropagation();
+        });
+        
+    })();
+
     // 关闭底部下载提示层
     $(".bottom-close").on("click", function(ev) {
         ev.stopPropagation();

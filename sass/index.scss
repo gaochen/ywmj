@@ -229,11 +229,11 @@ $color-C6: #f56d9d;
 .index-similar-name {
     width: 100%;
     @include px2rem(height, 30px);
-    @include px2rem(line-height, 30px);
-    padding: 0.4rem 0;
+    margin: 0.4rem 0;
     @include px2rem(font-size, $font-F5);
     color: $color-C4;
     text-align: center;
+    @include ell(1);
 }
 
 /**
@@ -910,8 +910,8 @@ $color-C6: #f56d9d;
     @include px2rem(font-size, $font-F5);
     color: $color-C4;
     @include px2rem(height, 30px);
-    @include px2rem(line-height, 30px);
-    padding: 0.52rem 0;
+    margin: 0.52rem 0;
+    @include ell(1);
 }
 .personal-mask {
     display: none;
@@ -1058,8 +1058,8 @@ $color-C6: #f56d9d;
     @include px2rem(font-size, $font-F5);
     color: $color-C4;
     @include px2rem(height, 30px);
-    @include px2rem(line-height, 30px);
-    padding: 0.52rem 0;
+    margin: 0.52rem 0;
+    @include ell(1);
 }
 
 /**
@@ -1217,10 +1217,6 @@ $color-C6: #f56d9d;
 }
 .video video {
     width: 100%;
-    background-image: url(../img/1.jpg);
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
     vertical-align: middle;
 }
 
