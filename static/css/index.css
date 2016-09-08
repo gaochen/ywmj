@@ -93,6 +93,11 @@
 
 .index-720-name {
   position: absolute;
+  width: 6rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
   bottom: 0.53333rem;
   left: 0.53333rem;
   color: #ffffff;

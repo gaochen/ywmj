@@ -108,6 +108,8 @@ $color-C6: #f56d9d;
 }
 .index-720-name {
     position: absolute;
+    width: 6rem;
+    @include ell(1);
     @include px2rem(bottom, 40px);
     @include px2rem(left, 40px);
     color: #ffffff;
