@@ -1,3 +1,16 @@
+require.config({
+    paths : {
+        'zepto': "libs/zepto.min",
+        'config': "config" 
+    },
+    shim: {
+        'zepto': {
+            exports: '$'
+        }
+    }
+});
+
+
 require(["zepto", "config"], function($) {
     $(function() {
         // 获取url参数
