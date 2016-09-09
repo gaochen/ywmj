@@ -3,6 +3,8 @@ $(function() {
     var id = GetQueryString("caseId");
     var indexId = window.location.hash;
 
+    //alert(navigator.userAgent);
+
     // 获取分享链接和title
     var share_url = window.Host.customer+"/case/app/share/"+id;
     $.ajax({
@@ -107,7 +109,29 @@ function loadXCSJ(url, id) {
             // 720路径
             if (typeof data.pathOf720 === "string") {
                 $(".index-720-btn").addClass("show");
-                $("#index-720").addClass("show").attr("href", data.pathOf720);
+                $("#index-720").on("click", function() {
+                    var weixin = navigator.userAgent.search("Language"),
+                        wifi = navigator.userAgent.search("WIFI");
+                    if (weixin > 0) {
+                        if (wifi > 0) {
+                            window.location.href = data.pathOf720;
+                        }
+                        else {
+                            $(".wifi-mask").show();
+                            $(".wifi-Lbtn").on("click", function(ev) {
+                                ev.stopPropagation();
+                                window.location.href = data.pathOf720;
+                            });
+                            $(".wifi-Rbtn").on("click", function(ev) {
+                                ev.stopPropagation();
+                                $(".wifi-mask").hide();
+                            });
+                        }
+                    }
+                    else {
+                        window.location.href = data.pathOf720;
+                    }
+                });
             }
 
             // 基础信息
@@ -224,26 +248,31 @@ function loadXXZL(url, id) {
 
 
             // 项目造价
-            $.each(data.costs, function(i, index) { 
-                if (index.id === 9 && index.cost === "0") {
-                    $(".js-cost").hide();
-                }
+            if (data.costs instanceof Array) {
+                $.each(data.costs, function(i, index) { 
+                    // if (index.id === 9 && index.cost === "0") {
+                    //     $(".js-cost").hide();
+                    // }
 
-                if (index.id === 9) {
-                    $(".data-totalCost").find("span").text(index.cost+"万元");
-                }
-                else {
-                    var oLi = $('<li><div class="data-cost-icon data-icon-'+index.id+'"></div><p><span>'+index.costType+'</span><span>'+index.cost+'万元</span></p></li>');
-                    
-                    if ((i%2) ===0) {
-                        var border = $('<div class="data-cost-line"></div>');
-                        border.appendTo(oLi);
+                    if (index.id === 9) {
+                        $(".data-totalCost").find("span").text(index.cost+"万元");
+                    }
+                    else {
+                        var oLi = $('<li><div class="data-cost-icon data-icon-'+index.id+'"></div><p><span>'+index.costType+'</span><span>'+index.cost+'万元</span></p></li>');
+                        
+                        if ((i%2) ===0) {
+                            var border = $('<div class="data-cost-line"></div>');
+                            border.appendTo(oLi);
+                        }
+
+                        oLi.appendTo($(".data-cost"));
                     }
 
-                    oLi.appendTo($(".data-cost"));
-                }
-
-            });
+                });
+            }
+            else {
+                $(".js-cost").hide();
+            }
 
             // 材料品牌
             $.each(data.brands, function(i, index) {

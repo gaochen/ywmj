@@ -24,7 +24,7 @@ $(function() {
 
                     if (!!data.videos) {
                         var video_cover = data.videos[0].videoInfo.url+"?vframe/jpg/offset/"+data.videos[0].videoInfo.second+"/w/240/h/160";
-                        $("#video").css("background-image", "url("+video_cover+")");
+                        // $("#video").css("background-image", "url("+video_cover+")");
                         $("#video").attr("src", data.videos[0].videoInfo.url);
                         document.querySelector("#video").play();
                     }
@@ -55,7 +55,7 @@ $(function() {
 
                     if (!!data.videos) {
                         var video_cover = data.videos[0].videoInfo.url+"?vframe/jpg/offset/"+data.videos[0].videoInfo.second+"/w/240/h/160";
-                        $("#video").css("background-image", "url("+video_cover+")");
+                        // $("#video").css("background-image", "url("+video_cover+")");
                         $("#video").attr("src", data.videos[0].videoInfo.url);
                         $("#video").play();
                     }

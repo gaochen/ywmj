@@ -56,12 +56,13 @@ $color-C6: #f56d9d;
     -webkit-text-size-adjust:none; // 兼容chrome浏览器最小字体限制
 }
 .index-nav a {
+    float: left;
     @include px2rem(width, 250px);
     @include px2rem(height, 30px);
     @include px2rem(line-height, 30px);
     padding:0.4rem 0;
     text-align: center;
-    display: inline-block;
+    display: block;
     @include px2rem(font-size, $font-F4);
     color: $color-C1;
     position: relative;
@@ -569,6 +570,7 @@ $color-C6: #f56d9d;
     display: table-cell;
     vertical-align:middle;
     text-align: center;
+    overflow: hidden;
 }
 .scan-picBox img {
     width: 100.5%;
@@ -852,6 +854,7 @@ $color-C6: #f56d9d;
     background-position: center center;
     background-size: cover;
     position: relative;
+    overflow: hidden;
 }
 .personal-video div {
     position: absolute;
@@ -936,7 +939,6 @@ $color-C6: #f56d9d;
 }
 .personal-mask video {
     width: 100%;
-    background-image: url(../img/1.jpg);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -1016,6 +1018,7 @@ $color-C6: #f56d9d;
    background-size: cover;
 }
 .company-showPic {
+   display: none;
    width: 100%;
    @include px2rem(height, 500px);
    overflow: hidden;
@@ -1061,6 +1064,18 @@ $color-C6: #f56d9d;
     @include px2rem(height, 30px);
     margin: 0.52rem 0;
     @include ell(1);
+}
+.company-toast {
+    position: absolute;
+    bottom: 3rem;
+    left: 1.5rem;
+    width: 7rem;
+    height: 1rem;
+    border-radius: 20px;
+    color: #fff;
+    background-color: rgba(0,0,0,0.8);
+    text-align: center;
+    line-height: 1rem;
 }
 
 /**
@@ -1198,8 +1213,66 @@ $color-C6: #f56d9d;
     text-align: center;
     @include px2rem(font-size, $font-F4);
     color: $color-C1;
-    border-bottom: 1px solid $color-C3;
     background-color: #ffffff;
+}
+/**
+ * WIFI提示
+ */
+.wifi-mask {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.7);
+    z-index: 100;
+}
+.wifi-mask > div {
+    width: 100%;
+    height: 100%;
+    display: table;
+}
+.wifi-mask > div > div {
+    width: 100%;
+    height: 100%;
+    display: table-cell;
+    vertical-align:middle;
+}
+.wifi-frame {
+    width: 7rem;
+    height: 3.2rem;
+    background-color: #ffffff;
+    margin: 0 auto;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.wifi-content {
+    width: 5rem;
+    height: 1.2rem;
+    padding: 0.4rem 0;
+    line-height: 0.6rem;
+    text-align: center;
+    margin: 0 auto;
+    @include px2rem(font-size, $font-F4);
+    color: $color-C1;
+}
+.wifi-btn {
+    width: 100%;
+    height: 1.2rem;
+    border-top: 1px solid $color-C3;
+}
+.wifi-btn div {
+    width: 50%;
+    height: 100%;
+    line-height: 1.2rem;
+    text-align: center;
+    @include px2rem(font-size, $font-F4);
+    color: $color-C6;
+}
+.wifi-Lbtn {
+    border-right: 1px solid $color-C3;
+    box-sizing: border-box;
 }
 
 /**
@@ -1219,6 +1292,9 @@ $color-C6: #f56d9d;
 .video video {
     width: 100%;
     vertical-align: middle;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 /**

@@ -22,7 +22,29 @@ $(function() {
             // 720路径
             if (!!data.pathOf720) {
                 $(".company-720-btn").addClass("show");
-                $("#company-720").attr("href", data.pathOf720);
+                $("#company-720").on("click", function() {
+                    var weixin = navigator.userAgent.search("Language"),
+                        wifi = navigator.userAgent.search("WIFI");
+                    if (weixin > 0) {
+                        if (wifi > 0) {
+                            window.location.href = data.pathOf720;
+                        }
+                        else {
+                            $(".wifi-mask").show();
+                            $(".wifi-Lbtn").on("click", function(ev) {
+                                ev.stopPropagation();
+                                window.location.href = data.pathOf720;
+                            });
+                            $(".wifi-Rbtn").on("click", function(ev) {
+                                ev.stopPropagation();
+                                $(".wifi-mask").hide();
+                            });
+                        }
+                    }
+                    else {
+                        window.location.href = data.pathOf720;
+                    }
+                });
             }
             else {
                 $(".js-company-720").hide();
@@ -33,6 +55,10 @@ $(function() {
                 var video_cover = data.video.videoInfo.url+"?vframe/jpg/offset/"+data.video.videoInfo.second+"/w/240/h/160";
                 $(".company-video").css("background-image", "url("+video_cover+")");
                 $("#company-video").attr("src", data.video.videoInfo.url);
+                var oDiv = $('<div></div>');
+                var oSpan = $('<span></span>');
+                oDiv.appendTo($(".company-video"));
+                oSpan.appendTo($(".company-video"));
             }
             else {
                 $(".js-company-video").hide();

@@ -48,8 +48,21 @@ $(function() {
                 }
             });
 
-            // 公司展示封面图
-            $(".company-showPic").css("background-image", "url("+data.cover+")");
+            // 判断是否有公司展示
+            if (data.hasPresent) {
+                // 跳转公司展示链接
+                var url_companyShow = window.Host.local + "companyShow.html?companyId="+companyId;
+                $("#company-show").attr("href", url_companyShow);
+                
+                // 如果有封面图    
+                if (typeof data.cover === "string") {
+                    $(".company-showPic").css("background-image", "url("+data.cover+")").addClass("show");
+                    
+                }
+            }
+            else {
+                $("#company-show").hide().next(".line-index").hide();
+            }
 
             // 其他作品总数
             if (data.otherCasesCount !== 0) {
@@ -134,10 +147,6 @@ $(function() {
         }
     });
 
-    // 跳转公司展示链接
-    var url_companyShow = window.Host.local + "companyShow.html?companyId="+companyId;
-    $("#company-show").attr("href", url_companyShow);
-
     // 视频播放
     (function() {
 
@@ -180,7 +189,6 @@ function slideDown(api, pageNum) {
         url: api,
         dataType: "json",
         success: function(data) {
-            console.log(data);
 
             var data = data.data;
 
@@ -195,11 +203,11 @@ function slideDown(api, pageNum) {
                 var num = $(".company-other").text();
 
                 if (length == num) {
-                    $(".personal-slideDown").hide();
+                    $(".personal-slideDown").text("更多案例陆续上传中，敬请期待");
                 }
             }
             else {
-                $(".personal-slideDown").hide();
+                $(".personal-slideDown").text("更多案例陆续上传中，敬请期待");
             }
         }
     });

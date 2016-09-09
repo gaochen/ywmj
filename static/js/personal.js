@@ -95,16 +95,34 @@ $(function() {
 
             // 视频(1个)
             if (!!data.videos) {
+                switch(phaseId) {
+                    case "1":
+                        $(".js-video-title").text("本案设计讲解");
+                        break;
+                    case "2":
+                        $(".js-video-title").text("本案工程验收");
+                        break;
+                    case "3":
+                        $(".js-video-title").text("本案配饰讲解");
+                        break;
+                    case "4":
+                        $(".js-video-title").text("本案园林讲解");
+                        break;
+                }
                 var video_cover = data.videos[0].videoInfo.url+"?vframe/jpg/offset/"+data.videos[0].videoInfo.second+"/w/240/h/160";
                 $(".personal-video").css("background-image", "url("+video_cover+")");
                 $("#personal-video").attr("src", data.videos[0].videoInfo.url);
+                var oDiv = $('<div></div>');
+                var oSpan = $('<span></span>');
+                oDiv.appendTo($(".personal-video"));
+                oSpan.appendTo($(".personal-video"));
             }
             else {
                 $(".js-personal-video").hide();
             }
 
             // 其他作品总数
-            if (data.otherCasesCount !== 0) {
+            if (typeof data.otherCasesCount === "number") {
                 $(".personal-other").text(data.otherCasesCount);
                 $(".personal-slideDown").show();
             }
@@ -200,7 +218,8 @@ $(function() {
 
         });
 
-        $(".personal-mask").on("tap", function() {
+        $(".personal-mask").on("tap", function(ev) {
+            ev.stopPropagation();
             $(this).removeClass("show");
         });
 
@@ -242,11 +261,11 @@ function slideDown(api, pageNum) {
                 var length = $(".personal-otherCase").find("li").length;
                 var num = $(".personal-other").text();
                 if (length == num) {
-                    $(".personal-slideDown").hide();
+                    $(".personal-slideDown").text("更多案例陆续上传中，敬请期待");
                 }
             }
             else {
-                $(".personal-slideDown").hide();
+                $(".personal-slideDown").text("更多案例陆续上传中，敬请期待");
             }
         }
     });

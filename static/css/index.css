@@ -41,12 +41,13 @@
   -webkit-text-size-adjust: none; }
 
 .index-nav a {
+  float: left;
   width: 3.33333rem;
   height: 0.4rem;
   line-height: 0.4rem;
   padding: 0.4rem 0;
   text-align: center;
-  display: inline-block;
+  display: block;
   font-size: 0.37333rem;
   color: #282828;
   position: relative; }
@@ -556,7 +557,8 @@
   height: 100%;
   display: table-cell;
   vertical-align: middle;
-  text-align: center; }
+  text-align: center;
+  overflow: hidden; }
 
 .scan-picBox img {
   width: 100.5%;
@@ -840,7 +842,8 @@
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
-  position: relative; }
+  position: relative;
+  overflow: hidden; }
 
 .personal-video div {
   position: absolute;
@@ -928,7 +931,6 @@
 
 .personal-mask video {
   width: 100%;
-  background-image: url(../img/1.jpg);
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -1008,6 +1010,7 @@
   background-size: cover; }
 
 .company-showPic {
+  display: none;
   width: 100%;
   height: 6.66667rem;
   overflow: hidden;
@@ -1056,6 +1059,18 @@
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden; }
+
+.company-toast {
+  position: absolute;
+  bottom: 3rem;
+  left: 1.5rem;
+  width: 7rem;
+  height: 1rem;
+  border-radius: 20px;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.8);
+  text-align: center;
+  line-height: 1rem; }
 
 /**
  * 公司展示
@@ -1192,8 +1207,66 @@
   text-align: center;
   font-size: 0.37333rem;
   color: #282828;
-  border-bottom: 1px solid #e6e6e6;
   background-color: #ffffff; }
+
+/**
+ * WIFI提示
+ */
+.wifi-mask {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 100; }
+
+.wifi-mask > div {
+  width: 100%;
+  height: 100%;
+  display: table; }
+
+.wifi-mask > div > div {
+  width: 100%;
+  height: 100%;
+  display: table-cell;
+  vertical-align: middle; }
+
+.wifi-frame {
+  width: 7rem;
+  height: 3.2rem;
+  background-color: #ffffff;
+  margin: 0 auto;
+  border-radius: 10px;
+  overflow: hidden; }
+
+.wifi-content {
+  width: 5rem;
+  height: 1.2rem;
+  padding: 0.4rem 0;
+  line-height: 0.6rem;
+  text-align: center;
+  margin: 0 auto;
+  font-size: 0.37333rem;
+  color: #282828; }
+
+.wifi-btn {
+  width: 100%;
+  height: 1.2rem;
+  border-top: 1px solid #e6e6e6; }
+
+.wifi-btn div {
+  width: 50%;
+  height: 100%;
+  line-height: 1.2rem;
+  text-align: center;
+  font-size: 0.37333rem;
+  color: #f56d9d; }
+
+.wifi-Lbtn {
+  border-right: 1px solid #e6e6e6;
+  box-sizing: border-box; }
 
 /**
  * 视频页面
@@ -1211,7 +1284,10 @@
 
 .video video {
   width: 100%;
-  vertical-align: middle; }
+  vertical-align: middle;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover; }
 
 /**
  * 底部链接
