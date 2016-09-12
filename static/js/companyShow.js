@@ -52,9 +52,9 @@ $(function() {
 
             // 视频(1个)
             if (!!data.video) {
-                var video_cover = data.video.videoInfo.url+"?vframe/jpg/offset/"+data.video.videoInfo.second+"/w/240/h/160";
+                var video_cover = data.video.url+"?vframe/jpg/offset/"+data.video.second+"/w/240/h/160";
                 $(".company-video").css("background-image", "url("+video_cover+")");
-                $("#company-video").attr("src", data.video.videoInfo.url);
+                $("#company-video").attr("src", data.video.url);
                 var oDiv = $('<div></div>');
                 var oSpan = $('<span></span>');
                 oDiv.appendTo($(".company-video"));
@@ -65,16 +65,26 @@ $(function() {
             }
 
             // 如果720和视频都没有，去掉顶部分割线
-            if (!!data.pathOf720 && !!data.video) {
+            if (!data.pathOf720 && !data.video) {
                 $(".line-index").eq(0).hide();
             }
 
-            $.each(data.pics, function(i, index) {
-                var num = i+1;
-                var api = window.Host.local+"scan.html?companyId="+companyId+"&type=company&index="+num;
-                var oLi = $('<li class="company-item"><div class="company-item-title">'+index.title+'</div><div class="company-item-describe">'+index.explain+'</div><a href="'+api+'"><img class="company-item-pic" src="'+index.pics[0]+'" /></a></li>');
-                oLi.appendTo($(".company-list"));
-            });
+            if (!!data.pics) {
+                $.each(data.pics, function(i, index) {
+                    var num = i+1;
+                    var api = window.Host.local+"scan.html?companyId="+companyId+"&type=company&index="+num;
+                    if (num < 10) {
+                        var oLi = $('<li class="company-item"><div class="company-item-title">0'+num+'</div><div class="company-item-describe">'+index.explain+'</div><a href="'+api+'"><img class="company-item-pic" src="'+index.pics[0]+'" /></a></li>');
+                    }
+                    else {
+                        var oLi = $('<li class="company-item"><div class="company-item-title">'+num+'</div><div class="company-item-describe">'+index.explain+'</div><a href="'+api+'"><img class="company-item-pic" src="'+index.pics[0]+'" /></a></li>');
+                    }
+                    oLi.appendTo($(".company-list"));
+                });
+            }
+            else {
+                $(".js-company-pics").hide();
+            }
 
         },
         error: function(error) {

@@ -543,7 +543,9 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background-color: #000000; }
+  background-color: #000000;
+  -webkit-transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1);
+  transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1); }
 
 .scan-item {
   width: 10rem;
