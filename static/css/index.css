@@ -201,6 +201,15 @@
   height: auto;
   overflow: hidden; }
 
+.index-similar-tips {
+  width: 100%;
+  height: 0.4rem;
+  line-height: 0.4rem;
+  margin-bottom: 0.4rem;
+  font-size: 0.34667rem;
+  color: #737373;
+  text-align: center; }
+
 .index-similar-item {
   width: 4.4rem;
   height: 5.6rem;

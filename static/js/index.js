@@ -146,7 +146,7 @@ function loadXCSJ(url, id) {
             $("#index-scene").attr("href", url_realScene).find(".index-module-pic").css("background-image","url("+data.sceneCover+")");
 
             // 相似作品
-            if (typeof data.relativeCases === "object") {
+            if (data.relativeCases.length > 0) {
                 $.each(data.relativeCases, function(i, index) {
                     var oDiv = $('<div class="index-similar-item fl" data-case-id='+ index.caseId +'><div class="index-similar-cover" style="background-image:url('+ data.caseCover +')"></div><div class="index-similar-name">'+index.caseName+'</div></div>');
                     if (i === 0) {
@@ -159,7 +159,8 @@ function loadXCSJ(url, id) {
                 }); 
             }
             else {
-                $(".index-similar-title").text("限量版，只有这一个哟");
+                var oP = $('<div class="index-similar-tips">限量版，只有这一个哟</div>');
+                oP.appendTo($(".index-similar-frame"));
             }   
         }
     });

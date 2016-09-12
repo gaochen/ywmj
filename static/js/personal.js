@@ -261,11 +261,11 @@ function slideDown(api, pageNum) {
                 var length = $(".personal-otherCase").find("li").length;
                 var num = $(".personal-other").text();
                 if (length == num) {
-                    $(".personal-slideDown").text("更多案例陆续上传中，敬请期待");
+                    $(".personal-slideDown").hide();
                 }
             }
             else {
-                $(".personal-slideDown").text("更多案例陆续上传中，敬请期待");
+                $(".personal-slideDown").hide();
             }
         }
     });

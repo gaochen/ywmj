@@ -214,6 +214,15 @@ $color-C6: #f56d9d;
     height: auto;
     overflow: hidden;
 }
+.index-similar-tips { 
+    width: 100%;
+    @include px2rem(height, 30px);
+    @include px2rem(line-height, 30px);
+    margin-bottom: 0.4rem;
+    @include px2rem(font-size, $font-F5);
+    color: $color-C4;
+    text-align: center;
+}
 .index-similar-item {
     @include px2rem(width, 330px);
     @include px2rem(height, 420px);
