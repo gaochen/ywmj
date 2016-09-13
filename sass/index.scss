@@ -565,8 +565,6 @@ $color-C6: #f56d9d;
     height: 100%;
     overflow: hidden;
     background-color: #000000;
-    -webkit-transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1);
-    transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1);
 }
 .scan-item {
     @include px2rem(width, 750px);

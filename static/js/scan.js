@@ -388,7 +388,7 @@ Slider.prototype = {
             ev.stopPropagation();
             ev.preventDefault();
             options.iX = options.iStartX + options.iDis;
-            options.oList.css({"WebkitTransform":"translateX("+options.iX+"px)", "transform":"translateX("+options.iX+"px)"});
+            options.oList.css({"WebkitTransform":"translateX("+options.iX+"px) translateZ(0)", "transform":"translateX("+options.iX+"px) translateZ(0)"});
         }
     },
     fnEnd: function() {
@@ -414,7 +414,7 @@ Slider.prototype = {
         options.iX = -options.iNow*options.iW;
      
         options.oList.css("transition", "0.5s");
-        options.oList.css({"WebkitTransform":"translateX("+options.iX+"px)", "transform":"translateX("+options.iX+"px)"});
+        options.oList.css({"WebkitTransform":"translateX("+options.iX+"px) translateZ(0)", "transform":"translateX("+options.iX+"px) translateZ(0)"});
     }
    
 };
