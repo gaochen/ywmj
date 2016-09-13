@@ -47,7 +47,9 @@ require(["zepto", "config"], function($) {
 
         // 加载现场实景
        (function() {
-            var url = window.Host.customer+"/case/app/detail/scene/"+id;
+            //var url = window.Host.customer+"/case/app/detail/scene/"+id;
+
+            var url = "/static/js/scene.txt";
 
             // 请求数据
             loadXCSJ(url, id);

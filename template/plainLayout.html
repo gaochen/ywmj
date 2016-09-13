@@ -12,7 +12,25 @@
 </head>
 <body>
     <div class="wrap">
-        <div class="content">
+        <div class="content" id="app">
+            <div class="plainLayout-item" v-for="item in items" v-cloak>
+                <div class="plainLayout-title">
+                    <h1>{{item.title}}</h1>
+                    <h4>原始平面图</h4>
+                </div>
+                <div class="plainLayout-pic">
+                    <img v-bind:src=item.pics[0] alt="">
+                </div>
+                <div class="plainLayout-title">
+                    <h4>设计平面图</h4>
+                </div>
+                <div class="plainLayout-pic">
+                    <img v-bind:src=item.pics[1] alt="">
+                </div>
+                <div class="plainLayout-describe">
+                    {{item.explain}}
+                </div>
+            </div>
             <!-- <div class="plainLayout-item">
                 <div class="plainLayout-title">
                     <h1>1F</h1>

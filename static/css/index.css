@@ -1271,3 +1271,7 @@
 
 .show {
   display: block; }
+
+[v-cloak] {
+  display: none;
+}
