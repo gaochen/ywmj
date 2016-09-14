@@ -159,8 +159,7 @@ function loadXCSJ(url, id) {
                 }); 
             }
             else {
-                var oP = $('<div class="index-similar-tips">限量版，只有这一个哟</div>');
-                oP.appendTo($(".index-similar-frame"));
+                $(".index-similar").hide().next(".line-index").hide();
             }   
         }
     });
