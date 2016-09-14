@@ -1304,6 +1304,8 @@ $color-C6: #f56d9d;
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
+    -webkit-transform:translateZ(0);
+    transform:translateZ(0);
 }
 
 /**
