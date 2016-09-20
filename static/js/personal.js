@@ -85,7 +85,7 @@ $(function() {
             }
 
             // 服务信息
-            if (typeof data.chargeRangeEnd === "number") {
+            if (typeof data.chargeRangeEnd === "number" && data.chargeRangeEnd !== 0) {
                 $(".personal-service-price").text("¥ "+data.chargeRangeStart+"-"+data.chargeRangeEnd);
             }
             else {
