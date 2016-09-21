@@ -33,6 +33,9 @@ $(function() {
             // 是否显示按钮
             if (oSummary.find("p").height() > oSummary.height()) {
                 oBtn.show();
+            }
+            else {
+                oSummary.css("height","auto");
             } 
             
             // 显示全部内容
@@ -51,12 +54,12 @@ $(function() {
             // 判断是否有公司展示
             if (data.hasPresent) {
                 // 跳转公司展示链接
-                var url_companyShow = window.Host.local + "companyShow.html?companyId="+companyId;
+                var url_companyShow = window.Host.local + "companyShow.html?companyId="+companyId+"&caseId="+caseId;
                 $("#company-show").attr("href", url_companyShow);
                 
                 // 如果有封面图    
                 if (typeof data.cover === "string") {
-                    $(".company-showPic").css("background-image", "url("+data.cover+")").addClass("show");
+                    $(".company-showPic").attr("src", data.cover).addClass("show");
                     
                 }
             }
@@ -65,7 +68,7 @@ $(function() {
             }
 
             // 其他作品总数
-            if (data.otherCasesCount !== 0) {
+            if (typeof data.otherCasesCount === "number") {
                 $(".company-other").text(data.otherCasesCount);
                 $(".personal-slideDown").show();
             }
@@ -192,22 +195,15 @@ function slideDown(api, pageNum) {
 
             var data = data.data;
 
+            if (data.length !== 10) {
+                 $(".personal-slideDown").hide();
+            }
+
             if (data.length > 0) {
                 $.each(data, function(i, index) {
                     var oLi = $('<li><div><img src="'+index.caseCover+'"></div><p>'+index.caseName+'</p></li>');
                     oLi.appendTo($(".company-otherCase ul"));
                });
-
-                // 判断是否加载完
-                var length = $(".company-otherCase").find("li").length;
-                var num = $(".company-other").text();
-
-                if (length == num) {
-                    $(".personal-slideDown").hide();
-                }
-            }
-            else {
-                $(".personal-slideDown").hide();
             }
         }
     });

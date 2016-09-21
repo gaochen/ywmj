@@ -1,0 +1,70 @@
+@charset "UTF-8";
+/**
+ * 通用样式
+ */
+.ti2 {
+  text-indent: 2em; }
+
+.wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0; }
+
+.content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  overflow-scrolling: touch; }
+
+/* 功能介绍 */
+.introduce {
+  width: auto;
+  height: auto;
+  margin: 0.64rem 0.64rem;
+  font-size: 0.37333rem;
+  color: #282828; }
+
+.introduce p {
+  line-height: 0.61333rem; }
+
+.footer {
+  width: 100%;
+  height: 110px;
+  position: absolute;
+  left: 0;
+  bottom: 1.12rem; }
+
+.footer div {
+  width: 100%;
+  height: auto;
+  font-size: 0.32rem;
+  margin-bottom: 0.34667rem;
+  color: #757575;
+  text-align: center; }
+
+.footer p {
+  width: 100%;
+  height: auto;
+  font-size: 0.29333rem;
+  margin-bottom: 0.10667rem;
+  color: #bdbdbd;
+  text-align: center; }
+
+/* 功能介绍 End */
+/* 用户协议 */
+.userAgreement {
+  width: auto;
+  height: auto;
+  margin: 0.64rem 0.64rem;
+  font-size: 0.37333rem;
+  color: #282828; }
+
+.userAgreement p {
+  line-height: 0.61333rem; }
+
+/* 用户协议 End */

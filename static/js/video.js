@@ -55,9 +55,9 @@ $(function() {
 
                     if (!!data.video) {
                         var video_cover = data.video.url+"?vframe/jpg/offset/"+data.video.second+"/w/240/h/160";
-                        // $("#video").css("background-image", "url("+video_cover+")");
+                        $("#video").css("background-image", "url("+video_cover+")");
                         $("#video").attr("src", data.video.url);
-                        $("#video").play();
+                        document.querySelector("#video").play();
                     }
                 },
                 error: function(error) {

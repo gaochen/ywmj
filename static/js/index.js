@@ -3,24 +3,6 @@ $(function() {
     var id = GetQueryString("caseId");
     var indexId = window.location.hash;
 
-    //alert(navigator.userAgent);
-
-    // 获取分享链接和title
-    var share_url = window.Host.customer+"/case/app/share/"+id;
-    $.ajax({
-        type: "GET",
-        url: share_url,
-        dataType: "json",
-        success: function(data) {
-            // 判断返回数据是否错误
-            if (data.succ === true) {
-                var data = data.data;
-                $("title").text(data.caseName);
-            }
-
-        }
-    });
-
     // 显示对应的tab
     if (indexId === "#index=1") {
         $(".index-nav").find("a").eq(1).addClass("active").siblings("a").removeClass("active");
@@ -148,7 +130,7 @@ function loadXCSJ(url, id) {
             // 相似作品
             if (data.relativeCases) {
                 $.each(data.relativeCases, function(i, index) {
-                    var oDiv = $('<div class="index-similar-item fl" data-case-id='+ index.caseId +'><div class="index-similar-cover" style="background-image:url('+ data.caseCover +')"></div><div class="index-similar-name">'+index.caseName+'</div></div>');
+                    var oDiv = $('<div class="index-similar-item fl" data-case-id='+ index.caseId +'><div class="index-similar-cover" style="background-image:url('+ index.caseCover +')"></div><div class="index-similar-name">'+index.caseName+'</div></div>');
                     if (i === 0) {
                         oDiv.addClass("fl");
                     }
@@ -250,9 +232,6 @@ function loadXXZL(url, id) {
             // 项目造价
             if (data.costs instanceof Array) {
                 $.each(data.costs, function(i, index) { 
-                    // if (index.id === 9 && index.cost === "0") {
-                    //     $(".js-cost").hide();
-                    // }
 
                     if (index.id === 9) {
                         $(".data-totalCost").find("span").text(index.cost+"万元");

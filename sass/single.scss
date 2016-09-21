@@ -1,0 +1,76 @@
+@import "mixin";
+
+/**
+ * 通用样式
+ */
+$font-22: 22px;
+$font-24: 24px;
+$font-28: 28px;
+$font-color1: #282828;
+$font-color2: #757575;
+$font-color3: #bdbdbd;
+.ti2 {text-indent: 2em;}
+
+.wrap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    overflow: auto;
+    @include css3(overflow-scrolling, touch);
+}
+/* 功能介绍 */
+.introduce {
+    width: auto;
+    height: auto;
+    margin: 0.64rem 0.64rem;
+    @include px2rem(font-size, $font-28);
+    color: $font-color1;
+}
+.introduce p {
+    @include px2rem(line-height, 46px);
+}
+.footer {
+    width: 100%;
+    height: 110px;
+    position: absolute;
+    left: 0;
+    @include px2rem(bottom, 84px);
+}
+.footer div {
+    width: 100%;
+    height: auto;
+    @include px2rem(font-size, $font-24);
+    @include px2rem(margin-bottom, 26px);
+    color: $font-color2;
+    text-align: center; 
+}
+.footer p {
+    width: 100%;
+    height: auto;
+    @include px2rem(font-size, $font-22);
+    @include px2rem(margin-bottom, 8px);
+    color: $font-color3;
+    text-align: center; 
+}
+/* 功能介绍 End */
+
+/* 用户协议 */
+.userAgreement {
+    width: auto;
+    height: auto;
+    margin: 0.64rem 0.64rem;
+    @include px2rem(font-size, $font-28);
+    color: $font-color1;
+}
+.userAgreement p {
+    @include px2rem(line-height, 46px);
+}
+/* 用户协议 End */

@@ -43,6 +43,9 @@ $color-C6: #f56d9d;
     background-color: #ffffff;
     @include css3(overflow-scrolling, touch);
 }
+.index-gray {
+    background-color: #f5f5f5;
+}
 
 /**
  * 首页-现场实景
@@ -87,6 +90,7 @@ $color-C6: #f56d9d;
     display: block;
 }
 .index-tab {
+    background-color: #ffffff;
     display: none;
 }
 .index-720 {
@@ -697,6 +701,7 @@ $color-C6: #f56d9d;
  */
 .personal-portrait {
     margin: 0.4rem auto;
+    border: 1px solid $color-C3;
     @include px2rem(width, 192px);
     @include px2rem(height, 192px);
     border-radius: 50%;
@@ -736,7 +741,7 @@ $color-C6: #f56d9d;
     @include px2rem(font-size, $font-F5);
     color: $color-C4;
     @include px2rem(line-height, 54px);
-    margin: 0 0.52rem 0.3rem 0.52rem;
+    margin: 0 0.52rem 0.4rem 0.52rem;
     overflow: hidden;
     text-align: center;
     word-break:break-all;
@@ -959,6 +964,7 @@ $color-C6: #f56d9d;
  */
 .company-portrait {
     margin: 0.4rem auto;
+    border: 1px solid $color-C3;
     @include px2rem(width, 192px);
     @include px2rem(height, 192px);
     border-radius: 50%;
@@ -983,7 +989,7 @@ $color-C6: #f56d9d;
     @include px2rem(font-size, $font-F5);
     color: $color-C4;
     @include px2rem(line-height, 54px);
-    margin: 0 0.52rem 0.3rem 0.52rem;
+    margin: 0 0.52rem 0.4rem 0.52rem;
     overflow: hidden;
     text-align: center;
     word-break:break-all;
@@ -1029,11 +1035,8 @@ $color-C6: #f56d9d;
 .company-showPic {
    display: none;
    width: 100%;
-   @include px2rem(height, 500px);
+   height: auto;
    overflow: hidden;
-   background-repeat: no-repeat;
-   background-position: center center;
-   background-size: cover;
 }
 .company-title .company-other {
     position: static;

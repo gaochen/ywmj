@@ -1,5 +1,6 @@
 $(function() {
-    var companyId = GetQueryString("companyId");
+    var caseId = GetQueryString("caseId"),
+        companyId = GetQueryString("companyId");
 
     var api = window.Host.customer+"/case/app/present/company/"+companyId;
 
@@ -72,7 +73,7 @@ $(function() {
             if (!!data.pics) {
                 $.each(data.pics, function(i, index) {
                     var num = i+1;
-                    var api = window.Host.local+"scan.html?companyId="+companyId+"&type=company&index="+num;
+                    var api = window.Host.local+"scan.html?companyId="+companyId+"&type=company&index="+num+"&caseId="+caseId;
                     if (num < 10) {
                         var oLi = $('<li class="company-item"><div class="company-item-title">0'+num+'</div><div class="company-item-describe">'+index.explain+'</div><a href="'+api+'"><img class="company-item-pic" src="'+index.pics[0]+'" /></a></li>');
                     }

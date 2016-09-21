@@ -38,6 +38,9 @@ $(function() {
             if (oSummary.find("p").height() > oSummary.height()) {
                 oBtn.show();
             } 
+            else {
+                oSummary.css("height","auto");
+            }
             
             // 显示全部内容
             $(".personal-btn").on("click", function() {
@@ -97,16 +100,16 @@ $(function() {
             if (!!data.videos) {
                 switch(phaseId) {
                     case "1":
-                        $(".js-video-title").text("本案设计讲解");
+                        $(".js-video-title").text("本案设计讲解视频");
                         break;
                     case "2":
-                        $(".js-video-title").text("本案工程验收");
+                        $(".js-video-title").text("本案工程验收视频");
                         break;
                     case "3":
-                        $(".js-video-title").text("本案配饰讲解");
+                        $(".js-video-title").text("本案配饰讲解视频");
                         break;
                     case "4":
-                        $(".js-video-title").text("本案园林讲解");
+                        $(".js-video-title").text("本案园林讲解视频");
                         break;
                 }
                 var video_cover = data.videos[0].videoInfo.url+"?vframe/jpg/offset/"+data.videos[0].videoInfo.second+"/w/240/h/160";
@@ -251,21 +254,15 @@ function slideDown(api, pageNum) {
 
             var data = data.data;
 
+            if (data.length  !== 10) {
+                $(".personal-slideDown").hide();
+            }
+
             if (data.length > 0) {
                 $.each(data, function(i, index) {
                     var oLi = $('<li><div><img src="'+index.caseCover+'"></div><p>'+index.caseName+'</p></li>');
                     oLi.appendTo($(".personal-otherCase ul"));
                });
-
-                // 判断是否加载完
-                var length = $(".personal-otherCase").find("li").length;
-                var num = $(".personal-other").text();
-                if (length == num) {
-                    $(".personal-slideDown").hide();
-                }
-            }
-            else {
-                $(".personal-slideDown").hide();
             }
         }
     });
