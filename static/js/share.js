@@ -19,7 +19,13 @@ $(function() {
             // 判断返回数据是否错误
             if (data.succ === true) {
                 var data = data.data.shareInfo;
-                //$("title").text(data.caseName);
+
+                var href = window.location.href;
+                var result = href.search(/consoleMobile\/template\/index.html/);
+                
+                if (result > 0) {
+                    $("title").text(data.caseName);
+                }
                 
                 // 分享信息
                 sharetitle = data.caseName,
