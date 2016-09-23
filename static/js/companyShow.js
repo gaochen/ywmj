@@ -18,6 +18,7 @@ $(function() {
 
             var data = data.data;
 
+            data.cover = data.cover + window.Host.imgSize_750_750;
             $(".company-720").css("background-image", "url("+data.cover+")");
 
             // 720路径
@@ -75,10 +76,10 @@ $(function() {
                     var num = i+1;
                     var api = window.Host.local+"scan.html?companyId="+companyId+"&type=company&index="+num+"&caseId="+caseId;
                     if (num < 10) {
-                        var oLi = $('<li class="company-item"><div class="company-item-title">0'+num+'</div><div class="company-item-describe">'+index.explain+'</div><a href="'+api+'"><img class="company-item-pic" src="'+index.pics[0]+'" /></a></li>');
+                        var oLi = $('<li class="company-item"><div class="company-item-title">0'+num+'</div><div class="company-item-describe">'+index.explain+'</div><a href="'+api+'"><img class="company-item-pic" src="'+index.pics[0]+window.Host.imgSize_750+'" /></a></li>');
                     }
                     else {
-                        var oLi = $('<li class="company-item"><div class="company-item-title">'+num+'</div><div class="company-item-describe">'+index.explain+'</div><a href="'+api+'"><img class="company-item-pic" src="'+index.pics[0]+'" /></a></li>');
+                        var oLi = $('<li class="company-item"><div class="company-item-title">'+num+'</div><div class="company-item-describe">'+index.explain+'</div><a href="'+api+'"><img class="company-item-pic" src="'+index.pics[0]+window.Host.imgSize_750+'" /></a></li>');
                     }
                     oLi.appendTo($(".company-list"));
                 });

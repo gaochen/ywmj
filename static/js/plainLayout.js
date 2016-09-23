@@ -17,7 +17,7 @@ $(function() {
                 str += '</div>';
                 str += '<div class="plainLayout-pic">';
                 str += '<a href="#" class="plainLayout-link">';
-                str += '<img src="'+item.pics[0]+'" alt="原始平面图">';
+                str += '<img src="'+item.pics[0]+window.Host.imgSize_750+'" alt="原始平面图">';
                 str += '</a>';
                 str += '</div>';
                 str += '<div class="plainLayout-title">';
@@ -25,7 +25,7 @@ $(function() {
                 str += '</div>';
                 str += '<div class="plainLayout-pic">';
                 str += '<a href="#" class="plainLayout-link">';
-                str += '<img src="'+item.pics[1]+'" alt="设计平面图">';
+                str += '<img src="'+item.pics[1]+window.Host.imgSize_750+'" alt="设计平面图">';
                 str += '</a>';
                 str += '</div>';
                 str += '<div class="plainLayout-describe">'+item.explain+'</div>';

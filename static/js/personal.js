@@ -21,7 +21,7 @@ $(function() {
             var data = data.data;
 
             // 头像、姓名、头衔、公司名
-            $(".personal-portrait").find("img").attr("src", data.headImage);
+            $(".personal-portrait").find("img").attr("src", data.headImage+window.Host.imgSize_190_190);
             $(".personal-name").text(data.name);
             $(".personal-job").text(data.title);
             $(".personal-company").text(data.companyName);
@@ -58,12 +58,12 @@ $(function() {
             // 点击图片跳转
             var url = window.Host.local+"scan.html?caseId="+caseId+"&type=personal"+"&userId="+userId+"&phaseId="+phaseId;
             $(".personal-showPic-url").attr("href", url);
-            $(".personal-showPic").attr("src", data.presentPics[0]);
+            $(".personal-showPic").attr("src", data.presentPics[0]+window.Host.imgSize_750);
 
             // 微信链接
             if (!!data.articles) {
                 $.each(data.articles, function(i, index) {
-                    var oLi = $('<li><a href="'+index.url+'"><p class="fl personal-article-title">'+index.title+'</p><div class="fr personal-article-thumb"><img src="'+index.thumb+'"></div></a></li>');
+                    var oLi = $('<li><a href="'+index.url+'"><p class="fl personal-article-title">'+index.title+'</p><div class="fr personal-article-thumb"><img src="'+index.thumb+window.Host.imgSize_128_128+'"></div></a></li>');
 
                     oLi.appendTo($(".personal-article"));
 
@@ -260,7 +260,7 @@ function slideDown(api, pageNum) {
 
             if (data.length > 0) {
                 $.each(data, function(i, index) {
-                    var oLi = $('<li><div><img src="'+index.caseCover+'"></div><p>'+index.caseName+'</p></li>');
+                    var oLi = $('<li><div><img src="'+index.caseCover+window.Host.imgSize_330_330+'"></div><p>'+index.caseName+'</p></li>');
                     oLi.appendTo($(".personal-otherCase ul"));
                });
             }

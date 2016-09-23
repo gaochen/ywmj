@@ -83,6 +83,7 @@ function loadXCSJ(url, id) {
         success: function(data) {
             var data = data.data;
             // 720背景图
+            data.caseCover = data.caseCover + window.Host.imgSize_750_750;
             $(".index-720").css("background-image","url("+data.caseCover+")");
 
             // 作品名称
@@ -121,16 +122,18 @@ function loadXCSJ(url, id) {
         
             // 平面布置
             var url_plainLayput = window.Host.local + "plainLayout.html?caseId="+id;
+            data.planCover = data.planCover + window.Host.imgSize_750_500;
             $("#index-plainLayout").attr("href", url_plainLayput).find(".index-module-pic").css("background-image","url("+data.planCover+")");
         
             // 实景照片
             var url_realScene = window.Host.local + "realScene.html?caseId="+id;
+            data.sceneCover = data.sceneCover + window.Host.imgSize_750_500;
             $("#index-scene").attr("href", url_realScene).find(".index-module-pic").css("background-image","url("+data.sceneCover+")");
 
             // 相似作品
             if (data.relativeCases) {
                 $.each(data.relativeCases, function(i, index) {
-                    var oDiv = $('<div class="index-similar-item fl" data-case-id='+ index.caseId +'><div class="index-similar-cover" style="background-image:url('+ index.caseCover +')"></div><div class="index-similar-name">'+index.caseName+'</div></div>');
+                    var oDiv = $('<div class="index-similar-item fl" data-case-id='+ index.caseId +'><div class="index-similar-cover" style="background-image:url('+index.caseCover+window.Host.imgSize_330_330+')"></div><div class="index-similar-name">'+index.caseName+'</div></div>');
                     if (i === 0) {
                         oDiv.addClass("fl");
                     }
@@ -175,7 +178,7 @@ function loadYCTD(url, id) {
                     var url = window.Host.local+"personal.html?userId="+index.userId+"&phaseId="+phaseId+"&caseId="+id;
                     var str = '<a href="'+url+'">';
                     str += '<div class="team-portrait fl">';
-                    str += '<img src="'+index.headImage+'">';
+                    str += '<img src="'+index.headImage+window.Host.imgSize_80_80+'">';
                     str += '</div>';
                     str += '<div class="team-member fl">';
                     str += '<h4>'+index.name+'</h4>';
@@ -191,7 +194,7 @@ function loadYCTD(url, id) {
                 var url = window.Host.local+"company.html?companyId="+index.company.companyId+"&caseId="+id;
                 var str = '<a href="'+url+'">';
                 str += '<div class="team-portrait fl">';
-                str += '<img src="'+index.company.companyHeadImage+'">';
+                str += '<img src="'+index.company.companyHeadImage+window.Host.imgSize_80_80+'">';
                 str += '</div>';
                 str += '<div class="team-member fl">';
                 str += '<h4>'+index.company.companyName+'</h4>';
@@ -226,8 +229,6 @@ function loadXXZL(url, id) {
         dataType: "json",
         success: function(data) {
             var data = data.data;
-
-
 
             // 项目造价
             if (data.costs instanceof Array) {

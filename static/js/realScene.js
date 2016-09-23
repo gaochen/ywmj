@@ -23,7 +23,7 @@ $(function () {
                     str += '<div class="realScene-describe">'+item.explain+'</div>';
                     str += '<div class="realScene-pic">';
                     str += '<a href="'+api+'">';
-                    str += '<img src="'+item.pics[0]+'">';
+                    str += '<img src="'+item.pics[0]+window.Host.imgSize_750+'">';
                     str += '</a>';
                     str += '</div>';
 

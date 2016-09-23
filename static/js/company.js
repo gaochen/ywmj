@@ -19,7 +19,7 @@ $(function() {
             var data = data.data;
 
             // 公司logo、公司名称
-            $(".company-portrait").find("img").attr("src", data.logo);
+            $(".company-portrait").find("img").attr("src", data.logo+window.Host.imgSize_190_190);
             $(".company-name").text(data.name);
 
             // 简介
@@ -59,7 +59,7 @@ $(function() {
                 
                 // 如果有封面图    
                 if (typeof data.cover === "string") {
-                    $(".company-showPic").attr("src", data.cover).addClass("show");
+                    $(".company-showPic").attr("src", data.cover+window.Host.imgSize_750).addClass("show");
                     
                 }
             }
@@ -201,7 +201,7 @@ function slideDown(api, pageNum) {
 
             if (data.length > 0) {
                 $.each(data, function(i, index) {
-                    var oLi = $('<li><div><img src="'+index.caseCover+'"></div><p>'+index.caseName+'</p></li>');
+                    var oLi = $('<li><div><img src="'+index.caseCover+window.Host.imgSize_330_330+'"></div><p>'+index.caseName+'</p></li>');
                     oLi.appendTo($(".company-otherCase ul"));
                });
             }

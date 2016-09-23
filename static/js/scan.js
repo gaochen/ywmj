@@ -58,7 +58,7 @@ function loadPMBZ(url, id, index) {
                 $.each(item.pics, function(i, item) {
                     var oLi = $('<li class="scan-item"></li>');
                     var str = '<div class="scan-picBox">';
-                    str += '<img src="'+item+'" alt="">';
+                    str += '<img src="'+item+window.Host.imgSize_750+'" alt="">';
                     str += '</div>';
                     str += '<div class="scan-content show">';
                     str += '<div class="scan-describe">';
@@ -133,7 +133,7 @@ function loadSJZP(url, id, index) {
             $.each(data.pics, function(i, item) {
                 var oLi = $('<li class="scan-item"></li>');
                 var str = '<div class="scan-picBox">';
-                str += '<img src="'+item.pics[0]+'" alt="">';
+                str += '<img src="'+item.pics[0]+window.Host.imgSize_750+'" alt="">';
                 str += '</div>';
                 str += '<div class="scan-content show">';
                 str += '<div class="scan-describe">';
@@ -207,7 +207,7 @@ function loadGRJJ(url, id, index) {
             $.each(data.presentPics, function(i, item) {
                 var oLi = $('<li class="scan-item"></li>');
                 var str = '<div class="scan-picBox">';
-                str += '<img src="'+item+'" alt="">';
+                str += '<img src="'+item+window.Host.imgSize_750+'" alt="">';
                 str += '</div>';
 
                 oLi.html(str);
@@ -260,7 +260,7 @@ function loadGSZS(url, id, index) {
             $.each(data.pics, function(i, item) {
                 var oLi = $('<li class="scan-item"></li>');
                 var str = '<div class="scan-picBox">';
-                str += '<img src="'+item.pics[0]+'" alt="">';
+                str += '<img src="'+item.pics[0]+window.Host.imgSize_750+'" alt="">';
                 str += '</div>';
                 str += '<div class="scan-content show">';
                 str += '<div class="scan-describe">';

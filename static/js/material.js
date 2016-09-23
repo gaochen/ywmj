@@ -19,7 +19,7 @@ $(function() {
             $.each(data.brands, function(i, index) {
                 var oDiv = $('<div class="material-module"><div class="material-title">'+index.name+'</div><div class="material-list"><ul></ul></div></div>');
                 $.each(index.brands, function(i, index) {
-                    var oLi = $('<li><div><img src="'+index.logo+'" alt="'+index.name+'" /></div><p>'+index.name+'</p></li>');
+                    var oLi = $('<li><div><img src="'+index.logo+window.Host.imgSize_200_84+'" alt="'+index.name+'" /></div><p>'+index.name+'</p></li>');
                     oLi.appendTo(oDiv.find("ul"));
                 })
 

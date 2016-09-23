@@ -218,6 +218,7 @@ function slideDown(api, pageNum) {
                 $.each(data, function(i, index) {
                     var text = index.style+" / "+index.houseType+" / "+index.cost+"万元";
                     var url = window.Host.local+"index.html?caseId="+index.caseId;
+                    index.caseCover = index.caseCover + window.Host.imgSize_750_750;
 
                     var oLi = $('<li class="listItem"></li>');
                     var str = '<a href='+url+'>';

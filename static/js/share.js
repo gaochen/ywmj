@@ -45,11 +45,8 @@ $(function() {
         data: {"requestUrl":requestUrl},
         dataType: "json",
         success: function(data) {
-            // 判断返回数据是否错误
 
             var data = data.data;
-            console.log(data);
-            console.log(sharetitle);
 
             wx.config({
                 debug: false,
