@@ -126,7 +126,7 @@ $(function() {
 
             // 其他作品总数
             if (typeof data.otherCasesCount === "number") {
-                $(".personal-other").text(data.otherCasesCount);
+                $(".js-personal-other").text("其他作品 ("+data.otherCasesCount+")");
                 $(".personal-slideDown").show();
             }
             else {

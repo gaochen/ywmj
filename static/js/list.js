@@ -222,7 +222,7 @@ function slideDown(api, pageNum) {
                     var oLi = $('<li class="listItem"></li>');
                     var str = '<a href='+url+'>';
                     str += '<div class="listPic">';
-                    str += '<img src='+index.caseCover+' alt="">';
+                    str += '<img class="listPic-img" data-src='+index.caseCover+' src="" alt="">';
                     str += '</div>';
                     str += '<div class="listInfo clearfix">';
                     str += '<h3 class="fl">'+index.caseName+'</h3>';
@@ -232,7 +232,37 @@ function slideDown(api, pageNum) {
 
                     oLi.html(str).appendTo($(".list-case"));
                 });
+
+                // 延时加载
+                var oFrame = document.querySelector(".content");
+                var arr_img = document.querySelectorAll(".listPic-img");
+                lazyLoad(arr_img);
+
+                //滚动页面时按需加载图片
+                oFrame.onscroll = function() {
+                    lazyLoad(arr_img);
+                }
+
             }
         }
     });
+}
+
+/**
+ * [lazyLoad 滚动延时加载]
+ * @param  {[type]} arr [dom类数组]
+ * @return {[type]}     [description]
+ */
+function lazyLoad(arr) {
+    var h = window.screen.height;
+    
+    for (var i=0, len=arr.length; i< len; i++) {
+        var _this = arr[i];
+        var src = _this.dataset.src;
+        var top = _this.getBoundingClientRect().top;
+
+        if ( top < h && _this.style.backgroundImage === "") {
+            _this.src = src;
+        }
+    }
 }
