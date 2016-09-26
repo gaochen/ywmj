@@ -258,13 +258,17 @@ function loadGSZS(url, id, index) {
             var data = data.data;
 
             $.each(data.pics, function(i, item) {
+                var num = i+1;
+                if (num < 10) {
+                    num = "0"+num;
+                }
                 var oLi = $('<li class="scan-item"></li>');
                 var str = '<div class="scan-picBox">';
                 str += '<img src="'+item.pics[0]+window.Host.imgSize_750+'" alt="">';
                 str += '</div>';
                 str += '<div class="scan-content show">';
                 str += '<div class="scan-describe">';
-                str += '<h3>'+item.title+'</h3>';
+                str += '<h3>'+num+'</h3>';
                 str += '<p>'+item.explain+'</p>';
                 str += '</div>';
                 str += '</div>';
