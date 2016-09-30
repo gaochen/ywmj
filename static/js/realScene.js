@@ -32,7 +32,7 @@ $(function () {
             });
 
             data.designConcept = data.designConcept.replace(/\n/g,'<br />');
-            $(".realScene-designConcept").text(data.designConcept);
+            $(".realScene-designConcept").html(data.designConcept);
         }
     });
 

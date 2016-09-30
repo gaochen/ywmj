@@ -229,7 +229,7 @@ $color-C6: #f56d9d;
 }
 .index-similar-item {
     @include px2rem(width, 330px);
-    @include px2rem(height, 420px);
+    @include px2rem(height, 426px);
     overflow: hidden;
 }
 .index-similar-cover {
@@ -242,7 +242,8 @@ $color-C6: #f56d9d;
 }
 .index-similar-name {
     width: 100%;
-    @include px2rem(height, 30px);
+    @include px2rem(height, 36px);
+    @include px2rem(line-height, 36px);
     margin: 0.4rem 0;
     @include px2rem(font-size, $font-F5);
     color: $color-C4;
@@ -593,14 +594,15 @@ $color-C6: #f56d9d;
 .scan-content {
     display: none;
     position: absolute;
-    bottom: 1.16rem;
+    bottom: 0;
     left: 0;
     width: 100%;
     @include px2rem(height, 320px);
     overflow: hidden;
-    padding-top: 1.2rem;
+    padding: 1.2rem 0 1.16rem 0;
     background:-webkit-linear-gradient(bottom, rgba(0,0,0,1), rgba(53,53,53,0)); 
     @include css3(overflow-scrolling, touch);
+    z-index: 2;
 }
 .scan-describe  {
     width: auto;
@@ -641,6 +643,7 @@ $color-C6: #f56d9d;
     @include px2rem(font-size, $font-F2);
     margin: 0.4rem 0 0.28rem 0;
     text-align: center;
+    z-index: 3;
 }
 
 /**
@@ -927,7 +930,8 @@ $color-C6: #f56d9d;
     text-align: center;
     @include px2rem(font-size, $font-F5);
     color: $color-C4;
-    @include px2rem(height, 30px);
+    @include px2rem(height, 36px);
+    @include px2rem(line-height, 36px);
     margin: 0.52rem 0;
     @include ell(1);
 }
@@ -1073,7 +1077,8 @@ $color-C6: #f56d9d;
     text-align: center;
     @include px2rem(font-size, $font-F5);
     color: $color-C4;
-    @include px2rem(height, 30px);
+    @include px2rem(height, 36px);
+    @include px2rem(line-height, 36px);
     margin: 0.52rem 0;
     @include ell(1);
 }

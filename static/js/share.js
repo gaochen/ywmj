@@ -21,7 +21,7 @@ $(function() {
                 var data = data.data.shareInfo;
 
                 var href = window.location.href;
-                var result = href.search(/consoleMobile\/template\/index.html/);
+                var result = href.search(/template\/index.html/);
                 
                 if (result > 0) {
                     $("title").text(data.caseName);
