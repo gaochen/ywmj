@@ -63,7 +63,7 @@ $(function() {
             // 微信链接
             if (!!data.articles) {
                 $.each(data.articles, function(i, index) {
-                    var oLi = $('<li><a href="'+index.url+'"><p class="fl personal-article-title">'+index.title+'</p><div class="fr personal-article-thumb"><img src="'+index.thumb+window.Host.imgSize_128_128+'"></div></a></li>');
+                    var oLi = $('<li class="clearfix"><a href="'+index.url+'"><p class="fl personal-article-title">'+index.title+'</p><div class="fr personal-article-thumb"><img src="'+index.thumb+window.Host.imgSize_128_128+'"></div></a></li>');
 
                     oLi.appendTo($(".personal-article"));
 
@@ -260,7 +260,16 @@ function slideDown(api, pageNum) {
 
             if (data.length > 0) {
                 $.each(data, function(i, index) {
-                    var oLi = $('<li><div><img src="'+index.caseCover+window.Host.imgSize_330_330+'"></div><p>'+index.caseName+'</p></li>');
+                    var oLi = $('<li></li>');
+                    
+                    var str = '<a href="http://a.app.qq.com/o/simple.jsp?pkgname=com.yingwumeijia.android.ywmj.client">';
+                    str += '<div>';
+                    str += '<img src="'+index.caseCover+window.Host.imgSize_330_330+'">';
+                    str += '</div>';
+                    str += '<p>'+index.caseName+'</p>';
+                    str += '</a>';
+
+                    oLi.html(str);
                     oLi.appendTo($(".personal-otherCase ul"));
                });
             }

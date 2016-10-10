@@ -201,7 +201,16 @@ function slideDown(api, pageNum) {
 
             if (data.length > 0) {
                 $.each(data, function(i, index) {
-                    var oLi = $('<li><div><img src="'+index.caseCover+window.Host.imgSize_330_330+'"></div><p>'+index.caseName+'</p></li>');
+                    var oLi = $('<li></li>');
+                    
+                    var str = '<a href="http://a.app.qq.com/o/simple.jsp?pkgname=com.yingwumeijia.android.ywmj.client">';
+                    str += '<div>';
+                    str += '<img src="'+index.caseCover+window.Host.imgSize_330_330+'">';
+                    str += '</div>';
+                    str += '<p>'+index.caseName+'</p>';
+                    str += '</a>';
+
+                    oLi.html(str);
                     oLi.appendTo($(".company-otherCase ul"));
                });
             }

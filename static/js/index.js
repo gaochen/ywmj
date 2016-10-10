@@ -133,13 +133,20 @@ function loadXCSJ(url, id) {
             // 相似作品
             if (data.relativeCases) {
                 $.each(data.relativeCases, function(i, index) {
-                    var oDiv = $('<div class="index-similar-item fl" data-case-id='+ index.caseId +'><div class="index-similar-cover" style="background-image:url('+index.caseCover+window.Host.imgSize_330_330+')"></div><div class="index-similar-name">'+index.caseName+'</div></div>');
+                    var oDiv = $('<div class="index-similar-item" data-case-id='+ index.caseId +'></div>');
+                    
+                    var str = '<a href="http://a.app.qq.com/o/simple.jsp?pkgname=com.yingwumeijia.android.ywmj.client">';
+                    str += '<div class="index-similar-cover" style="background-image:url('+index.caseCover+window.Host.imgSize_330_330+')"></div>';
+                    str += '<div class="index-similar-name">'+index.caseName+'</div>';
+                    str += '</a>';
+
                     if (i === 0) {
                         oDiv.addClass("fl");
                     }
                     else {
                         oDiv.addClass("fr");
                     }
+                    oDiv.html(str);
                     oDiv.appendTo($(".index-similar-frame"));
                 }); 
             }
