@@ -94,7 +94,12 @@ $(function() {
             else {
                 $(".personal-service-standard").hide();
             }
-            $(".personal-service-Target").text(data.serviceTarget);
+            if (typeof data.serviceTarget === "string") {
+                $(".personal-service-Target").text(data.serviceTarget);
+            }
+            else {
+                $(".personal-service-object").hide().next(".line-index").hide();
+            }
 
             // 视频(1个)
             if (!!data.videos) {

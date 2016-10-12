@@ -124,11 +124,13 @@ function loadXCSJ(url, id) {
             var url_plainLayput = window.Host.local + "plainLayout.html?caseId="+id;
             data.planCover = data.planCover + window.Host.imgSize_750_500;
             $("#index-plainLayout").attr("href", url_plainLayput).find(".index-module-pic").css("background-image","url("+data.planCover+")");
-        
+            $(".index-plainLayout-count").text(data.planCount);
+
             // 实景照片
             var url_realScene = window.Host.local + "realScene.html?caseId="+id;
             data.sceneCover = data.sceneCover + window.Host.imgSize_750_500;
             $("#index-scene").attr("href", url_realScene).find(".index-module-pic").css("background-image","url("+data.sceneCover+")");
+            $(".index-scene-count").text(data.sceneCount);
 
             // 相似作品
             if (data.relativeCases) {

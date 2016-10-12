@@ -167,7 +167,7 @@
   color: #282828;
   position: relative; }
 
-.index-module-title span {
+.index-module-title-arrow {
   width: 0.2rem;
   height: 0.4rem;
   position: absolute;
@@ -503,7 +503,7 @@
   overflow: hidden;
   word-break: break-all;
   word-wrap: break-word;
-  font-size: 0.34667rem;
+  font-size: 0.37333rem;
   color: #737373;
   margin: 0 0.5333rem 0.6rem 0.5333rem; }
 
@@ -522,7 +522,8 @@
   line-height: 0.48rem;
   width: auto;
   padding: 0.6rem 0 0.32rem 0;
-  margin: 0 0.5333rem; }
+  margin: 0 0.5333rem;
+  font-weight: bold; }
 
 .realScene-describe {
   width: auto;
@@ -531,7 +532,7 @@
   overflow: hidden;
   word-break: break-all;
   word-wrap: break-word;
-  font-size: 0.34667rem;
+  font-size: 0.37333rem;
   color: #737373;
   margin: 0 0.5333rem 0.6rem 0.5333rem; }
 
@@ -612,13 +613,14 @@
 
 .scan-describe h3 {
   color: #ffffff;
-  font-size: 0.45333rem; }
+  font-size: 0.45333rem;
+  font-weight: bold; }
 
 .scan-describe p {
   color: #ffffff;
   height: auto;
   width: 100%;
-  font-size: 0.34667rem;
+  font-size: 0.37333rem;
   line-height: 0.72rem; }
 
 .scan-page {
@@ -1207,7 +1209,7 @@
   height: auto;
   margin: 0 0.52rem;
   line-height: 0.72rem;
-  font-size: 0.34667rem;
+  font-size: 0.37333rem;
   color: #737373; }
 
 .company-item-pic {

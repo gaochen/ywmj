@@ -179,7 +179,7 @@ $color-C6: #f56d9d;
     color: $color-C1;
     position: relative;
 }
-.index-module-title span {
+.index-module-title-arrow {
    @include px2rem(width, 15px);
    @include px2rem(height, 30px);
    position: absolute;
@@ -513,7 +513,7 @@ $color-C6: #f56d9d;
     overflow: hidden;
     word-break:break-all;
     word-wrap:break-word;
-    @include px2rem(font-size, $font-F5);
+    @include px2rem(font-size, $font-F4);
     color: $color-C4;
     margin: 0 0.5333rem 0.6rem 0.5333rem;
 }
@@ -534,6 +534,7 @@ $color-C6: #f56d9d;
     width: auto;
     padding: 0.6rem 0 0.32rem 0;
     margin: 0 0.5333rem;
+    font-weight: bold;
 }
 .realScene-describe {
     width: auto;
@@ -542,7 +543,7 @@ $color-C6: #f56d9d;
     overflow: hidden;
     word-break:break-all;
     word-wrap:break-word;
-    @include px2rem(font-size, $font-F5);
+    @include px2rem(font-size, $font-F4);
     color: $color-C4;
     margin: 0 0.5333rem 0.6rem 0.5333rem;
 }
@@ -624,12 +625,13 @@ $color-C6: #f56d9d;
 .scan-describe h3 {
     color: #ffffff;
     @include px2rem(font-size, $font-F2);
+    font-weight: bold;
 }
 .scan-describe p {
     color: #ffffff;
     height: auto;
     width: 100%;
-    @include px2rem(font-size, $font-F5);
+    @include px2rem(font-size, $font-F4);
     @include px2rem(line-height, 54px);
 }
 .scan-page {
@@ -1213,7 +1215,7 @@ $color-C6: #f56d9d;
     height: auto;
     margin: 0 0.52rem;
     @include px2rem(line-height, 54px);
-    @include px2rem(font-size, $font-F5);
+    @include px2rem(font-size, $font-F4);
     color: $color-C4;
 }
 .company-item-pic {
