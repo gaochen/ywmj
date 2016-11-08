@@ -1,5 +1,6 @@
 $(function() {
     var id = GetQueryString("caseId");
+    var appe = GetQueryString("appe");
     var api = window.Host.customer+"/case/app/detail/scene/plan/"+id;
 
     $.ajax({
@@ -18,6 +19,7 @@ $(function() {
                 str += '<div class="plainLayout-pic">';
                 str += '<a href="#" class="plainLayout-link">';
                 str += '<img src="'+item.pics[0]+window.Host.imgSize_750+'" alt="原始平面图">';
+                str += '<div class="plainLayout-bg"></div>';
                 str += '</a>';
                 str += '</div>';
                 str += '<div class="plainLayout-title">';
@@ -26,6 +28,7 @@ $(function() {
                 str += '<div class="plainLayout-pic">';
                 str += '<a href="#" class="plainLayout-link">';
                 str += '<img src="'+item.pics[1]+window.Host.imgSize_750+'" alt="设计平面图">';
+                str += '<div class="plainLayout-bg"></div>';
                 str += '</a>';
                 str += '</div>';
                 str += '<div class="plainLayout-describe">'+item.explain+'</div>';
@@ -37,7 +40,7 @@ $(function() {
             var arr_a = $(".plainLayout-link");
             $.each(arr_a, function(i, item) {
                 var index = i+1;
-                var api = window.Host.local+"scan.html?caseId="+id+"&type=plainLayout&index="+index;
+                var api = window.Host.local+"scan.html?caseId="+id+"&appe="+appe+"&type=plainLayout&index="+index;
                 $(this).attr("href", api);
             });
 

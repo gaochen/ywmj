@@ -1,6 +1,7 @@
 /* 16 */
 window.Host = {
     customer: "http://192.168.28.16:8182",  // 接口地址
+    business: "http://192.168.28.16:8184",  // B端接口，公司列表
     local: "http://"+window.location.host+"/consoleMobile/template/",  // 前端资源地址
     imgSize_750_750: "?imageView2/1/w/750/h/750",
     imgSize_750_500: "?imageView2/1/w/750/h/500",

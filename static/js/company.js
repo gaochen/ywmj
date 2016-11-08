@@ -1,5 +1,6 @@
 $(function() {
     var caseId = GetQueryString("caseId"),
+        appe = GetQueryString("appe"),
         companyId = GetQueryString("companyId");
 
     var api = window.Host.customer+"/case/app/resume/company/"+companyId+"/"+caseId;
@@ -19,7 +20,7 @@ $(function() {
             var data = data.data;
 
             // 公司logo、公司名称
-            $(".company-portrait").find("img").attr("src", data.logo+window.Host.imgSize_190_190);
+            $(".company-portrait").css("backgroundImage", "url("+data.logo+window.Host.imgSize_190_190+")");
             $(".company-name").text(data.name);
 
             // 简介
@@ -54,7 +55,7 @@ $(function() {
             // 判断是否有公司展示
             if (data.hasPresent) {
                 // 跳转公司展示链接
-                var url_companyShow = window.Host.local + "companyShow.html?companyId="+companyId+"&caseId="+caseId;
+                var url_companyShow = window.Host.local + "companyShow.html?companyId="+companyId+"&caseId="+caseId+"&appe="+appe;
                 $("#company-show").attr("href", url_companyShow);
                 
                 // 如果有封面图    
@@ -67,13 +68,18 @@ $(function() {
                 $("#company-show").hide().next(".line-index").hide();
             }
 
-            // 其他作品总数
-            if (typeof data.otherCasesCount === "number") {
-                $(".js-company-other").text("其他作品 ("+data.otherCasesCount+")");
-                $(".personal-slideDown").show();
+            // 其他作品总数，当caseId为0时，该页面是公司列表进入的
+            if (caseId !== "0") {
+                if (typeof data.otherCasesCount === "number") {
+                    $(".js-company-other").text("其他作品 ("+data.otherCasesCount+")");
+                    $(".personal-slideDown").show();
+                }
+                else {
+                    $(".company-other").hide();
+                }
             }
             else {
-                $(".company-other").hide();
+                $(".js-company-other").text("全部作品");
             }
 
             //滚动到底部
@@ -204,8 +210,8 @@ function slideDown(api, pageNum) {
                     var oLi = $('<li></li>');
                     
                     var str = '<a href="http://a.app.qq.com/o/simple.jsp?pkgname=com.yingwumeijia.android.ywmj.client">';
-                    str += '<div>';
-                    str += '<img src="'+index.caseCover+window.Host.imgSize_330_330+'">';
+                    str += '<div style="background-image:url('+index.caseCover+window.Host.imgSize_330_330+')">';
+                    //str += '<img src="'+index.caseCover+window.Host.imgSize_330_330+'">';
                     str += '</div>';
                     str += '<p>'+index.caseName+'</p>';
                     str += '</a>';

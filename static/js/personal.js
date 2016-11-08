@@ -2,6 +2,7 @@ $(function() {
     new FastClick(document.body);
     var caseId = GetQueryString("caseId"),
         userId = GetQueryString("userId"),
+        appe = GetQueryString("appe"),
         phaseId = GetQueryString("phaseId");
 
     var api = window.Host.customer+"/case/app/resume/employee/"+userId+"/"+caseId+"/"+phaseId;
@@ -21,7 +22,7 @@ $(function() {
             var data = data.data;
 
             // 头像、姓名、头衔、公司名
-            $(".personal-portrait").find("img").attr("src", data.headImage+window.Host.imgSize_190_190);
+            $(".personal-portrait").css("backgroundImage", 'url('+data.headImage+window.Host.imgSize_190_190+')');
             $(".personal-name").text(data.name);
             $(".personal-job").text(data.title);
             $(".personal-company").text(data.companyName);
@@ -56,14 +57,14 @@ $(function() {
             });
 
             // 点击图片跳转
-            var url = window.Host.local+"scan.html?caseId="+caseId+"&type=personal"+"&userId="+userId+"&phaseId="+phaseId;
+            var url = window.Host.local+"scan.html?caseId="+caseId+"&type=personal"+"&userId="+userId+"&phaseId="+phaseId+"&appe="+appe;
             $(".personal-showPic-url").attr("href", url);
             $(".personal-showPic").attr("src", data.presentPics[0]+window.Host.imgSize_750);
 
             // 微信链接
             if (!!data.articles) {
                 $.each(data.articles, function(i, index) {
-                    var oLi = $('<li class="clearfix"><a href="'+index.url+'"><p class="fl personal-article-title">'+index.title+'</p><div class="fr personal-article-thumb"><img src="'+index.thumb+window.Host.imgSize_128_128+'"></div></a></li>');
+                    var oLi = $('<li class="clearfix"><a href="'+index.url+'"><p class="fl personal-article-title">'+index.title+'</p><div class="fr personal-article-thumb"><img src="'+index.thumb+window.Host.imgSize_128_128+'"><div></div></div></a></li>');
 
                     oLi.appendTo($(".personal-article"));
 
@@ -207,7 +208,6 @@ $(function() {
                 }, false);
             })();
 
-
         },
         error: function(error) {
             $("body").html("请求失败，稍后请重试！");
@@ -268,8 +268,8 @@ function slideDown(api, pageNum) {
                     var oLi = $('<li></li>');
                     
                     var str = '<a href="http://a.app.qq.com/o/simple.jsp?pkgname=com.yingwumeijia.android.ywmj.client">';
-                    str += '<div>';
-                    str += '<img src="'+index.caseCover+window.Host.imgSize_330_330+'">';
+                    str += '<div style="background-image:url('+index.caseCover+window.Host.imgSize_330_330+')">';
+                    //str += '<img src="'+index.caseCover+window.Host.imgSize_330_330+'">';
                     str += '</div>';
                     str += '<p>'+index.caseName+'</p>';
                     str += '</a>';

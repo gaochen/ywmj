@@ -1,7 +1,12 @@
 $(function() {
     // 获取url参数
     var id = GetQueryString("caseId");
+    var appe = GetQueryString("appe");
     var indexId = window.location.hash;
+
+    if (typeof appe === "string" && appe !== "null") {
+        $(".appe").hide();
+    }
 
     // 显示对应的tab
     if (indexId === "#index=1") {
@@ -20,7 +25,7 @@ $(function() {
         var url = window.Host.customer+"/case/app/detail/scene/"+id;
         
         // 请求数据
-        loadXCSJ(url, id);
+        loadXCSJ(url, id, appe);
    })();
 
    // 加载原创团队
@@ -28,7 +33,7 @@ $(function() {
         var url = window.Host.customer+"/case/app/detail/team/"+id;
         
         // 请求数据
-        loadYCTD(url, id);
+        loadYCTD(url, id, appe);
 
    })();
 
@@ -37,7 +42,7 @@ $(function() {
         var url = window.Host.customer+"/case/app/details/"+id;
         
         // 请求数据
-        loadXXZL(url, id);
+        loadXXZL(url, id, appe);
 
    })();
 
@@ -72,9 +77,10 @@ $(function() {
  * @param  {[type]} id  [案例编号]
  * @return {[type]}     [description]
  */
-function loadXCSJ(url, id) {
+function loadXCSJ(url, id, appe) {
     var url = url,
-        id = id;
+        id = id,
+        appe = appe;
 
     $.ajax({
         type: "GET",
@@ -118,19 +124,34 @@ function loadXCSJ(url, id) {
             }
 
             // 基础信息
-            $(".index-basicInfo-info").text(data.cityName + " / " + data.decorateStyle + " / " + data.houseType + " / " + data.houseArea + "㎡" + " / " + data.cost + "万" + " / " + data.buildingName);
+            if (typeof data.cost === "string" && data.cost !== "0.00") {
+                $(".index-basicInfo-info").text(data.cityName + " / " + data.decorateStyle + " / " + data.houseType + " / " + data.houseArea + "㎡" + " / " + data.cost + "万" + " / " + data.buildingName);
+            }
+            else {
+                $(".index-basicInfo-info").text(data.cityName + " / " + data.decorateStyle + " / " + data.houseType + " / " + data.houseArea + "㎡" + " / "  + data.buildingName);
+            }
         
             // 平面布置
-            var url_plainLayput = window.Host.local + "plainLayout.html?caseId="+id;
-            data.planCover = data.planCover + window.Host.imgSize_750_500;
-            $("#index-plainLayout").attr("href", url_plainLayput).find(".index-module-pic").css("background-image","url("+data.planCover+")");
-            $(".index-plainLayout-count").text(data.planCount);
+            if (typeof data.planCount === "number") {
+                var url_plainLayput = window.Host.local + "plainLayout.html?caseId="+id+"&appe="+appe;
+                data.planCover = data.planCover + window.Host.imgSize_750_500;
+                $("#index-plainLayout").attr("href", url_plainLayput).find(".index-module-pic").css("background-image","url("+data.planCover+")");
+                $(".index-plainLayout-count").text(data.planCount);
+            }
+            else {
+                $("#index-plainLayout").hide().next(".line-index").hide();
+            }
 
             // 实景照片
-            var url_realScene = window.Host.local + "realScene.html?caseId="+id;
-            data.sceneCover = data.sceneCover + window.Host.imgSize_750_500;
-            $("#index-scene").attr("href", url_realScene).find(".index-module-pic").css("background-image","url("+data.sceneCover+")");
-            $(".index-scene-count").text(data.sceneCount);
+            if (typeof data.sceneCount === "number") {
+                var url_realScene = window.Host.local + "realScene.html?caseId="+id+"&appe="+appe;
+                data.sceneCover = data.sceneCover + window.Host.imgSize_750_500;
+                $("#index-scene").attr("href", url_realScene).find(".index-module-pic").css("background-image","url("+data.sceneCover+")");
+                $(".index-scene-count").text(data.sceneCount);
+            }
+            else {
+                $("#index-scene").hide().next(".line-index").hide();
+            }
 
             // 相似作品
             if (data.relativeCases) {
@@ -165,9 +186,10 @@ function loadXCSJ(url, id) {
  * @param  {[type]} id  [案例编号]
  * @return {[type]}     [description]
  */
-function loadYCTD(url, id) {
+function loadYCTD(url, id, appe) {
     var url = url,
-        id = id;
+        id = id,
+        appe = appe;
 
     $.ajax({
         type: "GET",
@@ -184,10 +206,10 @@ function loadYCTD(url, id) {
 
                 $.each(index.employees, function(i, index) {
                     var oLi = $('<li></li>');
-                    var url = window.Host.local+"personal.html?userId="+index.userId+"&phaseId="+phaseId+"&caseId="+id;
+                    var url = window.Host.local+"personal.html?userId="+index.userId+"&phaseId="+phaseId+"&caseId="+id+"&appe="+appe;
                     var str = '<a href="'+url+'">';
-                    str += '<div class="team-portrait fl">';
-                    str += '<img src="'+index.headImage+window.Host.imgSize_80_80+'">';
+                    str += '<div class="team-portrait fl" style="background-image: url('+index.headImage+window.Host.imgSize_80_80+');">';
+                    // str += '<img src="'+index.headImage+window.Host.imgSize_80_80+'">';
                     str += '</div>';
                     str += '<div class="team-member fl">';
                     str += '<h4>'+index.name+'</h4>';
@@ -200,10 +222,10 @@ function loadYCTD(url, id) {
                 });
 
                 var company = $('<li></li>');
-                var url = window.Host.local+"company.html?companyId="+index.company.companyId+"&caseId="+id;
+                var url = window.Host.local+"company.html?companyId="+index.company.companyId+"&caseId="+id+"&appe="+appe;
                 var str = '<a href="'+url+'">';
-                str += '<div class="team-portrait fl">';
-                str += '<img src="'+index.company.companyHeadImage+window.Host.imgSize_80_80+'">';
+                str += '<div class="team-portrait fl" style="background-image: url('+index.company.companyHeadImage+window.Host.imgSize_80_80+');">';
+                //str += '<img src="'+index.company.companyHeadImage+window.Host.imgSize_80_80+'">';
                 str += '</div>';
                 str += '<div class="team-member fl">';
                 str += '<h4>'+index.company.companyName+'</h4>';
@@ -228,9 +250,10 @@ function loadYCTD(url, id) {
  * @param  {[type]} id  [案例编号]
  * @return {[type]}     [description]
  */
-function loadXXZL(url, id) {
+function loadXXZL(url, id, appe) {
     var url = url,
-        id = id;
+        id = id,
+        appe = appe;
 
     $.ajax({
         type: "GET",
@@ -264,12 +287,20 @@ function loadXXZL(url, id) {
             }
 
             // 材料品牌
-            $.each(data.brands, function(i, index) {
-                var url=window.Host.local+"material.html?brandId="+index.brandId+"&caseId="+id;
-                var oLi = $('<li><a href="'+url+'">'+index.brandName+'品牌</a></li>');
-                oLi.appendTo($(".data-material ul"));
+            if (data.brands instanceof Array) {
+                $.each(data.brands, function(i, index) {
+                    var url=window.Host.local+"material.html?brandId="+index.brandId+"&caseId="+id+"&appe="+appe;
+                    var oLi = $('<li><a href="'+url+'">'+index.brandName+'品牌</a></li>');
+                    oLi.appendTo($(".data-material ul"));
+                });
+            }
+            else {
+                $(".js-brands").hide();
+            }
 
-            });
+            if ($(".js-cost").css("display") === "none" && $(".js-brands").css("display") === "none") {
+                $(".data-noContent").show();
+            }
         }
     });
 }

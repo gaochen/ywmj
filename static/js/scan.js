@@ -59,6 +59,7 @@ function loadPMBZ(url, id, index) {
                     var oLi = $('<li class="scan-item"></li>');
                     var str = '<div class="scan-picBox">';
                     str += '<img src="'+item+window.Host.imgSize_750+'" alt="">';
+                    str += '<div></div>';
                     str += '</div>';
                     str += '<div class="scan-content show">';
                     str += '<div class="scan-describe">';
@@ -134,6 +135,7 @@ function loadSJZP(url, id, index) {
                 var oLi = $('<li class="scan-item"></li>');
                 var str = '<div class="scan-picBox">';
                 str += '<img src="'+item.pics[0]+window.Host.imgSize_750+'" alt="">';
+                str += '<div></div>';
                 str += '</div>';
                 str += '<div class="scan-content show">';
                 str += '<div class="scan-describe">';
@@ -208,6 +210,7 @@ function loadGRJJ(url, id, index) {
                 var oLi = $('<li class="scan-item"></li>');
                 var str = '<div class="scan-picBox">';
                 str += '<img src="'+item+window.Host.imgSize_750+'" alt="">';
+                str += '<div></div>';
                 str += '</div>';
 
                 oLi.html(str);
@@ -265,6 +268,7 @@ function loadGSZS(url, id, index) {
                 var oLi = $('<li class="scan-item"></li>');
                 var str = '<div class="scan-picBox">';
                 str += '<img src="'+item.pics[0]+window.Host.imgSize_750+'" alt="">';
+                str += '<div></div>';
                 str += '</div>';
                 str += '<div class="scan-content show">';
                 str += '<div class="scan-describe">';

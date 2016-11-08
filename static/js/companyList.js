@@ -16,7 +16,7 @@ $(function() {
         var pageNum = 1;
         var pageSize = 10;
 
-        var api = window.Host.customer+"/case/app/list/"+pageNum+"/10?style=0&houseType=0&cost=0&orderBy=collectionCount";
+        var api = window.Host.business+"/company/getCompanySimple?pageNum="+pageNum+"&pageSize=20";
         slideDown(api, pageNum);
         pageNum++;
 
@@ -63,7 +63,7 @@ $(function() {
             endTop = oDiv.scrollTop;
 
             if (endTop === startTop && bool) {
-                var api = window.Host.customer+"/case/app/list/"+pageNum+"/10?style=0&houseType=0&cost=0&orderBy=collectionCount";
+                var api = window.Host.business+"/company/getCompanySimple?pageNum="+pageNum+"&pageSize=20";
                 slideDown(api, pageNum);
                 pageNum++;
             }
@@ -210,44 +210,32 @@ function slideDown(api, pageNum) {
 
             var data = data.data;
 
-            if (data.length === 10) {
+            if (data.totalCount === 10) {
                 $(".list-slideDown").show();
             }
             else {
                 $(".list-slideDown").hide();
             }
 
-            if (data.length > 0) {
-                $.each(data, function(i, index) {
-                    var text = index.style+" / "+index.houseType+" / "+index.cost+"万元";
-                    var url = window.Host.local+"index.html?caseId="+index.caseId;
-                    index.caseCover = index.caseCover + window.Host.imgSize_750_750;
+            if (data.totalCount > 0) {
+                $.each(data.result, function(i, index) {
+                    var url = window.Host.local+"company.html?companyId="+index.id+"&caseId=0";
+                    index.logoImage = index.logoImage + window.Host.imgSize_80_80;
 
                     var oLi = $('<li class="listItem"></li>');
                     var str = '<a href='+url+'>';
-                    str += '<div class="listPic">';
-                    str += '<img class="listPic-img" data-src='+index.caseCover+' src="" alt="">';
-                    str += '<div class="listPic-bg"></div>';
+                    str += '<div class="company-portrait fl" style="background-image:url('+index.logoImage+')">';
+                    //str += '<img src="'+index.logoImage+'">';
                     str += '</div>';
-                    str += '<div class="listInfo clearfix">';
-                    str += '<h3 class="fl">'+index.caseName+'</h3>';
-                    str += '<p class="fr">'+text+'</p>';
+                    str += '<div class="company-info fl">';
+                    str += '<h4>'+index.name+'</h4>';
+                    str += '<p>'+index.address+'</p>';
                     str += '</div>';
+                    str += '<span></span>';
                     str += '</a>';
 
-                    oLi.html(str).appendTo($(".list-case"));
+                    oLi.html(str).appendTo($(".list-company"));
                 });
-
-                // 延时加载
-                var oFrame = document.querySelector(".content");
-                var arr_img = document.querySelectorAll(".listPic-img");
-                lazyLoad(arr_img);
-
-                //滚动页面时按需加载图片
-                oFrame.onscroll = function() {
-                    lazyLoad(arr_img);
-                }
-
             }
         }
     });

@@ -1,5 +1,6 @@
 $(function() {
     var id = GetQueryString("caseId");
+    var appe = GetQueryString("appe");
     var api = window.Host.customer + "/case/app/ticket";
     var sharetitle = null,
         sharedesc = null,
@@ -32,6 +33,13 @@ $(function() {
                 sharedesc = data.designConcept,
                 sharelink = data.url,
                 shareimgUrl = data.cover;
+
+                // 如果是E端则隐藏相关作品
+                if (typeof appe === "string" && appe !== "null") {
+                    $(".bottom").find(".bottom-btn").hide();
+                    sharelink = sharelink + "&appe=true";
+                    console.log(sharelink);
+                }
             }
             else {
                 return false

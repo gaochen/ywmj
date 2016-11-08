@@ -1,5 +1,6 @@
 $(function() {
     var caseId = GetQueryString("caseId"),
+        appe = GetQueryString("appe"),
         companyId = GetQueryString("companyId");
 
     var api = window.Host.customer+"/case/app/present/company/"+companyId;
@@ -74,12 +75,12 @@ $(function() {
             if (!!data.pics) {
                 $.each(data.pics, function(i, index) {
                     var num = i+1;
-                    var api = window.Host.local+"scan.html?companyId="+companyId+"&type=company&index="+num+"&caseId="+caseId;
+                    var api = window.Host.local+"scan.html?companyId="+companyId+"&type=company&index="+num+"&caseId="+caseId+"&appe="+appe;
                     if (num < 10) {
-                        var oLi = $('<li class="company-item"><div class="company-item-title">0'+num+'</div><div class="company-item-describe">'+index.explain+'</div><a href="'+api+'"><img class="company-item-pic" src="'+index.pics[0]+window.Host.imgSize_750+'" /></a></li>');
+                        var oLi = $('<li class="company-item"><div class="company-item-title">0'+num+'</div><div class="company-item-describe">'+index.explain+'</div><div class="company-item-box"><a href="'+api+'"><img class="company-item-pic" src="'+index.pics[0]+window.Host.imgSize_750+'" /><div></div></a></div></li>');
                     }
                     else {
-                        var oLi = $('<li class="company-item"><div class="company-item-title">'+num+'</div><div class="company-item-describe">'+index.explain+'</div><a href="'+api+'"><img class="company-item-pic" src="'+index.pics[0]+window.Host.imgSize_750+'" /></a></li>');
+                        var oLi = $('<li class="company-item"><div class="company-item-title">'+num+'</div><div class="company-item-describe">'+index.explain+'</div><div class="company-item-box"><a href="'+api+'"><img class="company-item-pic" src="'+index.pics[0]+window.Host.imgSize_750+'" /><div></div></a></div></li>');
                     }
                     oLi.appendTo($(".company-list"));
                 });
