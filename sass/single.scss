@@ -6,6 +6,7 @@
 $font-22: 22px;
 $font-24: 24px;
 $font-28: 28px;
+$font-32: 32px;
 $font-color1: #282828;
 $font-color2: #757575;
 $font-color3: #bdbdbd;
@@ -77,3 +78,23 @@ $font-color4: #414141;
     @include px2rem(line-height, 46px);
 }
 /* 用户协议 End */
+
+/* 说明页面 */
+.explain {
+    width: auto;
+    height: auto;
+    margin: 0.64rem 0.64rem;
+    @include px2rem(font-size, $font-28);
+    color: $font-color4; 
+}
+.explain h4 {
+    @include px2rem(font-size, $font-32);
+    @include px2rem(line-height, 36px);
+    padding: 0.2rem 0;
+    font-weight: bold;
+}
+.explain p {
+    @include px2rem(line-height, 46px);
+}
+
+/* 说明页面 End */

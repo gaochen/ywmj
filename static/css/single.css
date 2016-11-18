@@ -70,3 +70,21 @@
   line-height: 0.61333rem; }
 
 /* 用户协议 End */
+/* 说明页面 */
+.explain {
+  width: auto;
+  height: auto;
+  margin: 0.64rem 0.64rem;
+  font-size: 0.37333rem;
+  color: #414141; }
+
+.explain h4 {
+  font-size: 0.42667rem;
+  line-height: 0.48rem;
+  padding: 0.2rem 0;
+  font-weight: bold; }
+
+.explain p {
+  line-height: 0.61333rem; }
+
+/* 说明页面 End */

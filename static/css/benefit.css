@@ -246,7 +246,11 @@
   bottom: 0; }
 
 .detail-details-pic img {
-  width: 100%; }
+  width: 100%;
+  margin-bottom: 0.28rem; }
+
+.detail-details-pic img:last-child {
+  margin-bottom: 0; }
 
 .detail-details-btn {
   display: none;
@@ -547,15 +551,24 @@
   height: auto;
   font-size: 0.48rem;
   color: #f56d9d;
-  margin: 0.48rem 0 0.28rem 2.64rem; }
+  margin: 0.48rem 0 0.28rem 2.64rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden; }
 
 .coupon-info {
   width: auto;
-  height: auto;
+  height: 0.48rem;
+  line-height: 0.48rem;
   font-size: 0.45333rem;
   color: #282828;
   margin: 0 0 0.48rem 2.64rem;
-  font-weight: bold; }
+  font-weight: bold;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden; }
 
 .coupon-number {
   width: auto;

@@ -27,6 +27,14 @@ $(function() {
 
             var data = data.data;
 
+            if (data instanceof Array === false) {
+                var str = '<div class="benefit-noContent-image"></div>';
+                    str+= '<a href="" class="benefit-noContent-text">暂无优惠活动，敬请期待</a>';
+
+                $(".content").css("backgroundColor","#f5f5f5").html(str);
+                return false;
+            }
+
             $.each(data, function(i, item) {
                 var beginTime = setTime(item.beginTime);
                 var endTime = setTime(item.endTime);

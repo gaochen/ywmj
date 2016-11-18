@@ -265,6 +265,10 @@ $color-C6: #f56d9d;
 }
 .detail-details-pic img {
     width: 100%;
+    margin-bottom: 0.28rem;
+}
+.detail-details-pic img:last-child {
+    margin-bottom: 0;
 }
 .detail-details-btn {
     display: none;
@@ -558,14 +562,17 @@ $color-C6: #f56d9d;
     @include px2rem(font-size, $font-F1);
     color: $color-C6;
     margin: 0.48rem 0 0.28rem 2.64rem;
+    @include ell(1);
 }
 .coupon-info {
     width: auto;
-    height: auto;
+    @include px2rem(height, 36px);
+    @include px2rem(line-height, 36px);
     @include px2rem(font-size, $font-F2);
     color: $color-C1;
     margin: 0 0 0.48rem 2.64rem;
     font-weight: bold;
+     @include ell(1);
 }
 .coupon-number {
     width: auto;

@@ -8,9 +8,6 @@ $(function() {
         }
     })();
 
-    userId = "";
-    getUserId();
-
     // 返回前一个页面
     $(".title").find("span").on("click", function() {
         window.history.go(-1);
@@ -42,7 +39,12 @@ $(function() {
             var beginTime = setTime(data.beginTime);
             var endTime = setTime(data.endTime);
 
-            $(".detail-cover").find("img").attr("src",data.bannerImage);
+            if (typeof data.bannerImage === "string") {
+                $(".detail-cover").find("img").attr("src",data.bannerImage);
+            }
+            else {
+                $(".detail-cover").find("img").attr("src",data.listImage);
+            }
             $(".detail-Info-location").text(data.activityAreaName);
             $(".detail-Info-title").text(data.activityName);
             $(".detail-Info-summary").text(data.description);
@@ -55,10 +57,20 @@ $(function() {
                 $(".detail-details-text").text(data.specification);
             }
             else if (typeof data.specification !== "string" && typeof data.specificationImage === "string") {
-                $(".detail-details-text").hide().siblings(".detail-details-pic").show().find("img").attr("src",data.specificationImage);
+                var arrImg = data.specificationImage.split(",");
+                $.each(arrImg, function(i, item) {
+                    var oImg = $('<img src="'+item+'" />');
+                    oImg.appendTo($(".detail-details-pic"));
+                });
+                $(".detail-details-text").hide().siblings(".detail-details-pic").show();
             }
             else if (typeof data.specification === "string" && typeof data.specificationImage === "string") {
-                $(".detail-details-text").text(data.specification).siblings(".detail-details-pic").find("img").attr("src",data.specificationImage);
+                var arrImg = data.specificationImage.split(",");
+                $.each(arrImg, function(i, item) {
+                    var oImg = $('<img src="'+item+'" />');
+                    oImg.appendTo($(".detail-details-pic"));
+                });
+                $(".detail-details-text").text(data.specification);
                 $(".detail-details-btn").show();
             }
 
@@ -90,14 +102,19 @@ $(function() {
                 return false;
             }
 
-            var data = data.data
+            var data = data.data;
+
+            if (data instanceof Array === false) {
+                $(".detail-company").hide();
+                return false;
+            }
 
             var num = data.length;
             $(".detail-company-count").text(num);
 
             $.each(data, function(i, index) {
                 var oLi = $('<li class="detail-company-item"></li>');
-                var url = window.Host.local+"benefitCompany.html?activityId="+activityId+"&companyId="+index.companyId+"&userId="+userId;
+                var url = window.Host.local+"benefitCompany.html?activityId="+activityId+"&companyId="+index.companyId; // +"&userId="+userId
                 var str = '<a href='+url+'>';
                     str+= '<div class="detail-company-logo" style="background-image:url('+index.logoImage+window.Host.imgSize_80_80+')">';
                     //str+= '<img src="'+index.logoImage+'" alt="" />';
@@ -130,14 +147,6 @@ function GetQueryString(name) {
 }
 
 /**
- * [setUserId 获取userId]
- * @param {[type]} userId [description]
- */
-function setUserId(number) {
-    userId = number;
-}
-
-/**
  * [showToast 弹出提示信息]
  * @param  {[type]} caseId [description]
  * @return {[type]}        [description]
@@ -155,28 +164,6 @@ function showToast(message) {
     if (isiOS) {
         var message = message;
         window.webkit.messageHandlers.toastMessage.postMessage(message);
-    }
-}
-
-
-/**
- * [getUserId 获取用户Id]
- * @param  {[type]} caseId [description]
- * @return {[type]}        [description]
- */
-function getUserId() {
-    var u = navigator.userAgent;
-    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
-    var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
-
-    //Android接口
-    if (isAndroid) {
-        userId = window.jsIntelligencer.getUserId();
-        alert("android:"+userId);
-    }
-    //iOS接口
-    if (isiOS) {
-        window.webkit.messageHandlers.getUserId.postMessage("");
     }
 }
 

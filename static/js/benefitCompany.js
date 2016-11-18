@@ -10,7 +10,11 @@ $(function() {
 
     activityId = GetQueryString("activityId");
     companyId = GetQueryString("companyId");
-    userId = GetQueryString("userId");
+    couponId = null;
+    userId = "";
+    ticket = "";
+
+    couponList();
 
     $(".title").find("span").on("click", function() {
         window.history.go(-1);
@@ -94,27 +98,22 @@ $(function() {
             });
 
             // 参与业主
-            var num = data.customerOwners.length;
-            $(".company-actor-count").text(num);
+            if (data.customerOwners instanceof Array === false) {
+                $(".company-actor").hide().next(".line-index").hide();
+            }
+            else {
+                var num = data.customerOwners.length;
+                $(".company-actor-count").text(num);
 
-            $.each(data.customerOwners, function(i, index) {
-                var oLi = $('<li style="background-image:url('+index.headImage+window.Host.imgSize_80_80+')"></li>');
+                $.each(data.customerOwners, function(i, index) {
+                    var oLi = $('<li style="background-image:url('+index.headImage+window.Host.imgSize_80_80+')"></li>');
 
-                oLi.appendTo($(".company-actor-list ul"));
-            });
+                    oLi.appendTo($(".company-actor-list ul"));
+                });
+            }
 
         }
     });
-
-    // 优惠券信息
-    if ( userId === "-1" || userId === "null") {
-        var apiOfCoupon = window.Host.customer+"/activity/"+activityId+"/company/"+companyId+"/search";  //userId
-    }
-    else {
-        var apiOfCoupon = window.Host.customer+"/activity/"+activityId+"/company/"+companyId+"/search/?userId="+userId;  //userId
-    }
-
-    getCouponList(apiOfCoupon);
 
     //滚动到底部
     (function() {
@@ -130,7 +129,7 @@ $(function() {
         var pageNum = 1;
         var pageSize = 10;
 
-        var apiOfCase = window.Host.customer+"/activity/"+companyId+"/case?pageNum="+pageNum+"&pageSize=10";
+        var apiOfCase = window.Host.customer+"/activity/"+activityId+"/company/"+companyId+"/case?pageNum="+pageNum+"&pageSize=10";
         slideDown(apiOfCase, pageNum);
         pageNum++;
 
@@ -187,7 +186,7 @@ $(function() {
 });
 
 /**
- * [getCouponList 获取优惠券列表]
+ * [getCouponList 未登录获取优惠码列表]
  * @param  {[type]} api [description]
  * @return {[type]}     [description]
  */
@@ -199,14 +198,14 @@ function getCouponList(api) {
         success: function(data) {
             // 判断返回数据是否错误
             if (data.succ === false) {
-                var str = '<div class="benefit-noContent-image"></div>';
-                    str+= '<a href="" class="benefit-noContent-text">访问出错，请点击刷新</a>';
-
-                $(".content").css("backgroundColor","#f5f5f5").html(str);
+                showToast("未登录获取券列表："+data.message);
                 return false;
             }
 
             var data = data.data;
+
+            // 清空券信息
+            $(".coupon").find("li").remove();
 
             $.each(data, function(i, item) {
                 var beginTime = setTime(item.beginTime);
@@ -215,14 +214,110 @@ function getCouponList(api) {
                 var oLi = $('<li class="coupon-frame"></li>');
                 var str = '<div class="coupon-logo"></div>';
                     str+= '<div class="coupon-name">'+item.couponName+'</div>';
-                    str+= '<div class="coupon-info">'+item.details+'</div>';
+                    if (typeof item.details === "string") {
+                        str+= '<div class="coupon-info">'+item.details+'</div>';
+                    }
+                    else {
+                        str+= '<div class="coupon-info"></div>';
+                    }
                     str+= '<div class="coupon-detail clearfix">';
-                    str+= '<div class="coupon-detail-btn fl">详细情况<span></span></div>';
+                    if (typeof item.rules === "string") {
+                        str+= '<div class="coupon-detail-btn fl">详细情况<span></span></div>';
+                    }
                     str+= '<div class="coupon-detail-date fr">有效期： <span>'+beginTime+' - '+endTime+'</span></div>';
                     str+= '</div>';
-                    str+= '<div class="coupon-hide">使用条件：'+item.rules+'</div>';
+                    if (typeof item.rules === "string") {
+                        str+= '<div class="coupon-hide">使用条件：'+item.rules+'</div>';
+                    }
+                    str+= '<div class="coupon-bottom coupon-btn" data-coupon-id='+item.couponId+'>立即领取</div>';
+
+                oLi.html(str);
+                oLi.appendTo($(".coupon"));
+
+            });
+
+            $(".coupon-detail-btn").on("click", function() {
+                if ($(this).hasClass("coupon-detail-active")) {
+                    $(this).removeClass("coupon-detail-active");
+                    $(this).parent().siblings(".coupon-hide").hide();
+                }
+                else {
+                    $(this).addClass("coupon-detail-active");
+                    $(this).parent().siblings(".coupon-hide").show();
+                }
+            });
+
+
+            $(".coupon-btn").on("click", function() {
+                var _this = $(this);
+                couponId = _this.data("couponId");
+
+                if (userId === "-1") {
+                    showToast("优惠券只能用户领取");
+                }
+                else if (userId === "") {
+                    getCoupon()
+                }
+            });
+        },  
+        error: function(res) {
+            var str = '<div class="benefit-noContent-image"></div>';
+                str+= '<a href="" class="benefit-noContent-text">访问出错，请点击刷新</a>';
+
+            $(".content").css("backgroundColor","#f5f5f5").html(str);
+            return false;
+        }
+    });
+}
+
+/**
+ * [getCouponListUser 已登录获取优惠码列表]
+ * @param  {[type]} api    [description]
+ * @param  {[type]} ticket [description]
+ * @return {[type]}        [description]
+ */
+function getCouponListUser(api) {
+    $.ajax({
+        type: "GET",
+        url: api,
+        data: ticket,
+        dataType: "json",
+        success: function(data) {
+            // 判断返回数据是否错误
+            if (data.succ === false) {
+                showToast("登录后获取券列表："+data.message);
+                return false;
+            }
+
+            var data = data.data;
+
+            // 清空券信息
+            $(".coupon").find("li").remove();
+
+            $.each(data, function(i, item) {
+                var beginTime = setTime(item.beginTime);
+                var endTime = setTime(item.endTime);
+
+                var oLi = $('<li class="coupon-frame"></li>');
+                var str = '<div class="coupon-logo"></div>';
+                    str+= '<div class="coupon-name">'+item.couponName+'</div>';
+                    if (typeof item.details === "string") {
+                        str+= '<div class="coupon-info">'+item.details+'</div>';
+                    }
+                    else {
+                        str+= '<div class="coupon-info"></div>';
+                    }
+                    str+= '<div class="coupon-detail clearfix">';
+                    if (typeof item.rules === "string") {
+                        str+= '<div class="coupon-detail-btn fl">详细情况<span></span></div>';
+                    }
+                    str+= '<div class="coupon-detail-date fr">有效期： <span>'+beginTime+' - '+endTime+'</span></div>';
+                    str+= '</div>';
+                    if (typeof item.rules === "string") {
+                        str+= '<div class="coupon-hide">使用条件：'+item.rules+'</div>';
+                    }
                     if (typeof item.couponEmployCode === "string") {
-                        str+= '<div class="coupon-bottom">已领取优惠码：123456789012</div>';
+                        str+= '<div class="coupon-bottom">已领取优惠码：'+item.couponEmployCode+'</div>';
                     }
                     else {
                         str+= '<div class="coupon-bottom coupon-btn" data-coupon-id='+item.couponId+'>立即领取</div>';
@@ -236,59 +331,136 @@ function getCouponList(api) {
             $(".coupon-detail-btn").on("click", function() {
                 if ($(this).hasClass("coupon-detail-active")) {
                     $(this).removeClass("coupon-detail-active");
-                    $(".coupon-hide").hide();
+                    $(this).parent().siblings(".coupon-hide").hide();
                 }
                 else {
                     $(this).addClass("coupon-detail-active");
-                    $(".coupon-hide").show();
+                    $(this).parent().siblings(".coupon-hide").show();
                 }
             });
 
 
             $(".coupon-btn").on("click", function() {
                 var _this = $(this);
-                var couponId = _this.data("couponId");
+                couponId = _this.data("couponId");
 
                 if (_this.text() !== "立即领取" ) {
                     return false;
                 }
 
-                if (userId === "-1") {
-                    showToast("优惠券只能用户领取");
-                }
-                else if (userId === "") {
-                    toLogin();
-                }
-                else {
-                    var apiOfRecevie = window.Host.customer+"/activity/"+activityId+"/company/"+companyId+"/receiveCoupon/"+couponId+"?userId="+userId;
-                    
-                    $.ajax({
-                        type: "POST",
-                        url: apiOfRecevie,
-                        dataType: "json",
-                        success: function(res) {
-                            if (res.succ) {
-                                _this.removeClass("coupon-btn").text("已领取优惠码："+res.data);
-                            }
-                            else {
-                                showToast("领取出错");
-                            }
-                        },  
-                        error: function(res) {
-                            var str = '<div class="benefit-noContent-image"></div>';
-                                str+= '<a href="" class="benefit-noContent-text">访问出错，请点击刷新</a>';
+                getCoupon();
 
-                            $(".content").css("backgroundColor","#f5f5f5").html(str);
-                            return false;
-                        }
-                    });
-
-                }
             });
+        },  
+        error: function(res) {
+            var str = '<div class="benefit-noContent-image"></div>';
+                str+= '<a href="" class="benefit-noContent-text">访问出错，请点击刷新</a>';
+
+            $(".content").css("backgroundColor","#f5f5f5").html(str);
+            return false;
         }
     });
 }
 
+/**
+ * [couponList 优惠券列表]
+ * @return {[type]} [description]
+ */
+function couponList() {
+    var u = navigator.userAgent;
+    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+    var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+
+    //Android接口
+    if (isAndroid) {
+        window.jsIntelligencer.couponList();
+    }
+    //iOS接口
+    if (isiOS) {
+        window.webkit.messageHandlers.couponList.postMessage("");
+    }
+}
+
+/**
+ * [getCoupon 调用app获取优惠券接口]
+ * @return {[type]} [description]
+ */
+function getCoupon() {
+    var u = navigator.userAgent;
+    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+    var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+
+    //Android接口
+    if (isAndroid) {
+        window.jsIntelligencer.getCoupon();
+    }
+    //iOS接口
+    if (isiOS) {
+        window.webkit.messageHandlers.getCoupon.postMessage("");
+    }
+}
+
+/**
+ * [couponListReturn couponList回调]
+ * @param  {[type]} val [description]
+ * @return {[type]}     [description]
+ */
+function couponListReturn(val) {
+    var value = window.atob(val);
+    value = JSON.parse(value);
+    userId = value.userId;
+    ticket = value.ticket;
+
+    if ( userId === "-1" || userId === "") {
+        var apiOfCoupon = window.Host.customer+"/activity/"+activityId+"/company/"+companyId+"/search";  //userId
+        getCouponList(apiOfCoupon);
+    }
+    else {
+        var apiOfCoupon = window.Host.customer+"/activity/"+activityId+"/company/"+companyId+"/search/?userId="+userId;  //userId
+        getCouponListUser(apiOfCoupon);
+    }
+}
+
+/**
+ * [getCouponReturn getCoupon回调]
+ * @return {[type]} [description]
+ */
+function getCouponReturn(val) {
+    var value = window.atob(val);
+    value = JSON.parse(value);
+    userId = value.userId;
+    ticket = value.ticket;
+
+    var apiOfRecevie = window.Host.customer+"/activity/"+activityId+"/company/"+companyId+"/receiveCoupon/"+couponId+"?userId="+userId;
+
+    $.ajax({
+        type: "POST",
+        url: apiOfRecevie,
+        data: {"ticket":ticket},
+        dataType: "json",
+        success: function(res) {
+            if (res.succ) {
+                var data = res.data;
+                $.each($(".coupon-frame"), function() {
+                    var that = $(this).find(".coupon-bottom");
+                    if (that.data("couponId") == couponId) {
+                        that.removeClass("coupon-btn").text("已领取优惠码："+data);
+                    }
+                });
+            }
+            else {
+                showToast(res.message);
+            }
+        },  
+        error: function(res) {
+            var str = '<div class="benefit-noContent-image"></div>';
+                str+= '<a href="" class="benefit-noContent-text">访问出错，请点击刷新</a>';
+
+            $(".content").css("backgroundColor","#f5f5f5").html(str);
+            return false;
+        }
+    });
+}
 
 /**
  * [slideDown 下拉刷新]
@@ -383,8 +555,7 @@ function toLogin() {
 
     //Android接口
     if (isAndroid) {
-        userId = window.jsIntelligencer.startLogin();
-        return userId;
+        window.jsIntelligencer.startLogin();
     }
     //iOS接口
     if (isiOS) {
@@ -414,17 +585,4 @@ function toDouble(iNum) {
     } else {
         return '' + iNum;
     }
-}
-
-/**
- * [setUserId 获取userId]
- * @param {[type]} userId [description]
- */
-function setUserId(number) {
-    userId = number;
-
-    // 调用后端领券接口
-    $(".coupon").find("li").remove();
-    var apiOfCoupon = window.Host.customer+"/activity/"+activityId+"/company/"+companyId+"/search/?userId="+userId;
-    getCouponList(apiOfCoupon);
 }
