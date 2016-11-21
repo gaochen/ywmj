@@ -15,7 +15,8 @@ $(function() {
     payInfo();
 
     $(".title").find("span").on("click", function() {
-       closePage();
+        dismisDialog();
+        closePage();
     });
 
     $(".pay-list").find("li").on("click", function() {
@@ -74,7 +75,7 @@ function payInfoReturn(val) {
     
     switch (phase) {
         case 1:
-            $(".js-phase").text("阶段");
+            $(".js-phase").text("预约");
         break;
     }
 

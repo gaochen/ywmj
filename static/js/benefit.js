@@ -8,6 +8,15 @@ $(function() {
         }
     })();
     
+    getActivityList();
+
+})
+
+/**
+ * [getActivityList 获取活动列表]
+ * @return {[type]} [description]
+ */
+function getActivityList() {
     var api = window.Host.customer+"/activity?orderBy=beginTime&isAsc=true";
 
     // 获取优惠列表
@@ -24,6 +33,9 @@ $(function() {
                 $(".content").css("backgroundColor","#f5f5f5").html(str);
                 return false;
             }
+
+            // 清除li
+            $(".list").find("li").remove();
 
             var data = data.data;
 
@@ -75,7 +87,16 @@ $(function() {
             });
         }
     });
-})
+}
+
+/**
+ * [couponListReturn 刷新活动列表]
+ * @param  {[type]} val [description]
+ * @return {[type]}     [description]
+ */
+function couponListReturn(val) {
+    getActivityList();
+}
 
 /**
  * [时间格式]
