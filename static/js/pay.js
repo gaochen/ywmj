@@ -14,17 +14,20 @@ $(function() {
 
     payInfo();
 
+    // 返回上一页
     $(".title").find("span").on("click", function() {
         dismisDialog();
         closePage();
     });
 
+    // 选择支付方式
     $(".pay-list").find("li").on("click", function() {
         if (!$(this).hasClass("pay-item-wait") && !$(this).hasClass("pay-item-active")) {
             $(this).addClass("pay-item-active").siblings("li").removeClass("pay-item-active");
         }
     });
 
+    // 点击支付
     $(".pay-btn").on("click", function() {
         var payToolType = $(".pay-item-active").data("payToolType");
         payToolType = parseInt(payToolType);

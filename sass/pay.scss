@@ -151,6 +151,15 @@ $color-C6: #f56d9d;
     background-size: contain;
     margin: 0.4rem 0.24rem;
 }
+.pay-list .pay-balance-logo {
+    @include px2rem(width, 72px);
+    @include px2rem(height, 66px);
+    background-image:url(../img/order_pay_cash_ico@3x.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin: 0.36rem 0.24rem;
+}
 .pay-item-text {
     @include px2rem(width,480px);
     @include px2rem(height,36px);
@@ -175,8 +184,25 @@ $color-C6: #f56d9d;
 .pay-item-wait .pay-item-radio {
     display: none;
 }
+.pay-list .pay-balance-value {
+    display: inline;
+}
 .pay-item-active .pay-item-radio {
     background-image:url(../img/work_details_contact_chioce_right@3x.png);
+}
+.pay-batch {
+    display: block;
+    @include px2rem(width,634px);
+    @include px2rem(height,36px);
+    @include px2rem(line-height,36px);
+    padding: 0.24rem 0;
+    color: $color-C6;
+    @include px2rem(font-size, $font-F4);
+    margin: 0 auto;
+    border: 1px solid $color-C6;
+    text-align: center;
+    border-radius: 3px;
+    margin-bottom: 0.4rem;
 }
 .bottom {
     position: absolute;

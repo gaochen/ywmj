@@ -134,6 +134,15 @@
   background-size: contain;
   margin: 0.4rem 0.24rem; }
 
+.pay-list .pay-balance-logo {
+  width: 0.96rem;
+  height: 0.88rem;
+  background-image: url(../img/order_pay_cash_ico@3x.png);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin: 0.36rem 0.24rem; }
+
 .pay-item-text {
   width: 6.4rem;
   height: 0.48rem;
@@ -158,8 +167,25 @@
 .pay-item-wait .pay-item-radio {
   display: none; }
 
+.pay-list .pay-balance-value {
+  display: inline; }
+
 .pay-item-active .pay-item-radio {
   background-image: url(../img/work_details_contact_chioce_right@3x.png); }
+
+.pay-batch {
+  display: block;
+  width: 8.45333rem;
+  height: 0.48rem;
+  line-height: 0.48rem;
+  padding: 0.24rem 0;
+  color: #f56d9d;
+  font-size: 0.37333rem;
+  margin: 0 auto;
+  border: 1px solid #f56d9d;
+  text-align: center;
+  border-radius: 3px;
+  margin-bottom: 0.4rem; }
 
 .bottom {
   position: absolute;
