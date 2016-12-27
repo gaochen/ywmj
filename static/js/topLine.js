@@ -1,4 +1,8 @@
 $(function() {
+    if ($("body").find("a").eq(0).text() == "站长统计") {
+        $("body").find("a").eq(0).hide();
+    }
+
     var obj = $(".frame");
     var obj_w = obj.width();
     obj.find("li").width(obj_w);
@@ -9,17 +13,39 @@ $(function() {
     var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
     var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
 
+    // 判断是否为微信
+    var ua = navigator.userAgent.toLowerCase();//获取判断用的对象
+    var isWeixin = false;
+    if (ua.match(/MicroMessenger/i) == "micromessenger") {
+        //在微信浏览器打开
+        isWeixin = true;
+    }
+
     $("#btn").on("click", function() {
         if (source === "jinritoutiao") {
             //Android接口
             if (isAndroid) {
-                _czc.push(["_trackEvent","下载按钮","安卓设备","今日头条",0,"btn"]); 
-                window.location.href = "http://o7zlnyltf.bkt.clouddn.com/app-toutiao-release.apk";               
+                if (isWeixin) {
+                    //在微信浏览器打开
+                    _czc.push(["_trackEvent","下载按钮","微信Android","今日头条",0,"btn"]); 
+                    window.location.href = "http://a.app.qq.com/o/simple.jsp?pkgname=com.yingwumeijia.android.ywmj.client";
+                }
+                else {
+                    _czc.push(["_trackEvent","下载按钮","安卓设备","今日头条",0,"btn"]); 
+                    window.location.href = "http://o7zlnyltf.bkt.clouddn.com/app-toutiao-release.apk";
+                }               
             }
             //iOS接口
             if (isiOS) {
-                _czc.push(["_trackEvent","下载按钮","iOS设备","今日头条",0,"btn"]);
-                window.location.href = "http://itunes.apple.com/us/app/id1133878484";
+                if (isWeixin) {
+                    //在微信浏览器打开
+                    _czc.push(["_trackEvent","下载按钮","微信ios","今日头条",0,"btn"]); 
+                    window.location.href = "http://a.app.qq.com/o/simple.jsp?pkgname=com.yingwumeijia.android.ywmj.client";
+                }
+                else {
+                    _czc.push(["_trackEvent","下载按钮","iOS设备","今日头条",0,"btn"]);
+                    window.location.href = "http://itunes.apple.com/us/app/id1133878484";
+                }
             }
         }
     });

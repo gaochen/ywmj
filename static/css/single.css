@@ -88,3 +88,12 @@
   line-height: 0.61333rem; }
 
 /* 说明页面 End */
+/* 会员权益 */
+.memberRights {
+  width: 100%;
+  height: auto;
+  overflow: hidden; }
+
+.memberRights img {
+  width: 100%;
+  height: auto; }

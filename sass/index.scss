@@ -16,6 +16,11 @@ $color-C3: #e6e6e6;
 $color-C4: #737373;
 $color-C5: #a8a8a8;
 $color-C6: #f56d9d;
+
+#cnzz_stat_icon_1260955674 {
+    display: none;
+}
+
 .line-index {
     width: 100%;
     @include px2rem(height, 20px);
@@ -1482,7 +1487,34 @@ $color-C6: #f56d9d;
     display: block;
 }
 
-// 无内容提示
+/**
+ * 微信下载提示
+ */
+.wxTips {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.7);
+    z-index: 10002;
+}
+.wxTips div {
+    @include px2rem(width, 300px);
+    @include px2rem(height, 160px);
+    background-repeat:no-repeat;
+    background-position: center center;
+    background-size:cover;
+    background-image: url(../img/wxTips.png);
+    position: absolute;
+    top: 0;
+    @include px2rem(right, 40px);
+}
+
+/**
+ * 无内容提示
+ */ 
 .data-noContent {
     display: none;
     position: absolute;

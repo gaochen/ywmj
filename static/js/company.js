@@ -178,12 +178,6 @@ $(function() {
         
     })();
 
-    // 关闭底部下载提示层
-    $(".bottom-close").on("click", function(ev) {
-        ev.stopPropagation();
-        $(".wrap").find(".bottom").remove();
-    });
-
 });
 
 /**
@@ -207,19 +201,19 @@ function slideDown(api, pageNum) {
 
             if (data.length > 0) {
                 $.each(data, function(i, index) {
-                    var oLi = $('<li></li>');
+                    var oLi = $('<li class="js-download"></li>');
                     
-                    var str = '<a href="http://a.app.qq.com/o/simple.jsp?pkgname=com.yingwumeijia.android.ywmj.client">';
-                    str += '<div style="background-image:url('+index.caseCover+window.Host.imgSize_330_330+')">';
-                    //str += '<img src="'+index.caseCover+window.Host.imgSize_330_330+'">';
+                    var str = '<div style="background-image:url('+index.caseCover+window.Host.imgSize_330_330+')">';
                     str += '</div>';
                     str += '<p>'+index.caseName+'</p>';
-                    str += '</a>';
 
                     oLi.html(str);
                     oLi.appendTo($(".company-otherCase ul"));
                });
             }
+
+            // 微信内下载提示
+            wxTips();
         }
     });
 }

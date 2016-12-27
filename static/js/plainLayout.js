@@ -18,7 +18,7 @@ $(function() {
                 str += '</div>';
                 str += '<div class="plainLayout-pic">';
                 str += '<a href="#" class="plainLayout-link">';
-                str += '<img src="'+item.pics[0]+window.Host.imgSize_750+'" alt="原始平面图">';
+                str += '<img src="'+item.pics[0]+window.Host.imgSize_750+window.Host.watermark+'" alt="原始平面图">';
                 str += '<div class="plainLayout-bg"></div>';
                 str += '</a>';
                 str += '</div>';
@@ -27,7 +27,7 @@ $(function() {
                 str += '</div>';
                 str += '<div class="plainLayout-pic">';
                 str += '<a href="#" class="plainLayout-link">';
-                str += '<img src="'+item.pics[1]+window.Host.imgSize_750+'" alt="设计平面图">';
+                str += '<img src="'+item.pics[1]+window.Host.imgSize_750+window.Host.watermark+'" alt="设计平面图">';
                 str += '<div class="plainLayout-bg"></div>';
                 str += '</a>';
                 str += '</div>';
@@ -47,11 +47,6 @@ $(function() {
         }
     });
 
-    // 关闭底部下载提示层
-    $(".bottom-close").on("click", function(ev) {
-        ev.stopPropagation();
-        $(".wrap").find(".bottom").remove();
-    });
 });
 
 /**

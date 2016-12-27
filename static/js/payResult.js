@@ -1,12 +1,4 @@
 $(function() {
-    //判断浏览器
-    (function() {
-        var u = navigator.userAgent;
-        var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
-        if (isiOS) {
-            $(".wrap").addClass("ios");
-        }
-    })();
 
     $(".title").find("span").on("click", function() {
         dismisDialog();

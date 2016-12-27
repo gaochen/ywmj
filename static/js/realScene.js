@@ -24,7 +24,7 @@ $(function () {
                     str += '<div class="realScene-describe">'+item.explain+'</div>';
                     str += '<div class="realScene-pic">';
                     str += '<a href="'+api+'">';
-                    str += '<img src="'+item.pics[0]+window.Host.imgSize_750+'">';
+                    str += '<img src="'+item.pics[0]+window.Host.imgSize_750+window.Host.watermark+'">';
                     str += '<div class="realScene-bg"></div>';
                     str += '</a>';
                     str += '</div>';
@@ -38,12 +38,6 @@ $(function () {
         }
     });
 
-
-    // 关闭底部下载提示层
-    $(".bottom-close").on("click", function(ev) {
-        ev.stopPropagation();
-        $(".wrap").find(".bottom").remove();
-    });
 });
 
 /**

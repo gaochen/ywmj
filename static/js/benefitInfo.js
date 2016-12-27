@@ -1,10 +1,17 @@
 $(function() {
-    //判断浏览器
+
     (function() {
         var u = navigator.userAgent;
+        var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
         var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+
+        //Android接口
+        if (isAndroid) {
+            _czc.push(["_trackEvent","active_details","安卓设备","参与公司"]);               
+        }
+        //iOS接口
         if (isiOS) {
-            $(".wrap").addClass("ios");
+            _czc.push(["_trackEvent","active_details","iOS设备","参与公司"]);
         }
     })();
 

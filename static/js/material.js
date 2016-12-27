@@ -33,11 +33,6 @@ $(function() {
         }
     });
 
-    // 关闭底部下载提示层
-    $(".bottom-close").on("click", function(ev) {
-        ev.stopPropagation();
-        $(".wrap").find(".bottom").remove();
-    });
 });
 
 /**

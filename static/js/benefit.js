@@ -1,13 +1,28 @@
 $(function() {
     //判断浏览器
+    // (function() {
+    //     var u = navigator.userAgent;
+    //     var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+    //     if (isiOS) {
+    //         $(".wrap").addClass("ios");
+    //     }
+    // })();
+    
     (function() {
         var u = navigator.userAgent;
+        var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
         var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+
+        //Android接口
+        if (isAndroid) {
+            _czc.push(["_trackEvent","active_list","安卓设备","活动列表"]);               
+        }
+        //iOS接口
         if (isiOS) {
-            $(".wrap").addClass("ios");
+            _czc.push(["_trackEvent","active_list","iOS设备","活动列表"]);
         }
     })();
-    
+
     getActivityList();
 
 })
@@ -36,6 +51,7 @@ function getActivityList() {
 
             // 清除li
             $(".list").find("li").remove();
+            $(".listNone").hide();
 
             var data = data.data;
 
@@ -43,7 +59,7 @@ function getActivityList() {
                 var str = '<div class="benefit-noContent-image"></div>';
                     str+= '<a href="" class="benefit-noContent-text">暂无优惠活动，敬请期待</a>';
 
-                $(".content").css("backgroundColor","#f5f5f5").html(str);
+                $(".listNone").show();
                 return false;
             }
 
@@ -82,6 +98,8 @@ function getActivityList() {
                 if (item.recommend) {
                     oLi.find(".listItem-recommend").css("display","block");
                 }
+
+
 
                 oLi.appendTo($(".list"));
             });

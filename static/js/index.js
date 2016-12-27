@@ -63,12 +63,6 @@ $(function() {
         });
    })();
 
-    // 关闭底部下载提示层
-    $(".bottom-close").on("click", function(ev) {
-        ev.stopPropagation();
-        $(".wrap").find(".bottom").remove();
-    });
-
 });
 
 /**
@@ -99,6 +93,9 @@ function loadXCSJ(url, id, appe) {
             if (typeof data.pathOf720 === "string") {
                 $(".index-720-btn").addClass("show");
                 $("#index-720").on("click", function() {
+                    // 统计公司720点击事件次数
+                    statistics();
+
                     var weixin = navigator.userAgent.search("Language"),
                         wifi = navigator.userAgent.search("WIFI");
                     if (weixin > 0) {
@@ -156,12 +153,10 @@ function loadXCSJ(url, id, appe) {
             // 相似作品
             if (data.relativeCases) {
                 $.each(data.relativeCases, function(i, index) {
-                    var oDiv = $('<div class="index-similar-item" data-case-id='+ index.caseId +'></div>');
+                    var oDiv = $('<div class="index-similar-item js-download" data-case-id='+ index.caseId +'></div>');
                     
-                    var str = '<a href="http://a.app.qq.com/o/simple.jsp?pkgname=com.yingwumeijia.android.ywmj.client">';
-                    str += '<div class="index-similar-cover" style="background-image:url('+index.caseCover+window.Host.imgSize_330_330+')"></div>';
-                    str += '<div class="index-similar-name">'+index.caseName+'</div>';
-                    str += '</a>';
+                    var str = '<div class="index-similar-cover" style="background-image:url('+index.caseCover+window.Host.imgSize_330_330+')"></div>';
+                        str += '<div class="index-similar-name">'+index.caseName+'</div>';
 
                     if (i === 0) {
                         oDiv.addClass("fl");
@@ -176,6 +171,9 @@ function loadXCSJ(url, id, appe) {
             else {
                 $(".index-similar").hide().next(".line-index").hide();
             }   
+
+            // 微信内下载提示
+            wxTips();
         }
     });
 }
@@ -330,4 +328,23 @@ function GetQueryString(name) {
      var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
      var r = window.location.search.substr(1).match(reg);
      if(r!=null)return  unescape(r[2]); return null;
+}
+
+/**
+ * [statistics 友盟统计]
+ * @return {[type]} [description]
+ */
+function statistics() {
+    var u = navigator.userAgent;
+    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+    var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+
+    //Android接口
+    if (isAndroid) {
+        _czc.push(["_trackEvent","案例720","安卓设备","h5"]);        
+    }
+    //iOS接口
+    if (isiOS) {
+        _czc.push(["_trackEvent","案例720","iOS设备","h5"]);
+    }
 }

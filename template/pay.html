@@ -5,14 +5,14 @@
     <meta name="viewport" content="initial-scale=1.0,width=device-width,user-scalabel=no,maximum-scale=1.0,minimum-scale=1.0" />
     <!-- 去掉移动web页面自动探测电话号码 -->
     <meta name="format-detection" content="telephone=no, email=no"/>
-    <title></title>
+    <title>在线支付</title>
     <script src="../static/js/libs/flexible.js"></script>
     <link rel="stylesheet" href="../static/css/reset.css" type="text/css ">
     <link rel="stylesheet" href="../static/css/pay.css" type="text/css">
 </head>
 <body>
     <div class="wrap">
-        <div class="title">在线支付<span></span></div>
+        <!-- <div class="title">在线支付<span></span></div> -->
         <div class="content">
             <div class="pay-tips">为了保证工期的进行，请尽快支付</div>
             <div class="line-index"></div>
@@ -33,6 +33,11 @@
                     <div class="pay-box-right fr js-overplus"></div>
                 </div>
                 <ul class="pay-list">
+                    <li class="pay-alipay" data-pay-tool-type="6">
+                        <span class="pay-alipay-logo fl"></span>
+                        <span class="pay-item-text fl">支付宝支付（单笔最高限额2万）</span>
+                        <span class="pay-item-radio fr"></span>
+                    </li>
                     <li class="pay-bankCard" data-pay-tool-type="5">
                         <span class="pay-bankCard-logo fl"></span>
                         <span class="pay-item-text fl">银行卡支付（单笔最高限额2万）</span>
@@ -41,11 +46,6 @@
                     <li class="pay-wx pay-item-wait" data-pay-tool-type="4">
                         <span class="pay-wx-logo fl"></span>
                         <span class="pay-item-text fl">微信支付即将上线</span>
-                        <span class="pay-item-radio fr"></span>
-                    </li>
-                    <li class="pay-alipay pay-item-wait">
-                        <span class="pay-alipay-logo fl"></span>
-                        <span class="pay-item-text fl">支付宝支付即将上线</span>
                         <span class="pay-item-radio fr"></span>
                     </li>
                     <!-- <li class="pay-balance">

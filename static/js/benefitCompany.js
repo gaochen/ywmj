@@ -1,12 +1,17 @@
 $(function() {
-    //判断浏览器
-    (function() {
-        var u = navigator.userAgent;
-        var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
-        if (isiOS) {
-            $(".wrap").addClass("ios");
-        }
-    })();
+
+    u = navigator.userAgent;
+    isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+    isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+
+    //Android接口
+    if (isAndroid) {
+        _czc.push(["_trackEvent","active_joinCompany","安卓设备","活动详情"]);               
+    }
+    //iOS接口
+    if (isiOS) {
+        _czc.push(["_trackEvent","active_joinCompany","iOS设备","活动详情"]);
+    }
 
     activityId = GetQueryString("activityId");
     companyId = GetQueryString("companyId");
@@ -229,7 +234,17 @@ function getCouponList(api) {
                     if (typeof item.rules === "string") {
                         str+= '<div class="coupon-hide">使用条件：'+item.rules+'</div>';
                     }
-                    str+= '<div class="coupon-bottom coupon-btn" data-coupon-id='+item.couponId+'>立即领取</div>';
+                    // 判断优惠券领取状态
+                    if (item.activityStatus == "0") {
+                        str+= '<div class="coupon-bottom" data-coupon-id='+item.couponId+'>活动尚未开始，暂不能领取</div>';
+                    }
+                    else if (item.activityStatus == "1") {
+                        str+= '<div class="coupon-bottom coupon-btn" data-coupon-id='+item.couponId+'>立即领取</div>';
+                    }
+                    else if (item.activityStatus == "2") {
+                        str+= '<div class="coupon-bottom" data-coupon-id='+item.couponId+'>优惠活动已结束</div>';
+                    }
+                    
 
                 oLi.html(str);
                 oLi.appendTo($(".coupon"));
@@ -253,7 +268,7 @@ function getCouponList(api) {
                 couponId = _this.data("couponId");
 
                 if (userId === "-1") {
-                    showToast("优惠券只能用户领取");
+                    showToast("优惠券只能业主领取");
                 }
                 else if (userId === "") {
                     getCoupon()
@@ -280,7 +295,7 @@ function getCouponListUser(api) {
     $.ajax({
         type: "GET",
         url: api,
-        data: ticket,
+        data: {"ticket":ticket},
         dataType: "json",
         success: function(data) {
             // 判断返回数据是否错误
@@ -316,11 +331,20 @@ function getCouponListUser(api) {
                     if (typeof item.rules === "string") {
                         str+= '<div class="coupon-hide">使用条件：'+item.rules+'</div>';
                     }
+                    // 判断优惠券领取状态
                     if (typeof item.couponEmployCode === "string") {
                         str+= '<div class="coupon-bottom">已领取优惠码：'+item.couponEmployCode+'</div>';
                     }
                     else {
-                        str+= '<div class="coupon-bottom coupon-btn" data-coupon-id='+item.couponId+'>立即领取</div>';
+                        if (item.activityStatus == "0") {
+                            str+= '<div class="coupon-bottom" data-coupon-id='+item.couponId+'>活动尚未开始，暂不能领取</div>';
+                        }
+                        else if (item.activityStatus == "1") {
+                            str+= '<div class="coupon-bottom coupon-btn" data-coupon-id='+item.couponId+'>立即领取</div>';
+                        }
+                        else if (item.activityStatus == "2") {
+                            str+= '<div class="coupon-bottom" data-coupon-id='+item.couponId+'>优惠活动已结束</div>';
+                        }
                     }
 
                 oLi.html(str);
@@ -447,6 +471,15 @@ function getCouponReturn(val) {
                         that.removeClass("coupon-btn").text("已领取优惠码："+data);
                     }
                 });
+
+                //Android接口
+                if (isAndroid) {
+                    _czc.push(["_trackEvent","active_getCouponInCompany","安卓设备","领券成功"]);               
+                }
+                //iOS接口
+                if (isiOS) {
+                    _czc.push(["_trackEvent","active_getCouponInCompany","iOS设备","领券成功"]);
+                }
             }
             else {
                 showToast(res.message);

@@ -26,6 +26,9 @@ $(function() {
             if (!!data.pathOf720) {
                 $(".company-720-btn").addClass("show");
                 $("#company-720").on("click", function() {
+                    // 统计公司720点击事件次数
+                    statistics(1);
+
                     var weixin = navigator.userAgent.search("Language"),
                         wifi = navigator.userAgent.search("WIFI");
                     if (weixin > 0) {
@@ -99,6 +102,8 @@ $(function() {
     (function() {
 
         $(".company-video").on("tap", function() {
+            // 统计公司视频点击事件次数
+            statistics(2);
 
             $(".company-mask").addClass("show");
 
@@ -117,11 +122,6 @@ $(function() {
         
     })();
 
-    // 关闭底部下载提示层
-    $(".bottom-close").on("click", function(ev) {
-        ev.stopPropagation();
-        $(".wrap").find(".bottom").remove();
-    });
 });
 
 /**
@@ -132,4 +132,35 @@ function GetQueryString(name) {
      var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
      var r = window.location.search.substr(1).match(reg);
      if(r!=null)return  unescape(r[2]); return null;
+}
+
+/**
+ * [statistics 友盟统计]
+ * @param  {[type]} type [1代表公司720，2代表公司视频]
+ * @return {[type]}      [description]
+ */
+function statistics(type) {
+    var type = type;
+    var u = navigator.userAgent;
+    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+    var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+
+    //Android接口
+    if (isAndroid) {
+        if (type === 1) {
+            _czc.push(["_trackEvent","公司720","安卓设备","h5"]);
+        }        
+        else if (type === 2) {
+            _czc.push(["_trackEvent","公司视频","安卓设备","h5"]);
+        }
+    }
+    //iOS接口
+    if (isiOS) {
+        if (type === 1) {
+            _czc.push(["_trackEvent","公司720","iOS设备","h5"]);
+        }
+        else if (type === 2) {
+            _czc.push(["_trackEvent","公司视频","iOS设备","h5"]);
+        }
+    }
 }
