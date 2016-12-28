@@ -30,7 +30,7 @@ $(function() {
             return false;
         }
 
-        if (payAmount < 0.03) {
+        if (payAmount < 300) {
             showToast("金额小于300元，请直接点击去支付！");
             return false;
         }
