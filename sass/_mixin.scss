@@ -109,3 +109,10 @@
     @include px2rem(margin-top, $marginTop);
 }
 
+// 背景图片
+@mixin bgImage($url, $size:cover) {
+    background-image: url($url);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: $size;
+}

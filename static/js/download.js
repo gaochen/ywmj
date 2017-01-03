@@ -37,7 +37,7 @@ function wxTips() {
         //Android接口
         if (isAndroid) {
             _czc.push(["_trackEvent","下载按钮","安卓设备","分享案例"]); 
-            window.location.href = "http://o7zlnyltf.bkt.clouddn.com/app-toutiao-release.apk";           
+            window.location.href = "http://o7zlnyltf.bkt.clouddn.com/app-ywmj-release.apk";           
         }
         //iOS接口
         if (isiOS) {
