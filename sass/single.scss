@@ -77,6 +77,12 @@ $font-color4: #414141;
 .userAgreement p {
     @include px2rem(line-height, 46px);
 }
+.userAgreement h4 {
+    @include px2rem(font-size, $font-32);
+    @include px2rem(line-height, 36px);
+    padding: 0.2rem 0;
+    font-weight: bold;
+}
 /* 用户协议 End */
 
 /* 说明页面 */

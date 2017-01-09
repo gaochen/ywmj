@@ -63,6 +63,31 @@ $(function() {
         });
    })();
 
+    // 视频播放
+    (function() {
+
+        $(".personal-video").on("tap", function() {
+            // 统计个人视频点击事件次数
+            statistics();
+
+            $(".personal-mask").addClass("show");
+
+            var video = document.querySelector("#personal-video");
+            video.play();
+
+        });
+
+        $(".personal-mask").on("tap", function(ev) {
+            ev.stopPropagation();
+            $(this).removeClass("show");
+        });
+
+        $("#personal-video").on("tap", function(ev) {
+            ev.stopPropagation();
+        });
+        
+    })();
+
 });
 
 /**
@@ -126,6 +151,21 @@ function loadXCSJ(url, id, appe) {
             }
             else {
                 $(".index-basicInfo-info").text(data.cityName + " / " + data.decorateStyle + " / " + data.houseType + " / " + data.houseArea + "㎡" + " / "  + data.buildingName);
+            }
+
+            // 视频(1个)
+            if (!!data.videos) {
+                $(".js-video-title").text(data.videos[0].phaseName);
+                var video_cover = data.videos[0].videoInfo.url+"?vframe/jpg/offset/"+data.videos[0].videoInfo.second+"/w/240/h/160";
+                $(".personal-video").css("background-image", "url("+video_cover+")");
+                $("#personal-video").attr("src", data.videos[0].videoInfo.url);
+                var oDiv = $('<div></div>');
+                var oSpan = $('<span></span>');
+                oDiv.appendTo($(".personal-video"));
+                oSpan.appendTo($(".personal-video"));
+            }
+            else {
+                $(".js-personal-video").hide();
             }
         
             // 平面布置
