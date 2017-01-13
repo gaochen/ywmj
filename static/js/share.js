@@ -1,6 +1,9 @@
 $(function() {
     var id = GetQueryString("caseId");
     var appe = GetQueryString("appe");
+    var twitterId = GetQueryString("uid");
+    var twitterType = GetQueryString("type");
+    var isTwitter = GetQueryString("twitter");
     var api = window.Host.customer + "/case/app/ticket";
     var sharetitle = null,
         sharedesc = null,
@@ -19,6 +22,7 @@ $(function() {
         success: function(data) {
             // 判断返回数据是否错误
             if (data.succ === true) {
+                console.log(data);
                 var data = data.data.shareInfo;
 
                 var href = window.location.href;
@@ -36,10 +40,24 @@ $(function() {
 
                 // 如果是E端则隐藏相关作品
                 if (typeof appe === "string" && appe !== "null") {
-                    $(".bottom").find(".bottom-btn").hide();
-                    sharelink = sharelink + "&appe=true";
-                    console.log(sharelink);
+                    // 判断是否为登录用户链接
+                    if (typeof twitterType === 'c') {
+                        $(".bottom-btn").text("立即注册");
+                        sharelink = sharelink + "&appe=true&uid="+twitterId+"&type="+twitterType;
+                    }
+                    else {
+                        $(".bottom").find(".bottom-btn").hide();
+                        sharelink = sharelink + "&appe=true";
+                    };
                 }
+                else {
+                     // 判断是否为登录用户链接
+                    if (typeof twitterId === "string" && twitterId !== "null") {
+                        $(".bottom-btn").text("立即注册");
+                        sharelink = sharelink + "&uid="+twitterId+"&type="+twitterType;
+                    }
+                }
+                console.log(sharelink);
             }
             else {
                 return false

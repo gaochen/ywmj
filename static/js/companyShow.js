@@ -1,6 +1,9 @@
 $(function() {
     var caseId = GetQueryString("caseId"),
         appe = GetQueryString("appe"),
+        twitterId = GetQueryString("uid"),    // 推客id
+        twitterType = GetQueryString("type"),    // 推客类型
+        isTwitter = GetQueryString("twitter"),  // 是否为twitter
         companyId = GetQueryString("companyId");
 
     var api = window.Host.customer+"/case/app/present/company/"+companyId;
@@ -78,7 +81,7 @@ $(function() {
             if (!!data.pics) {
                 $.each(data.pics, function(i, index) {
                     var num = i+1;
-                    var api = window.Host.local+"scan.html?companyId="+companyId+"&type=company&index="+num+"&caseId="+caseId+"&appe="+appe;
+                    var api = window.Host.local+"scan.html?companyId="+companyId+"&lastPage=company&index="+num+"&caseId="+caseId+"&appe="+appe+"&uid="+twitterId+"&type="+twitterType+"&twitter="+isTwitter;
                     if (num < 10) {
                         var oLi = $('<li class="company-item"><div class="company-item-title">0'+num+'</div><div class="company-item-describe">'+index.explain+'</div><div class="company-item-box"><a href="'+api+'"><img class="company-item-pic" src="'+index.pics[0]+window.Host.imgSize_750+'" /><div></div></a></div></li>');
                     }

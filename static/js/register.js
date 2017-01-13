@@ -74,7 +74,11 @@ $(function() {
     });
 });
 
-
+/**
+ * [showJsToast 仿ios提示]
+ * @param  {[type]} text [提示文本]
+ * @return {[type]}      [description]
+ */
 function showJsToast(text) {
     $("body").find(".js-toast").remove();
 

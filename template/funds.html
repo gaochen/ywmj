@@ -12,42 +12,51 @@
 </head>
 <body>
     <div class="wrap">
-        <div class="title"><span></span>资金信息<a class="funds-link" href="/consoleMobile/template/funds-detail.html">明细</a></div>
+        <div class="title"><span></span>资金信息<a class="funds-link" href="javascript:void(0);">明细</a></div>
         <div class="content index-gray">
             <div class="funds-info clearfix">
                 <div class="funds-info-contL fl">
-                    <p class="funds-info-title">账户余额（元）<span></span></p>
-                    <p class="funds-info-sum">9999999</p>
+                    <p class="funds-info-title">账户余额（元）<a href="/template/balanceExplain.html"></a></p>
+                    <p class="funds-info-sum js-balance"></p>
                 </div>
                 <div class="funds-info-contR fr">
-                    <p class="funds-info-title">冻结资金（元）<span></span></p>
-                    <p class="funds-info-sum">9999999</p>
+                    <p class="funds-info-title">冻结资金（元）<a href="/template/frozenFundsExplain.html"></a></span></p>
+                    <p class="funds-info-sum js-frozenCapital"></p>
                 </div>
             </div>
             <div class="line"></div>
             <ul class="funds-select">
                 <li class="funds-recharge">
-                    <a href="/consoleMobile/template/funds-recharge.html">
+                    <!-- <a href="/consoleMobile/template/funds-recharge.html"> -->
                         <span></span>
                         <p>充值</p>
                         <span class="funds-select-arrow"></span>
-                    </a>
+                    <!-- </a> -->
                 </li>
                 <li class="funds-drawCash">
-                    <a href="/consoleMobile/template/funds-drawCash.html">
+                    <!-- <a href="/consoleMobile/template/funds-drawCash.html"> -->
                         <span></span>
                         <p>提现</p>
                         <span class="funds-select-arrow"></span>
-                    </a>
+                    <!-- </a> -->
                 </li>
                 <li class="funds-banks">
-                    <a href="/consoleMobile/template/funds-bankCards.html">
+                    <!-- <a href="/consoleMobile/template/funds-bankCards.html"> -->
                         <span></span>
                         <p>银行卡</p>
                         <span class="funds-select-arrow"></span>
-                    </a>
+                    <!-- </a> -->
                 </li>
             </ul>
+            <div class="funds-mask">
+                <div class="funds-frame">
+                    <h4>请先进行身份认证！</h4>
+                    <div class="funds-btns clearfix">
+                        <button class="funds-btns-cancel fl">取消</button>
+                        <button class="funds-btns-confirm fr">确定</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <script src="../static/js/libs/zepto.min.js"></script>

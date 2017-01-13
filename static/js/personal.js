@@ -2,6 +2,9 @@ $(function() {
     var caseId = GetQueryString("caseId"),
         userId = GetQueryString("userId"),
         appe = GetQueryString("appe"),
+        twitterId = GetQueryString("uid"),    // 推客id
+        twitterType = GetQueryString("type"),    // 推客类型
+        isTwitter = GetQueryString("twitter"),  // 是否为twitter
         phaseId = GetQueryString("phaseId");
 
     var api = window.Host.customer+"/case/app/resume/employee/"+userId+"/"+caseId+"/"+phaseId;
@@ -56,7 +59,7 @@ $(function() {
             });
 
             // 点击图片跳转
-            var url = window.Host.local+"scan.html?caseId="+caseId+"&type=personal"+"&userId="+userId+"&phaseId="+phaseId+"&appe="+appe;
+            var url = window.Host.local+"scan.html?caseId="+caseId+"&lastPage=personal"+"&userId="+userId+"&phaseId="+phaseId+"&appe="+appe+"&uid="+twitterId+"&type="+twitterType+"&twitter="+isTwitter;
             $(".personal-showPic-url").attr("href", url);
             $(".personal-showPic").attr("src", data.presentPics[0]+window.Host.imgSize_750);
 

@@ -1,6 +1,9 @@
 $(function() {
     var caseId = GetQueryString("caseId"),
         appe = GetQueryString("appe"),
+        twitterId = GetQueryString("uid"),    // 推客id
+        twitterType = GetQueryString("type"),    // 推客类型
+        isTwitter = GetQueryString("twitter"),  // 是否为twitter
         companyId = GetQueryString("companyId");
 
     var api = window.Host.customer+"/case/app/resume/company/"+companyId+"/"+caseId;
@@ -55,7 +58,7 @@ $(function() {
             // 判断是否有公司展示
             if (data.hasPresent) {
                 // 跳转公司展示链接
-                var url_companyShow = window.Host.local + "companyShow.html?companyId="+companyId+"&caseId="+caseId+"&appe="+appe;
+                var url_companyShow = window.Host.local + "companyShow.html?companyId="+companyId+"&caseId="+caseId+"&appe="+appe+"&uid="+twitterId+"&type="+twitterType+"&twitter="+isTwitter;
                 $("#company-show").attr("href", url_companyShow);
                 
                 // 如果有封面图    

@@ -1,7 +1,10 @@
 $(function() {
     // 获取url参数
-    var id = GetQueryString("caseId");
-    var appe = GetQueryString("appe");
+    var id = GetQueryString("caseId");    // 案例id
+    var appe = GetQueryString("appe");      // 是否为E端
+    var twitterId = GetQueryString("uid");    // 用户id
+    var twitterType = GetQueryString("type");    // 用户类型
+    var isTwitter = GetQueryString("twitter");  // 是否为twitter
     var indexId = window.location.hash;
 
     if (typeof appe === "string" && appe !== "null") {
@@ -25,7 +28,7 @@ $(function() {
         var url = window.Host.customer+"/case/app/detail/scene/"+id;
         
         // 请求数据
-        loadXCSJ(url, id, appe);
+        loadXCSJ(url, id, appe, twitterId, twitterType, isTwitter);
    })();
 
    // 加载原创团队
@@ -33,7 +36,7 @@ $(function() {
         var url = window.Host.customer+"/case/app/detail/team/"+id;
         
         // 请求数据
-        loadYCTD(url, id, appe);
+        loadYCTD(url, id, appe, twitterId, twitterType, isTwitter);
 
    })();
 
@@ -42,7 +45,7 @@ $(function() {
         var url = window.Host.customer+"/case/app/details/"+id;
         
         // 请求数据
-        loadXXZL(url, id, appe);
+        loadXXZL(url, id, appe, twitterId, twitterType, isTwitter);
 
    })();
 
@@ -99,7 +102,10 @@ $(function() {
 function loadXCSJ(url, id, appe) {
     var url = url,
         id = id,
-        appe = appe;
+        appe = appe,
+        twitterId = twitterId,
+        twitterType = twitterType,
+        isTwitter = isTwitter;
 
     $.ajax({
         type: "GET",
@@ -170,7 +176,7 @@ function loadXCSJ(url, id, appe) {
         
             // 平面布置
             if (typeof data.planCount === "number") {
-                var url_plainLayput = window.Host.local + "plainLayout.html?caseId="+id+"&appe="+appe;
+                var url_plainLayput = window.Host.local + "plainLayout.html?caseId="+id+"&appe="+appe+"&uid="+twitterId+"&type="+twitterType+"&twitter="+isTwitter;
                 data.planCover = data.planCover + window.Host.imgSize_750_500;
                 $("#index-plainLayout").attr("href", url_plainLayput).find(".index-module-pic").css("background-image","url("+data.planCover+")");
                 $(".index-plainLayout-count").text(data.planCount);
@@ -181,7 +187,7 @@ function loadXCSJ(url, id, appe) {
 
             // 实景照片
             if (typeof data.sceneCount === "number") {
-                var url_realScene = window.Host.local + "realScene.html?caseId="+id+"&appe="+appe;
+                var url_realScene = window.Host.local + "realScene.html?caseId="+id+"&appe="+appe+"&uid="+twitterId+"&type="+twitterType+"&twitter="+isTwitter;
                 data.sceneCover = data.sceneCover + window.Host.imgSize_750_500;
                 $("#index-scene").attr("href", url_realScene).find(".index-module-pic").css("background-image","url("+data.sceneCover+")");
                 $(".index-scene-count").text(data.sceneCount);
@@ -227,7 +233,10 @@ function loadXCSJ(url, id, appe) {
 function loadYCTD(url, id, appe) {
     var url = url,
         id = id,
-        appe = appe;
+        appe = appe,
+        twitterId = twitterId,
+        twitterType = twitterType,
+        isTwitter = isTwitter;
 
     $.ajax({
         type: "GET",
@@ -244,7 +253,7 @@ function loadYCTD(url, id, appe) {
 
                 $.each(index.employees, function(i, index) {
                     var oLi = $('<li></li>');
-                    var url = window.Host.local+"personal.html?userId="+index.userId+"&phaseId="+phaseId+"&caseId="+id+"&appe="+appe;
+                    var url = window.Host.local+"personal.html?userId="+index.userId+"&phaseId="+phaseId+"&caseId="+id+"&appe="+appe+"&uid="+twitterId+"&type="+twitterType+"&twitter="+isTwitter;
                     var str = '<a href="'+url+'">';
                     str += '<div class="team-portrait fl" style="background-image: url('+index.headImage+window.Host.imgSize_80_80+');">';
                     // str += '<img src="'+index.headImage+window.Host.imgSize_80_80+'">';
@@ -260,7 +269,7 @@ function loadYCTD(url, id, appe) {
                 });
 
                 var company = $('<li></li>');
-                var url = window.Host.local+"company.html?companyId="+index.company.companyId+"&caseId="+id+"&appe="+appe;
+                var url = window.Host.local+"company.html?companyId="+index.company.companyId+"&caseId="+id+"&appe="+appe+"&uid="+twitterId+"&type="+twitterType+"&twitter="+isTwitter;
                 var str = '<a href="'+url+'">';
                 str += '<div class="team-portrait fl" style="background-image: url('+index.company.companyHeadImage+window.Host.imgSize_80_80+');">';
                 //str += '<img src="'+index.company.companyHeadImage+window.Host.imgSize_80_80+'">';
@@ -291,7 +300,10 @@ function loadYCTD(url, id, appe) {
 function loadXXZL(url, id, appe) {
     var url = url,
         id = id,
-        appe = appe;
+        appe = appe,
+        twitterId = twitterId,
+        twitterType = twitterType,
+        isTwitter = isTwitter;
 
     $.ajax({
         type: "GET",
@@ -327,7 +339,7 @@ function loadXXZL(url, id, appe) {
             // 材料品牌
             if (data.brands instanceof Array) {
                 $.each(data.brands, function(i, index) {
-                    var url=window.Host.local+"material.html?brandId="+index.brandId+"&caseId="+id+"&appe="+appe;
+                    var url=window.Host.local+"material.html?brandId="+index.brandId+"&caseId="+id+"&appe="+appe+"&uid="+twitterId+"&type="+twitterType+"&twitter="+isTwitter;
                     var oLi = $('<li><a href="'+url+'">'+index.brandName+'品牌</a></li>');
                     oLi.appendTo($(".data-material ul"));
                 });

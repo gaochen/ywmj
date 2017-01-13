@@ -1,5 +1,8 @@
 $(function() {
     var brandId = GetQueryString("brandId"),
+        twitterId = GetQueryString("uid"),   // 推客id
+        twitterType = GetQueryString("type"),    // 推客类型
+        isTwitter = GetQueryString("twitter"),  // 是否为twitter
         caseId = GetQueryString("caseId");
 
     var api = window.Host.customer+"/case/app/detail/brand/"+brandId+"/"+caseId;

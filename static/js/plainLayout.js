@@ -1,6 +1,9 @@
 $(function() {
     var id = GetQueryString("caseId");
     var appe = GetQueryString("appe");
+    var twitterId = GetQueryString("uid");    // 推客id
+    var twitterType = GetQueryString("type");    // 推客类型
+    var isTwitter = GetQueryString("twitter");  // 是否为twitter
     var api = window.Host.customer+"/case/app/detail/scene/plan/"+id;
 
     $.ajax({
@@ -40,7 +43,7 @@ $(function() {
             var arr_a = $(".plainLayout-link");
             $.each(arr_a, function(i, item) {
                 var index = i+1;
-                var api = window.Host.local+"scan.html?caseId="+id+"&appe="+appe+"&type=plainLayout&index="+index;
+                var api = window.Host.local+"scan.html?caseId="+id+"&appe="+appe+"&lastPage=plainLayout&index="+index+"&uid="+twitterId+"&type="+twitterType+"&twitter="+isTwitter;
                 $(this).attr("href", api);
             });
 

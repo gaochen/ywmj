@@ -1,6 +1,11 @@
 $(function() {
     new FastClick(document.body);
 
+    // 判断是否为推客链接
+    var twitterId = GetQueryString("uid"),   // 推客id
+        twitterType = GetQueryString("type"),    // 推客类型
+        isTwitter = GetQueryString("twitter");  // 是否为twitter
+
     wxTips();
 
     // 关闭微信提示
@@ -45,4 +50,14 @@ function wxTips() {
             window.location.href = "http://itunes.apple.com/us/app/id1133878484";
         }
     });
+}
+
+/**
+ * [GetQueryString 通过名字查询url参数]
+ * @param {[type]} name [description]
+ */
+function GetQueryString(name) {
+     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+     var r = window.location.search.substr(1).match(reg);
+     if(r!=null)return  unescape(r[2]); return null;
 }

@@ -1,6 +1,9 @@
 $(function () {
     var id = GetQueryString("caseId");
     var appe = GetQueryString("appe");
+    var twitterId = GetQueryString("uid");    // 推客id
+    var twitterType = GetQueryString("type");    // 推客类型
+    var isTwitter = GetQueryString("twitter");  // 是否为twitter
     var api = window.Host.customer+"/case/app/detail/scene/pics/"+id;
 
     $.ajax({
@@ -18,7 +21,7 @@ $(function () {
 
             $.each(data.pics, function(i, item) {
                 var index = i+1;
-                var api = window.Host.local+"scan.html?caseId="+id+"&appe="+appe+"&type=realScene&index="+index;
+                var api = window.Host.local+"scan.html?caseId="+id+"&appe="+appe+"&lastPage=realScene&index="+index+"&uid="+twitterId+"&type="+twitterType+"&twitter="+isTwitter;
                 var oDiv = $('<div class="realScene-item"></div>');
                 var str = '<div class="realScene-title">'+item.title+'</div>';
                     str += '<div class="realScene-describe">'+item.explain+'</div>';

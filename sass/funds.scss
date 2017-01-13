@@ -125,7 +125,7 @@ $color-C7: #f5f5f5;
     @include px2rem(font-size,$font-F6);
     margin-top: 0.08rem;
 }
-.funds-info-title span {
+.funds-info-title a {
     display: inline-block;
     @include px2rem(width,33px);
     @include px2rem(height,33px);
@@ -207,6 +207,58 @@ $color-C7: #f5f5f5;
     background-position: center center;
     background-size: cover;
 }
+.funds-mask {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.7);
+    z-index: 10;
+}
+.funds-frame {
+    @include px2rem(width, 500px);
+    @include px2rem(height, 248px);
+    border-radius: 3px;
+    background-color: #ffffff; 
+    margin: 0 auto;
+    margin-top: 40%;
+    position: relative;
+    overflow: hidden;
+}
+.funds-frame h4 {
+    width: 100%;
+    text-align: center;
+    @include px2rem(height, 36px);
+    @include px2rem(line-height, 36px);
+    @include px2rem(margin-top, 62px);
+    @include px2rem(font-size,$font-F4);
+    color: $color-C1;
+}
+.funds-btns {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-top: 1px solid $color-C3;
+    width: 100%;
+    @include px2rem(height, 88px);
+    overflow: hidden;
+}
+.funds-btns button {
+    display: block;
+    border: 0;
+    background-color: #ffffff;
+    @include css3(box-sizing, border-box);
+    width: 50%;
+    @include px2rem(height, 88px);
+    text-align: center;
+    @include px2rem(font-size, $font-F2);
+    color: $color-C6;
+}
+.funds-btns-cancel {
+    border-right: 1px solid $color-C3;
+}
 
 /* 明细页面 */
 .detail-list {
@@ -246,7 +298,7 @@ $color-C7: #f5f5f5;
     @include px2rem(text-indent, 40px);
 }
 .list-slideDown {
-    display: block;
+    display: none;
     width: 100%;
     @include px2rem(height, 30px);
     @include px2rem(line-height, 30px);
@@ -528,7 +580,7 @@ $color-C7: #f5f5f5;
 }
 
 /* 银行卡 */
-.bankCards-link {
+.bankCards-add {
     display: block;
     @include px2rem(height,40px);
     @include px2rem(width,40px);
@@ -575,7 +627,6 @@ $color-C7: #f5f5f5;
     @include px2rem(height, 80px);
     margin: 0 auto;
     @include px2rem(margin-top,20px);
-    background-color: red;
     border-radius: 50%;
     background-position: center;
     background-repeat: no-repeat;
@@ -606,6 +657,13 @@ $color-C7: #f5f5f5;
     @include px2rem(font-size, $font-F3);
     color: #ffffff;
 }
+.bankCards-tips {
+    display: none;
+    width: 100%;
+    text-align: center;
+    @include px2rem(font-size, $font-F4);
+    color: $color-C4;
+}
 
 /* 银行卡详情 */
 .bankCardsInfo-logo {
@@ -624,7 +682,6 @@ $color-C7: #f5f5f5;
     margin: 0 auto;
     @include px2rem(margin-top,20px);
     @include px2rem(margin-bottom,20px);
-    background-color: red;
     border-radius: 50%;
     background-position: center;
     background-repeat: no-repeat;

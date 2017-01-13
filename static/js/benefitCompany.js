@@ -509,6 +509,11 @@ function slideDown(api, pageNum) {
         success: function(data) {
             var data = data.data;
 
+            if (data.totalCount === 0) {
+                $(".company-case").hide();
+                return false;
+            }
+
             $(".company-case-count").text(data.totalCount);
 
             $.each(data.result, function(i, index) {

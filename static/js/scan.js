@@ -1,12 +1,14 @@
 $(function() {
     var id = GetQueryString("caseId");
     var index = GetQueryString("index");
-    var type = GetQueryString("type");
+    var lastPage = GetQueryString("lastPage");
     var userId = GetQueryString("userId");
     var phaseId = GetQueryString("phaseId");
     var companyId = GetQueryString("companyId");
+    var twitterId = GetQueryString("uid");   // 推客id
+    var twitterType = GetQueryString("type");    // 推客类型
 
-    switch (type) {
+    switch (lastPage) {
         case "plainLayout":
             var api = window.Host.customer+"/case/app/detail/scene/plan/"+id;
             loadPMBZ(api, id, index);
