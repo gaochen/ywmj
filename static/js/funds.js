@@ -33,13 +33,16 @@ $(function() {
             url: api,
             data:{"sessionToken":sessionToken, "source":1},
             dataType: "json",
-            success: function(data) {
+            success: function(res) {
                 GC.Hybind.dismisDialog();
-                if (data.succ) {
-                    window.location.href = data.data;
+                if (res.succ) {
+                    window.location.href = res.data;
                 }
                 else {
-                    GC.Hybind.showToast(data.message);
+                    GC.Hybind.showToast(res.message);
+                    if (res.stateCode == 336) {
+                        GC.Hybind.closePage();
+                    }
                 }
             }
         });
@@ -63,10 +66,10 @@ $(function() {
             url: api,
             data:{"sessionToken":sessionToken},
             dataType: "json",
-            success: function(data) {
+            success: function(res) {
                 GC.Hybind.dismisDialog();
-                if (data.succ) {
-                    var data = data.data;
+                if (res.succ) {
+                    var data = res.data;
 
                     storage.setItem("balance", data.balance);
                     $(".js-balance").text(data.balance);
@@ -98,7 +101,6 @@ $(function() {
                     $(".funds-banks").on("click", function() {
                         if (authorized) {
                             window.location.href = window.Host.local + "funds-bankCards.html";
-
                         }
                         else {
                             $(".funds-mask").show();
@@ -122,14 +124,17 @@ $(function() {
                                     url: api,
                                     data:{"sessionToken":sessionToken},
                                     dataType: "json",
-                                    success: function(data) {
+                                    success: function(res) {
                                         GC.Hybind.dismisDialog();
-                                        if (data.succ) {
+                                        if (res.succ) {
                                             // 跳转页面
-                                            window.location.href = data.data;
+                                            window.location.href = res.data;
                                         }
                                         else {
-                                            GC.Hybind.showToast(data.message);
+                                            GC.Hybind.showToast(res.message);
+                                            if (res.stateCode == 336) {
+                                                GC.Hybind.closePage();
+                                            }
                                         }
                                     }
                                 });
@@ -142,7 +147,10 @@ $(function() {
 
                 }
                 else {
-                    GC.Hybind.showToast(data.message);
+                    GC.Hybind.showToast(res.message);
+                    if (res.stateCode == 336) {
+                        GC.Hybind.closePage();
+                    }
                 }
             }
         });

@@ -23,11 +23,11 @@ $(function() {
             url: api,
             data:{"sessionToken":sessionToken,"onlyDebitCard": true},
             dataType: "json",
-            success: function(data) {
+            success: function(res) {
                 GC.Hybind.dismisDialog();
 
-                if (data.succ) {
-                    if (!data.data) {
+                if (res.succ) {
+                    if (!res.data) {
                         // 无银行卡，使用新卡支付
                         payTool = "3";
                         bindId = -1;
@@ -38,7 +38,7 @@ $(function() {
                         $(".recharge-checked").html(str);
                     }
                     else {
-                        var arr = data.data;
+                        var arr = res.data;
 
                         // 默认选中第一个银行卡
                         payTool = "2";
@@ -137,7 +137,10 @@ $(function() {
                     }
                 }
                 else {
-                    GC.Hybind.showToast(data.message);
+                    GC.Hybind.showToast(res.message);
+                    if (res.stateCode == 336) {
+                        GC.Hybind.closePage();
+                    }
                 }
             }
         });
@@ -174,13 +177,16 @@ $(function() {
                 data:JSON.stringify({"payTool":payTool, "amount":amount, "bindId":bindId}),
                 dataType: "json",
                 contentType: "application/json",
-                success: function(data) {
+                success: function(res) {
                     GC.Hybind.dismisDialog();
-                    if (data.succ) {
-                        window.location.href = data.data;
+                    if (res.succ) {
+                        window.location.href = res.data;
                     }
                     else {
-                        GC.Hybind.showToast(data.message);
+                        GC.Hybind.showToast(res.message);
+                        if (res.stateCode == 336) {
+                            GC.Hybind.closePage();
+                        }
                     }
                 }
             });    

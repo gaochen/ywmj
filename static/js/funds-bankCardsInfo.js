@@ -61,14 +61,17 @@ $(function() {
                 url: api,
                 data:{"sessionToken":sessionToken, "token":token},
                 dataType: "json",
-                success: function(data) {
+                success: function(res) {
                     GC.Hybind.dismisDialog();
-                    if (data.succ) {
+                    if (res.succ) {
                         GC.Hybind.showToast("解绑成功");
                         window.location.href = window.Host.local + "/funds-bankCards.html";
                     }
                     else {
-                        GC.Hybind.showToast(data.message);
+                        GC.Hybind.showToast(res.message);
+                        if (res.stateCode == 336) {
+                            GC.Hybind.closePage();
+                        }
                     }
 
                 }
@@ -84,14 +87,17 @@ $(function() {
                 url: api,
                 data:{"sessionToken":sessionToken, "bindId":data.bindId},
                 dataType: "json",
-                success: function(data) {
+                success: function(res) {
                     GC.Hybind.dismisDialog();
-                    if (data.succ) {
+                    if (res.succ) {
                         // 跳转页面
-                        window.location.href = data.data;
+                        window.location.href = res.data;
                     }
                     else {
-                        GC.Hybind.showToast(data.message);
+                        GC.Hybind.showToast(res.message);
+                        if (res.stateCode == 336) {
+                            GC.Hybind.closePage();
+                        }
                     }
                 }
             });   

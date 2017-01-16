@@ -35,17 +35,17 @@ $(function() {
             url: api,
             data:{"sessionToken":sessionToken,"onlyDebitCard": true},
             dataType: "json",
-            success: function(data) {
+            success: function(res) {
                 GC.Hybind.dismisDialog();
 
-                if (data.succ) {
-                    if (!data.data) {
+                if (res.succ) {
+                    if (!res.data) {
                         // 无银行卡
                         GC.Hybind.showToast("请先绑定银行卡！")
                         window.location.href = window.Host.local+"funds-bankCards.html";
                     }
                     else {
-                        var arr = data.data;
+                        var arr = res.data;
 
                             // 默认选中第一个银行卡
                             bindId = arr[0].bindId;
@@ -128,7 +128,10 @@ $(function() {
                     }
                 }
                 else {
-                    GC.Hybind.showToast(data.message);
+                    GC.Hybind.showToast(res.message);
+                    if (res.stateCode == 336) {
+                        GC.Hybind.closePage();
+                    }
                 }
             }
         });
@@ -176,14 +179,17 @@ $(function() {
                 data:JSON.stringify({"amount":amount, "bindId":bindId}),
                 dataType: "json",
                 contentType: "application/json",
-                success: function(data) {
+                success: function(res) {
                     GC.Hybind.dismisDialog();
-                    if (data.succ) {
+                    if (res.succ) {
                         GC.Hybind.showToast("提现成功！");
                         window.location.href = window.Host.local + "funds.html";
                     }
                     else {
-                        GC.Hybind.showToast(data.message);
+                        GC.Hybind.showToast(res.message);
+                        if (res.stateCode == 336) {
+                            GC.Hybind.closePage();
+                        }
                     }
                 }
             });    

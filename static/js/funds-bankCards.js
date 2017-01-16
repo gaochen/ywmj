@@ -28,13 +28,16 @@ $(function() {
                 url: url,
                 data:{"sessionToken":sessionToken},
                 dataType: "json",
-                success: function(data) {
+                success: function(res) {
                     GC.Hybind.dismisDialog();
-                    if (data.succ) {
+                    if (res.succ) {
                         window.location.href = data.data;
                     }
                     else {
-                        GC.Hybind.showToast(data.message);
+                        GC.Hybind.showToast(res.message);
+                        if (res.stateCode == 336) {
+                            GC.Hybind.closePage();
+                        }
                     }
                 }
             });
@@ -51,16 +54,16 @@ $(function() {
             url: api,
             data:{"sessionToken":sessionToken,"onlyDebitCard": false},
             dataType: "json",
-            success: function(data) {
+            success: function(res) {
                 GC.Hybind.dismisDialog();
-                if (data.succ) {
+                if (res.succ) {
 
-                    if (!data.data) {
+                    if (!res.data) {
                         $(".bankCards-tips").show();
                         return false;
                     }
 
-                    var arr = data.data;
+                    var arr = res.data;
 
                     $.each(arr, function(i, index) {
                         var oLi = $('<li></li>');
@@ -86,7 +89,10 @@ $(function() {
                     });
                 }
                 else {
-                    GC.Hybind.showToast(data.message);
+                    GC.Hybind.showToast(res.message);
+                    if (res.stateCode == 336) {
+                        GC.Hybind.closePage();
+                    }
                 }
             }
         });

@@ -92,11 +92,11 @@ function slideDown(api, sessionToken) {
         data:{"sessionToken":sessionToken},
         dataType: "json",
         success: function(res) {
-            if (!res.data) {
-                GC.Hybind.showToast("无更多明细");
-            }
-
             if (res.succ) {
+                if (!res.data) {
+                    GC.Hybind.showToast("暂无更多明细");
+                    return false;
+                }
 
                 var data = res.data;
 
@@ -116,10 +116,12 @@ function slideDown(api, sessionToken) {
                     });
                 }
 
-
             }
             else {
-                GC.Hybind.showToast(data.message);
+                GC.Hybind.showToast(res.message);
+                if (res.stateCode == 336) {
+                    GC.Hybind.closePage();
+                }
             }
         }
     });
