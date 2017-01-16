@@ -6,7 +6,14 @@ $(function() {
         twitterType = GetQueryString("type"),    // 推客类型
         isTwitter = GetQueryString("twitter");  // 是否为twitter
 
-    wxTips();
+    (function() {
+        var options = {
+            "twitterId": twitterId,
+            "twitterType": twitterType,
+            "isTwitter": isTwitter
+        };
+        wxTips(options);    
+    })();
 
     // 关闭微信提示
     $(".wxTips").on("click", function() {
@@ -24,7 +31,7 @@ $(function() {
  * [wxTips 微信提示从浏览器打开]
  * @return {[type]} [description]
  */
-function wxTips() {
+function wxTips(options) {
     var u = navigator.userAgent;
     var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
     var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
@@ -33,6 +40,11 @@ function wxTips() {
     var ua = navigator.userAgent.toLowerCase();//获取判断用的对象
 
     $(".js-download").on("click", function() {
+        if (options.isTwitter === "true") {
+            window.location.href = window.Host.local+"register.html?uid="+options.twitterId+"&type="+options.twitterType+"&twitter="+options.isTwitter;
+            return false;
+        }
+
         // 是否在微信内打开
         if (ua.match(/MicroMessenger/i) == "micromessenger") {
             $(".wxTips").show();

@@ -16,7 +16,6 @@ $(function() {
     // 从localStorage获取sessionToken
     var storage = window.localStorage;
     var sessionToken = storage.getItem("sessionToken");
-    console.log(sessionToken);
 
     // 取消
     $(".funds-btns-cancel").on("click", function() {
@@ -35,12 +34,11 @@ $(function() {
             data:{"sessionToken":sessionToken, "source":1},
             dataType: "json",
             success: function(data) {
+                GC.Hybind.dismisDialog();
                 if (data.succ) {
                     window.location.href = data.data;
-                    GC.Hybind.dismisDialog();
                 }
                 else {
-                    GC.Hybind.dismisDialog();
                     GC.Hybind.showToast(data.message);
                 }
             }
@@ -57,6 +55,7 @@ $(function() {
 
     // 请求余额
     (function() {
+        GC.Hybind.showDialog();
         var api = window.Host.customer+"/account";
 
         $.ajax({
@@ -65,6 +64,7 @@ $(function() {
             data:{"sessionToken":sessionToken},
             dataType: "json",
             success: function(data) {
+                GC.Hybind.dismisDialog();
                 if (data.succ) {
                     var data = data.data;
 
@@ -98,6 +98,7 @@ $(function() {
                     $(".funds-banks").on("click", function() {
                         if (authorized) {
                             window.location.href = window.Host.local + "funds-bankCards.html";
+
                         }
                         else {
                             $(".funds-mask").show();
@@ -107,7 +108,32 @@ $(function() {
                     // 跳转提现
                     $(".funds-drawCash").on("click", function() {
                         if (authorized) {
-                            window.location.href = window.Host.local + "funds-drawCash.html";
+                            if (data.balance == 0) {
+                                GC.Hybind.showToast("余额为零，无法提现！")
+                            }
+                            else {
+                                // 需要首先验证支付密码
+                                var api = window.Host.customer+"/account/payCode/3";
+
+                                GC.Hybind.showDialog();
+
+                                $.ajax({
+                                    type: "POST",
+                                    url: api,
+                                    data:{"sessionToken":sessionToken},
+                                    dataType: "json",
+                                    success: function(data) {
+                                        GC.Hybind.dismisDialog();
+                                        if (data.succ) {
+                                            // 跳转页面
+                                            window.location.href = data.data;
+                                        }
+                                        else {
+                                            GC.Hybind.showToast(data.message);
+                                        }
+                                    }
+                                });
+                            }
                         }
                         else {
                             $(".funds-mask").show();
@@ -116,39 +142,17 @@ $(function() {
 
                 }
                 else {
-                    GC.Hybind.showToast("请求余额："+data.message);
+                    GC.Hybind.showToast(data.message);
                 }
             }
         });
     })();
 
-    // 提现认证
-    // (function() {   
-    //     // 需要首先验证支付密码
-    //     var api = window.Host.customer+"/account/payCode/3";
-
-    //     $.ajax({
-    //         type: "GET",
-    //         url: api,
-    //         data:{"sessionToken":sessionToken},
-    //         dataType: "json",
-    //         success: function(data) {
-    //             if (data.succ) {
-    //                 // 跳转页面
-    //                 window.location.href = data.data;
-    //             }
-    //             else {
-    //                 GC.Hybind.showToast(data.message);
-    //             }
-    //         }
-    //     });
-    // })();
-
 });
 
 function getTokenReturn(token) {
     var sessionToken = token;
-    GC.Hybind.showToast("alert:"+sessionToken);
+    //GC.Hybind.showToast("alert:"+sessionToken);
     // localStorage存储sessionToken
     var storage = window.localStorage;
     storage.setItem("sessionToken",sessionToken);

@@ -1,6 +1,7 @@
 $(function() {
     // 返回上一页
     $(".title").find("span").on("click", function() {
+        GC.Hybind.dismisDialog();
         window.history.go(-1);
     });
 
@@ -23,7 +24,7 @@ $(function() {
         var pageNum = 1;
         var pageSize = 10;
 
-        var api = window.Host.customer+"/account/detail/"+pageNum+"/"+pageSize;
+        var api = window.Host.customer+"/account/details?pageNum="+pageNum+"&pageSize="+pageSize;
         slideDown(api, sessionToken);
         pageNum++;
 
@@ -70,7 +71,7 @@ $(function() {
             endTop = oDiv.scrollTop;
 
             if (endTop === startTop && bool) {
-                var api = window.Host.customer+"/account/detail/"+pageNum+"/"+pageSize;
+                var api = window.Host.customer+"/account/details?pageNum="+pageNum+"&pageSize="+pageSize;
                 slideDown(api, sessionToken);
                 pageNum++;
             }
@@ -90,14 +91,14 @@ function slideDown(api, sessionToken) {
         url: api,
         data:{"sessionToken":sessionToken},
         dataType: "json",
-        success: function(data) {
-            if (data.succ) {
+        success: function(res) {
+            if (!res.data) {
+                GC.Hybind.showToast("无更多明细");
+            }
 
-                var data = data.data;
+            if (res.succ) {
 
-                if (!(data instanceof Array)) {
-                    GC.Hybind.showToast("暂无更多明细");
-                }
+                var data = res.data;
 
                 if (data.length === 10) {
                     $(".list-slideDown").show();

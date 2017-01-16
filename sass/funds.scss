@@ -332,7 +332,7 @@ $color-C7: #f5f5f5;
     position: absolute;
     @include px2rem(top, 52px);
     @include px2rem(left, 50px);
-    @include bgImage("../img/mine_ticket_list_light_ico@3x.png");
+    @include bgImage("");
 }
 .recharge-checked-bankName {
     @include px2rem(font-size, $font-F2);
@@ -448,10 +448,10 @@ $color-C7: #f5f5f5;
     position: absolute;
     @include px2rem(top, 22px);
     @include px2rem(left, 26px);
-    @include bgImage("../img/mine_ticket_list_light_ico@3x.png");
+    @include bgImage("");
 }
 .selectBank-bankCard-bankName {
-    @include px2rem(font-size, $font-F2);
+    @include px2rem(font-size, $font-F4);
     color: $color-C1;
     width: auto;
     height: auto;

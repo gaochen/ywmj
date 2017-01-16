@@ -5,8 +5,9 @@ $(function() {
     var userId = GetQueryString("userId");
     var phaseId = GetQueryString("phaseId");
     var companyId = GetQueryString("companyId");
-    var twitterId = GetQueryString("uid");   // 推客id
-    var twitterType = GetQueryString("type");    // 推客类型
+    var twitterId = GetQueryString("uid");    // 用户id
+    var twitterType = GetQueryString("type");    // 用户类型
+    var isTwitter = GetQueryString("twitter");  // 是否为twitter
 
     switch (lastPage) {
         case "plainLayout":
