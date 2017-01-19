@@ -3,7 +3,21 @@ $(function() {
     var storage = window.localStorage;
     var sessionToken = storage.getItem("sessionToken");
     var balance = storage.getItem("balance");
+    var userType = storage.getItem("userType");
     var bindId = null;
+    var apiHost = null;
+
+    // 判断APP是C端还是E端
+    if (userType === "e") {
+        apiHost = window.Host.employee;
+    }
+    else if (userType === "c") {
+        apiHost = window.Host.customer;
+    }
+    else {
+        GC.Hybind.showToast("访问出错，请重试");
+        GC.Hybind.closePage();
+    }
 
     //　从url参数获取token
     var token = GC.Lib.GetQueryString("token");
@@ -26,7 +40,7 @@ $(function() {
     // 请求银行卡列表
     (function() {
         // 请求银行卡列表
-        var api = window.Host.customer+"/account/bankCards";
+        var api = apiHost+"/account/bankCards";
 
         GC.Hybind.showDialog();
 
@@ -130,7 +144,9 @@ $(function() {
                 else {
                     GC.Hybind.showToast(res.message);
                     if (res.stateCode == 336) {
-                        GC.Hybind.closePage();
+                        setTimeout(function() {
+                            GC.Hybind.closePage();
+                        }, 3000);
                     }
                 }
             }
@@ -169,7 +185,7 @@ $(function() {
         var amount = parseInt($(".drawCash-input").val());
         
         if (!!amount && amount > 0 && amount <= balance) {
-            var api = window.Host.customer+"/account/capital/withdraw?sessionToken="+sessionToken+"&token="+token+"&requestNo="+requestNo;
+            var api = apiHost+"/account/capital/withdraw?sessionToken="+sessionToken+"&token="+token+"&requestNo="+requestNo;
 
             GC.Hybind.showDialog();
 
@@ -188,7 +204,9 @@ $(function() {
                     else {
                         GC.Hybind.showToast(res.message);
                         if (res.stateCode == 336) {
-                            GC.Hybind.closePage();
+                            setTimeout(function() {
+                                GC.Hybind.closePage();
+                            }, 3000);
                         }
                     }
                 }

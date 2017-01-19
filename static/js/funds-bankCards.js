@@ -1,6 +1,36 @@
 $(function() {
     var userType = GC.Lib.GetQueryString("userType");  // 判断C端还是E端
     var source = GC.Lib.GetQueryString("source");  // 判断来源是推客信息还是资金信息
+    var storage = window.localStorage;
+    var apiHost = null;
+
+    if (source == "2") {
+        // 获取sessionToken
+        GC.Hybind.getToken();
+    }
+
+    if (userType) {
+        storage.setItem("userType",userType);
+    }
+    else {
+        userType = storage.getItem("userType");
+    }
+
+    if (!source) {
+        source = storage.getItem("source");
+    }
+
+    // 判断APP是C端还是E端
+    if (userType === "e") {
+        apiHost = window.Host.employee;
+    }
+    else if (userType === "c") {
+        apiHost = window.Host.customer;
+    }
+    else {
+        GC.Hybind.showToast("访问出错，请重试");
+        GC.Hybind.closePage();
+    }
 
     // 返回上一页
     $(".title").find("span").on("click", function() {
@@ -21,7 +51,7 @@ $(function() {
         // 添加银行卡
         $(".bankCards-add").on("click", function() {
             GC.Hybind.showDialog();
-            var url = window.Host.customer+"/account/bankCard";
+            var url = apiHost+"/account/bankCard";
 
             $.ajax({
                 type: "POST",
@@ -31,12 +61,14 @@ $(function() {
                 success: function(res) {
                     GC.Hybind.dismisDialog();
                     if (res.succ) {
-                        window.location.href = data.data;
+                        window.location.href = res.data;
                     }
                     else {
                         GC.Hybind.showToast(res.message);
                         if (res.stateCode == 336) {
-                            GC.Hybind.closePage();
+                            setTimeout(function() {
+                                GC.Hybind.closePage();
+                            }, 3000);
                         }
                     }
                 }
@@ -45,7 +77,7 @@ $(function() {
         });
 
         // 请求银行卡列表
-        var api = window.Host.customer+"/account/bankCards";
+        var api = apiHost+"/account/bankCards";
 
         GC.Hybind.showDialog();
 
@@ -91,10 +123,25 @@ $(function() {
                 else {
                     GC.Hybind.showToast(res.message);
                     if (res.stateCode == 336) {
-                        GC.Hybind.closePage();
+                        setTimeout(function() {
+                            GC.Hybind.closePage();
+                        }, 3000);
                     }
                 }
             }
         });
     })();
 });
+
+/**
+ * [getTokenReturn 获取token]
+ * @param  {[type]} token [description]
+ * @return {[type]}       [description]
+ */
+function getTokenReturn(token) {
+    var sessionToken = token;
+    // localStorage存储sessionToken
+    var storage = window.localStorage;
+    storage.setItem("sessionToken",sessionToken);
+    storage.setItem("source", "2");
+}

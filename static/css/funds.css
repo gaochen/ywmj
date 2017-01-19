@@ -242,7 +242,7 @@
   font-size: 0.45333rem;
   color: #f56d9d; }
 
-.funds-btns-cancel {
+.funds-btns .funds-btns-cancel {
   border-right: 1px solid #e6e6e6; }
 
 /* 明细页面 */
@@ -255,7 +255,8 @@
   width: 100%;
   height: 2.45333rem;
   border-bottom: 1px solid #e6e6e6;
-  overflow: hidden; }
+  overflow: hidden;
+  position: relative; }
 
 .detail-type {
   width: 60%;
@@ -510,7 +511,7 @@
   font-size: 0.45333rem;
   color: #f56d9d; }
 
-.selectBank-btns-cancel {
+.selectBank-btns .selectBank-btns-cancel {
   border-right: 1px solid #e6e6e6; }
 
 /* 提现 */

@@ -8,13 +8,27 @@ $(function() {
     // 从localStorage提取当前银行卡信息
     var storage = window.localStorage;
     var sessionToken = storage.getItem("sessionToken");
+    var userType = storage.getItem("userType");
+    var apiHost = null;
+
+    // 判断APP是C端还是E端
+    if (userType === "e") {
+        apiHost = window.Host.employee;
+    }
+    else if (userType === "c") {
+        apiHost = window.Host.customer;
+    }
+    else {
+        GC.Hybind.showToast("访问出错，请重试");
+        GC.Hybind.closePage();
+    }
 
     //　从url参数获取token
     var token = GC.Lib.GetQueryString("token");
     var bindId = GC.Lib.GetQueryString("bindId");
     var requestNo = GC.Lib.GetQueryString("requestNo");
     // 解绑
-    var api = window.Host.customer+"/account/bankCard/"+bindId;
+    var api = apiHost+"/account/bankCard/"+bindId;
 
     GC.Hybind.showDialog();
 
@@ -31,7 +45,9 @@ $(function() {
             else {
                 GC.Hybind.showToast(res.message);
                 if (res.stateCode == 336) {
-                    GC.Hybind.closePage();
+                    setTimeout(function() {
+                        GC.Hybind.closePage();
+                    }, 3000);
                 }
             }
             window.location.href = window.Host.local + "funds-bankCards.html";

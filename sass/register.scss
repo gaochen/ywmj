@@ -113,18 +113,15 @@ $color-C6: #f56d9d;
     color: $color-C5;
     top: 0.2rem;
     right: 0;
-    border: 1px solid #d2d2d2;
+    border: 1px solid $color-C1;
     border-radius: 3px;
-    background-color: #ffffff;
-}
-.sendCode-active {
     background-color: $color-C1;
     color: #ffffff;
-    border-color: $color-C1;
 }
 .sendCode-invalid {
     background-color: #c3c3c3;
     color: #ffffff;
+    border-color: #c3c3c3;
 }
 .phoneNumber {
     width: 100%;
@@ -175,16 +172,21 @@ $color-C6: #f56d9d;
     display: block;
     @include px2rem(width,582px);
     @include px2rem(height,96px);
-    border: 1px solid #d2d2d2;
-    background-color: #ffffff;
+    border: 1px solid $color-C1;
+    background-color: $color-C1;
     margin: 1rem auto 0 auto;
     @include px2rem(font-size,$font-F3);
-    color: $color-C5;
-}
-.submit-active {
-    background-color: $color-C1;
     color: #ffffff;
-    border-color: $color-C1;
+}
+.succTip {
+    display: none;
+    width: auto;
+    text-align: center;   
+    @include px2rem(height,36px);
+    @include px2rem(line-height,36px);
+    @include px2rem(font-size,$font-F4);
+    color: $color-C6;
+    margin-top: 1rem;
 }
 
 /* 仿iOS toast */
@@ -205,4 +207,56 @@ $color-C6: #f56d9d;
     @include px2rem(font-size,$font-F4);
     color: #ffffff;
     background-color: rgba(0,0,0,0.8);
+}
+.funds-mask {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.7);
+    z-index: 10;
+}
+.funds-frame {
+    @include px2rem(width, 500px);
+    @include px2rem(height, 248px);
+    border-radius: 3px;
+    background-color: #ffffff; 
+    margin: 0 auto;
+    margin-top: 40%;
+    position: relative;
+    overflow: hidden;
+}
+.funds-frame h4 {
+    width: 100%;
+    text-align: center;
+    @include px2rem(height, 36px);
+    @include px2rem(line-height, 36px);
+    @include px2rem(margin-top, 62px);
+    @include px2rem(font-size,$font-F4);
+    color: $color-C1;
+}
+.funds-btns {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-top: 1px solid $color-C3;
+    width: 100%;
+    @include px2rem(height, 88px);
+    overflow: hidden;
+}
+.funds-btns button {
+    display: block;
+    border: 0;
+    background-color: #ffffff;
+    @include css3(box-sizing, border-box);
+    width: 50%;
+    @include px2rem(height, 88px);
+    text-align: center;
+    @include px2rem(font-size, $font-F2);
+    color: $color-C6;
+}
+.funds-btns .funds-btns-cancel {
+    border-right: 1px solid $color-C3;
 }

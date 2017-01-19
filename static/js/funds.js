@@ -1,21 +1,41 @@
 $(function() {
+    // 初始化localStorage
+    var storage = window.localStorage;
+
+    // 获取APP类型
     var userType = GC.Lib.GetQueryString("userType");
 
+    if (userType) {
+        storage.setItem("userType",userType);
+    }
+    else {
+        userType = storage.getItem("userType");
+    }
+
+    // 获取sessionToken，设置userType、source
+    GC.Hybind.getToken();
+
+    // 从localStorage获取sessionToken
+    var sessionToken = storage.getItem("sessionToken");
+    var apiHost = null;
+
+    // 判断APP是C端还是E端
     if (userType === "e") {
         $(".funds-recharge").hide();
+        apiHost = window.Host.employee;
+    }
+    else if (userType === "c") {
+        apiHost = window.Host.customer;
+    }
+    else {
+        GC.Hybind.showToast("访问出错，请重试");
+        GC.Hybind.closePage();
     }
 
     // 关闭WebView
     $(".title").find("span").on("click", function() {
         GC.Hybind.closePage();
     });
-
-    // 获取sessionToken
-    GC.Hybind.getToken();
-
-    // 从localStorage获取sessionToken
-    var storage = window.localStorage;
-    var sessionToken = storage.getItem("sessionToken");
 
     // 取消
     $(".funds-btns-cancel").on("click", function() {
@@ -26,7 +46,7 @@ $(function() {
     $(".funds-btns-confirm").on("click", function() {
         $(".funds-mask").hide();
         GC.Hybind.showDialog();
-        var api = window.Host.customer+"/account/auth"; 
+        var api = apiHost+"/account/auth"; 
 
         $.ajax({
             type: "POST",
@@ -41,7 +61,9 @@ $(function() {
                 else {
                     GC.Hybind.showToast(res.message);
                     if (res.stateCode == 336) {
-                        GC.Hybind.closePage();
+                        setTimeout(function() {
+                            GC.Hybind.closePage();
+                        }, 3000);
                     }
                 }
             }
@@ -59,7 +81,7 @@ $(function() {
     // 请求余额
     (function() {
         GC.Hybind.showDialog();
-        var api = window.Host.customer+"/account";
+        var api = apiHost+"/account";
 
         $.ajax({
             type: "GET",
@@ -115,7 +137,7 @@ $(function() {
                             }
                             else {
                                 // 需要首先验证支付密码
-                                var api = window.Host.customer+"/account/payCode/3";
+                                var api = apiHost+"/account/payCode/3";
 
                                 GC.Hybind.showDialog();
 
@@ -133,7 +155,9 @@ $(function() {
                                         else {
                                             GC.Hybind.showToast(res.message);
                                             if (res.stateCode == 336) {
-                                                GC.Hybind.closePage();
+                                                setTimeout(function() {
+                                                    GC.Hybind.closePage();
+                                                }, 3000);
                                             }
                                         }
                                     }
@@ -149,7 +173,9 @@ $(function() {
                 else {
                     GC.Hybind.showToast(res.message);
                     if (res.stateCode == 336) {
-                        GC.Hybind.closePage();
+                        setTimeout(function() {
+                            GC.Hybind.closePage();
+                        }, 3000);
                     }
                 }
             }
@@ -158,10 +184,15 @@ $(function() {
 
 });
 
+/**
+ * [getTokenReturn 获取token]
+ * @param  {[type]} token [description]
+ * @return {[type]}       [description]
+ */
 function getTokenReturn(token) {
     var sessionToken = token;
-    //GC.Hybind.showToast("alert:"+sessionToken);
     // localStorage存储sessionToken
     var storage = window.localStorage;
     storage.setItem("sessionToken",sessionToken);
+    storage.setItem("source", "1");
 }

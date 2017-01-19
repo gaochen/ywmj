@@ -161,6 +161,14 @@ $color-C6: #f56d9d;
     background-size: contain;
     margin: 0.36rem 0.24rem;
 }
+.pay-list .pay-newCard-logo {
+    @include px2rem(width, 72px);
+    @include px2rem(height, 66px);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin: 0.36rem 0.24rem;
+}
 .pay-item-text {
     @include px2rem(width,480px);
     @include px2rem(height,36px);
@@ -168,6 +176,7 @@ $color-C6: #f56d9d;
     padding: 0.56rem 0;
     @include px2rem(font-size,$font-F4);
     color: $color-C1;
+    overflow: hidden;
 }
 .pay-item-radio {
     @include px2rem(width,36px);
@@ -226,6 +235,18 @@ $color-C6: #f56d9d;
     @include px2rem(border-radius,35px);
     margin: 0.2rem auto;
 }
+
+/* 身份认证支付 */
+.pay-balance {
+    display: none;
+}
+.pay-newCard {
+    display: none;
+}
+.pay-newCard .pay-item-text {
+    color: $color-C6;
+}
+
 
 /* 支付结果 */
 .payResult-success {

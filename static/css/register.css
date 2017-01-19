@@ -92,18 +92,15 @@
   color: #a8a8a8;
   top: 0.2rem;
   right: 0;
-  border: 1px solid #d2d2d2;
+  border: 1px solid #282828;
   border-radius: 3px;
-  background-color: #ffffff; }
-
-.sendCode-active {
   background-color: #282828;
-  color: #ffffff;
-  border-color: #282828; }
+  color: #ffffff; }
 
 .sendCode-invalid {
   background-color: #c3c3c3;
-  color: #ffffff; }
+  color: #ffffff;
+  border-color: #c3c3c3; }
 
 .phoneNumber {
   width: 100%;
@@ -153,16 +150,21 @@
   display: block;
   width: 7.76rem;
   height: 1.28rem;
-  border: 1px solid #d2d2d2;
-  background-color: #ffffff;
+  border: 1px solid #282828;
+  background-color: #282828;
   margin: 1rem auto 0 auto;
   font-size: 0.4rem;
-  color: #a8a8a8; }
+  color: #ffffff; }
 
-.submit-active {
-  background-color: #282828;
-  color: #ffffff;
-  border-color: #282828; }
+.succTip {
+  display: none;
+  width: auto;
+  text-align: center;
+  height: 0.48rem;
+  line-height: 0.48rem;
+  font-size: 0.37333rem;
+  color: #f56d9d;
+  margin-top: 1rem; }
 
 /* 仿iOS toast */
 .js-toast {
@@ -182,3 +184,56 @@
   font-size: 0.37333rem;
   color: #ffffff;
   background-color: rgba(0, 0, 0, 0.8); }
+
+.funds-mask {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 10; }
+
+.funds-frame {
+  width: 6.66667rem;
+  height: 3.30667rem;
+  border-radius: 3px;
+  background-color: #ffffff;
+  margin: 0 auto;
+  margin-top: 40%;
+  position: relative;
+  overflow: hidden; }
+
+.funds-frame h4 {
+  width: 100%;
+  text-align: center;
+  height: 0.48rem;
+  line-height: 0.48rem;
+  margin-top: 0.82667rem;
+  font-size: 0.37333rem;
+  color: #282828; }
+
+.funds-btns {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  border-top: 1px solid #e6e6e6;
+  width: 100%;
+  height: 1.17333rem;
+  overflow: hidden; }
+
+.funds-btns button {
+  display: block;
+  border: 0;
+  background-color: #ffffff;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 50%;
+  height: 1.17333rem;
+  text-align: center;
+  font-size: 0.45333rem;
+  color: #f56d9d; }
+
+.funds-btns .funds-btns-cancel {
+  border-right: 1px solid #e6e6e6; }

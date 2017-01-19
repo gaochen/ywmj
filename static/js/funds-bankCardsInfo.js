@@ -9,8 +9,22 @@ $(function() {
     // 从localStorage提取当前银行卡信息
     var storage = window.localStorage;
     var sessionToken = storage.getItem("sessionToken");
+    var userType = storage.getItem("userType");
     var json = storage.getItem("bankCard");
     var data = JSON.parse(json);
+    var apiHost = null;
+
+    // 判断APP是C端还是E端
+    if (userType === "e") {
+        apiHost = window.Host.employee;
+    }
+    else if (userType === "c") {
+        apiHost = window.Host.customer;
+    }
+    else {
+        GC.Hybind.showToast("访问出错，请重试");
+        GC.Hybind.closePage();
+    }
 
     $(".bankCardsInfo-logo").find("div").css("backgroundImage","url("+data.bankLogo+")");
     $(".bankCardsInfo-name").text(data.bankName+data.bankCardTypeDesc);
@@ -54,7 +68,7 @@ $(function() {
 
         if (token) {
             // 解绑
-            var api = window.Host.customer+"/account/bankCard/"+data.bindId;
+            var api = apiHost+"/account/bankCard/"+data.bindId;
 
             $.ajax({
                 type: "GET",
@@ -70,7 +84,9 @@ $(function() {
                     else {
                         GC.Hybind.showToast(res.message);
                         if (res.stateCode == 336) {
-                            GC.Hybind.closePage();
+                            setTimeout(function() {
+                                GC.Hybind.closePage();
+                            }, 3000);
                         }
                     }
 
@@ -80,7 +96,7 @@ $(function() {
         }
         else {
             // 需要首先验证支付密码
-            var api = window.Host.customer+"/account/payCode/7";
+            var api = apiHost+"/account/payCode/7";
 
             $.ajax({
                 type: "POST",
@@ -96,7 +112,9 @@ $(function() {
                     else {
                         GC.Hybind.showToast(res.message);
                         if (res.stateCode == 336) {
-                            GC.Hybind.closePage();
+                            setTimeout(function() {
+                                GC.Hybind.closePage();
+                            }, 3000);
                         }
                     }
                 }

@@ -8,13 +8,27 @@ $(function() {
     // 从localStorage获取sessionToken
     var storage = window.localStorage;
     var sessionToken = storage.getItem("sessionToken");
+    var userType = storage.getItem("userType");
     var payTool = null;
     var bindId = null;
+    var apiHost = null;
 
+    // 判断APP是C端还是E端
+    if (userType === "e") {
+        apiHost = window.Host.employee;
+    }
+    else if (userType === "c") {
+        apiHost = window.Host.customer;
+    }
+    else {
+        GC.Hybind.showToast("访问出错，请重试");
+        GC.Hybind.closePage();
+    }
+    
     // 请求银行卡列表
     (function() {
         // 请求银行卡列表
-        var api = window.Host.customer+"/account/bankCards";
+        var api = apiHost+"/account/bankCards";
 
         GC.Hybind.showDialog();
 
@@ -28,14 +42,20 @@ $(function() {
 
                 if (res.succ) {
                     if (!res.data) {
-                        // 无银行卡，使用新卡支付
-                        payTool = "3";
-                        bindId = -1;
+                        // 无银行卡，使用新卡支付(该功能暂时无效)
+                        // payTool = "3";
+                        // bindId = -1;
 
-                        var str = '<div class="recharge-checked-frame">';
-                        str += '<p class="recharge-checked-newCard">使用新卡支付</p>';
-                        str += '</div>';
-                        $(".recharge-checked").html(str);
+                        // var str = '<div class="recharge-checked-frame">';
+                        // str += '<p class="recharge-checked-newCard">使用新卡支付</p>';
+                        // str += '</div>';
+                        // $(".recharge-checked").html(str);
+                        
+
+                        // 无银行卡
+                        GC.Hybind.showToast("请先绑定借记卡")
+                        window.location.href = window.Host.local+"funds-bankCards.html";
+                        
                     }
                     else {
                         var arr = res.data;
@@ -51,8 +71,13 @@ $(function() {
                         str += '<p class="recharge-checked-bankName">'+arr[0].bankName+'</p>';
                         str += '<p class="recharge-checked-bankCard">尾号'+number+' 储蓄卡</p>';
                         str += '</div>';
-                        str += '<span class="recharge-checked-arrow"></span>';
-                        str += '</div>';
+                        if (arr.length == 1) {
+                            str += '</div>';
+                        }
+                        else {
+                            str += '<span class="recharge-checked-arrow"></span>';
+                            str += '</div>';
+                        }
                         $(".recharge-checked").html(str);
 
                         $.each(arr, function(i, index) {
@@ -64,7 +89,9 @@ $(function() {
                                 str += '<p class="selectBank-bankCard-bankNumber">尾号'+number+' 储蓄卡</p>';
                                 str += '<span class="selectBank-bankCard-checked"></span>';
 
-                            oLi.html(str).insertBefore($(".selectBank-newCard"));
+                            // oLi.html(str).insertBefore($(".selectBank-newCard"));  // 有新卡时
+
+                            oLi.html(str).appendTo($(".selectBank-list"));
 
                             // 判断是否选中
                             if (bindId == index.bindId) {
@@ -81,12 +108,12 @@ $(function() {
                         });
     
                         // 选择新卡
-                        $(".selectBank-newCard").on("click", function() {
-                            var self = $(this);
-                            if (!self.hasClass("active")) {
-                                self.addClass("active").siblings("li").removeClass("active");
-                            }
-                        });
+                        // $(".selectBank-newCard").on("click", function() {
+                        //     var self = $(this);
+                        //     if (!self.hasClass("active")) {
+                        //         self.addClass("active").siblings("li").removeClass("active");
+                        //     }
+                        // });
 
                         // 弹出银行卡选择
                         $(".recharge-checked").on("click", function() {
@@ -139,7 +166,9 @@ $(function() {
                 else {
                     GC.Hybind.showToast(res.message);
                     if (res.stateCode == 336) {
-                        GC.Hybind.closePage();
+                        setTimeout(function() {
+                            GC.Hybind.closePage();
+                        }, 3000);
                     }
                 }
             }
@@ -167,7 +196,7 @@ $(function() {
         var amount = parseInt($(".recharge-input").val());
         
         if (!!amount && amount > 0) {
-            var api = window.Host.customer+"/account/capital/recharge?sessionToken="+sessionToken;
+            var api = apiHost+"/account/capital/recharge?sessionToken="+sessionToken;
 
             GC.Hybind.showDialog();
 
@@ -185,7 +214,9 @@ $(function() {
                     else {
                         GC.Hybind.showToast(res.message);
                         if (res.stateCode == 336) {
-                            GC.Hybind.closePage();
+                            setTimeout(function() {
+                                GC.Hybind.closePage();
+                            }, 3000);
                         }
                     }
                 }

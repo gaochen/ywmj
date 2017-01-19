@@ -143,13 +143,22 @@
   background-size: contain;
   margin: 0.36rem 0.24rem; }
 
+.pay-list .pay-newCard-logo {
+  width: 0.96rem;
+  height: 0.88rem;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin: 0.36rem 0.24rem; }
+
 .pay-item-text {
   width: 6.4rem;
   height: 0.48rem;
   line-height: 0.48rem;
   padding: 0.56rem 0;
   font-size: 0.37333rem;
-  color: #282828; }
+  color: #282828;
+  overflow: hidden; }
 
 .pay-item-radio {
   width: 0.48rem;
@@ -207,6 +216,16 @@
   text-align: center;
   border-radius: 0.46667rem;
   margin: 0.2rem auto; }
+
+/* 身份认证支付 */
+.pay-balance {
+  display: none; }
+
+.pay-newCard {
+  display: none; }
+
+.pay-newCard .pay-item-text {
+  color: #f56d9d; }
 
 /* 支付结果 */
 .payResult-success {

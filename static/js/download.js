@@ -50,6 +50,12 @@ function wxTips(options) {
             $(".wxTips").show();
             return false;
         }
+
+        // 是否在微博内打开
+        if (ua.match(/WeiBo/i) == "weibo") {
+            $(".wxTips").show();
+            return false;
+        }
     
         //Android接口
         if (isAndroid) {

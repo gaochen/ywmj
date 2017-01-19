@@ -10,6 +10,19 @@ $(function() {
         // 从localStorage获取sessionToken
         var storage = window.localStorage;
         var sessionToken = storage.getItem("sessionToken");
+        var userType = storage.getItem("userType");
+
+        // 判断APP是C端还是E端
+        if (userType === "e") {
+            apiHost = window.Host.employee;
+        }
+        else if (userType === "c") {
+            apiHost = window.Host.customer;
+        }
+        else {
+            GC.Hybind.showToast("访问出错，请重试");
+            GC.Hybind.closePage();
+        }
 
         // 下拉刷新参数
         var oDiv = document.querySelector(".content");
@@ -24,7 +37,7 @@ $(function() {
         var pageNum = 1;
         var pageSize = 10;
 
-        var api = window.Host.customer+"/account/details?pageNum="+pageNum+"&pageSize="+pageSize;
+        var api = apiHost+"/account/details?pageNum="+pageNum+"&pageSize="+pageSize;
         slideDown(api, sessionToken);
         pageNum++;
 
@@ -71,7 +84,7 @@ $(function() {
             endTop = oDiv.scrollTop;
 
             if (endTop === startTop && bool) {
-                var api = window.Host.customer+"/account/details?pageNum="+pageNum+"&pageSize="+pageSize;
+                var api = apiHost+"/account/details?pageNum="+pageNum+"&pageSize="+pageSize;
                 slideDown(api, sessionToken);
                 pageNum++;
             }
@@ -110,7 +123,14 @@ function slideDown(api, sessionToken) {
                 if (data.length > 0) {
                     $.each(data, function(i, index) {
                         var operateTime = GC.Lib.setTime(index.operateTime);
-                        var oLi = $('<li><p class="detail-type">'+index.detail+'</p><p class="detail-date">'+operateTime+'</p><p class="detail-num">'+index.amount+'</p></li>')
+                        var icon = null;
+                        if (index.income) {
+                            icon = "+";
+                        }
+                        else {
+                            icon = "-";
+                        }
+                        var oLi = $('<li><p class="detail-type">'+index.detail+'</p><p class="detail-date">'+operateTime+'</p><p class="detail-num">'+icon+''+index.amount+'</p></li>')
                     
                         oLi.appendTo($(".detail-list"));
                     });
@@ -120,7 +140,9 @@ function slideDown(api, sessionToken) {
             else {
                 GC.Hybind.showToast(res.message);
                 if (res.stateCode == 336) {
-                    GC.Hybind.closePage();
+                    setTimeout(function() {
+                        GC.Hybind.closePage();
+                    }, 3000);
                 }
             }
         }
