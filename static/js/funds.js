@@ -1,6 +1,20 @@
 $(function() {
-    // 初始化localStorage
+    // 获取sessionToken，设置userType、source
+    GC.Hybind.getToken();
+});
+
+/**
+ * [getTokenReturn 获取token]
+ * @param  {[type]} token [description]
+ * @return {[type]}       [description]
+ */
+function getTokenReturn(token) {
+    //GC.Hybind.showToast(token);
+    var sessionToken = token;
+    // localStorage存储sessionToken
     var storage = window.localStorage;
+    storage.setItem("sessionToken",sessionToken);
+    storage.setItem("source", "1");
 
     // 获取APP类型
     var userType = GC.Lib.GetQueryString("userType");
@@ -12,11 +26,8 @@ $(function() {
         userType = storage.getItem("userType");
     }
 
-    // 获取sessionToken，设置userType、source
-    GC.Hybind.getToken();
-
     // 从localStorage获取sessionToken
-    var sessionToken = storage.getItem("sessionToken");
+    //var sessionToken = storage.getItem("sessionToken");
     var apiHost = null;
 
     // 判断APP是C端还是E端
@@ -171,28 +182,14 @@ $(function() {
 
                 }
                 else {
-                    GC.Hybind.showToast(res.message);
                     if (res.stateCode == 336) {
-                        setTimeout(function() {
-                            GC.Hybind.closePage();
-                        }, 3000);
+                        GC.Hybind.getToken();
+                    }
+                    else {
+                        GC.Hybind.showToast(res.message);
                     }
                 }
             }
         });
     })();
-
-});
-
-/**
- * [getTokenReturn 获取token]
- * @param  {[type]} token [description]
- * @return {[type]}       [description]
- */
-function getTokenReturn(token) {
-    var sessionToken = token;
-    // localStorage存储sessionToken
-    var storage = window.localStorage;
-    storage.setItem("sessionToken",sessionToken);
-    storage.setItem("source", "1");
 }

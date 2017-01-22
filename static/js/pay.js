@@ -147,22 +147,22 @@ function payInfoReturn(val) {
             data:{"sessionToken":token},
             dataType: "json",
             success: function(res) {
+                // 接口请求是否成功
                 if (res.succ) {
-                    var data = res.data;
-                    var balance = data.balance;
-                    var payAmount = $(".js-overplus").text();
-                    balance = parseFloat(balance);
-                    payAmount = parseFloat(payAmount);
+                    // 该用户是否已认证
+                    if (res.data.authorized) {
+                        var data = res.data;
+                        var balance = data.balance;
+                        var payAmount = $(".js-overplus").text();
+                        balance = parseFloat(balance);
+                        payAmount = parseFloat(payAmount);
 
-                    $(".pay-balance-value").text(balance);
+                        $(".pay-balance-value").text(balance);
 
-                    if (balance < payAmount && balance < 300) {
-                        $(".pay-balance").addClass("pay-item-wait");
-                    }
+                        if (balance < payAmount && balance < 300) {
+                            $(".pay-balance").addClass("pay-item-wait");
+                        }
 
-                    var authorized = data.authorized;
-
-                    if (authorized) {
                         $(".pay-balance").show();
                         //$(".pay-newCard").show();
 
@@ -204,11 +204,12 @@ function payInfoReturn(val) {
                             });
                         })();
                     }
-                    else {
+                    else{
                         dismisDialog();
                     }
                 }
                 else {
+                    dismisDialog();
                     showToast(res.message);
                 }
             }
