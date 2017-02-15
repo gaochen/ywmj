@@ -51,7 +51,7 @@ $(function() {
 
     // 头部标签切换
    (function() {
-        $(".index-nav a").on("tap", function() {
+        $(".index-nav a").on("click", function() {
             var index = $(this).index();
 
             if (index === 2) {
@@ -99,7 +99,7 @@ $(function() {
  * @param  {[type]} id  [案例编号]
  * @return {[type]}     [description]
  */
-function loadXCSJ(url, id, appe) {
+function loadXCSJ(url, id, appe, twitterId, twitterType, isTwitter) {
     var url = url,
         id = id,
         appe = appe,
@@ -230,7 +230,7 @@ function loadXCSJ(url, id, appe) {
  * @param  {[type]} id  [案例编号]
  * @return {[type]}     [description]
  */
-function loadYCTD(url, id, appe) {
+function loadYCTD(url, id, appe, twitterId, twitterType, isTwitter) {
     var url = url,
         id = id,
         appe = appe,
@@ -297,7 +297,7 @@ function loadYCTD(url, id, appe) {
  * @param  {[type]} id  [案例编号]
  * @return {[type]}     [description]
  */
-function loadXXZL(url, id, appe) {
+function loadXXZL(url, id, appe, twitterId, twitterType, isTwitter) {
     var url = url,
         id = id,
         appe = appe,
